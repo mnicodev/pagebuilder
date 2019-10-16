@@ -1,0 +1,164 @@
+{# templates/admin/page.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    <style>
+        .popup {
+            position: absolute;
+            width: 600px;
+
+            display: none;
+            top: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+
+        }
+        .popup > div {
+            height: 100%;
+            margin: 0;
+        }
+        .new {
+            background: #FFD6FC;
+            min-height: 20px;
+            width: 100%;
+        }
+    </style>
+{% endblock %}
+{% block menu %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Page builder</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="create-page">Créer une page</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="add-zone">Ajouter une zone</a>
+                </li>
+
+
+            </ul>
+
+        </div>
+    </nav>
+{% endblock %}
+
+{% block body %}
+
+    <div id="popup" class="popup shadow"></div>
+
+    <div id="page"></div>
+
+
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+
+    <script>
+        var zone={
+            format: "",
+
+        }
+        var page={
+            name: "",
+            param: "",
+            zones: [],
+
+            refresh: function () {
+                $("#page").html("");
+                container=document.createElement("div");
+                $(container).addClass(this.param);
+
+                $("#page").append(container);
+            }
+        }
+
+        function close() {
+            $("#close").click(function () {
+                $("#popup").hide();
+            })
+        }
+
+        jQuery(document).ready(function() {
+            $("#create-page").click(function () {
+                $.ajax({
+                    url: "{{ url('admin.popup.create') }}",
+                    success: function(result) {
+                        $("#popup").html(result);
+                        $("#popup").show();
+                        $("#create-validate").click(function () {
+
+                            page.name=$("#name").val();
+
+                            if($("#fluid").is(":checked")) page.param="new container-fluid";
+                            else page.param="new container";
+                            $("#popup").hide();
+                            page.refresh();
+
+
+                        })
+
+                        close();
+
+                    }
+
+                })
+
+            })
+            
+            $("#add-zone").click(function () {
+                $.ajax({
+                    url: "{{ url('admin.popup.addzone') }}",
+                    success: function (result) {
+                        if(page.name==="") alert("Veuillez créer une page");
+                        else  {
+                            $("#popup").html(result);
+                            $("#popup").show();
+
+                            $("#zone-validate").click(function () {
+
+                                zone.format=$("#format").val();
+
+                                if($("#fluid").is(":checked")) page.param="new container-fluid";
+                                else page.param="new container";
+                                $("#popup").hide();
+                                page.refresh();
+
+
+                            })
+
+                            close();
+
+
+                        }
+
+                    }
+
+                })
+
+            })
+
+
+
+
+
+        })
+    </script>
+
+{% endblock %}
