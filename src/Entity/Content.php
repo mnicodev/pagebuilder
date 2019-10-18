@@ -31,10 +31,7 @@ class Content
      */
     private $value;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Zone", inversedBy="contents")
-     */
-    private $id_zone;
+
 
     public function getId(): ?int
     {
@@ -77,15 +74,5 @@ class Content
         return $this;
     }
 
-    public function getIdZone(): ?Zone
-    {
-        return $this->id_zone;
-    }
 
-    public function setIdZone(?Zone $id_zone): self
-    {
-        $this->id_zone = $id_zone;
-
-        return $this;
-    }
 }

@@ -7,7 +7,7 @@
 <link rel="stylesheet" media="screen" href="{{ asset('css/admin/styles.css') }}" />
 {% endblock %}
 {% block menu %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
         <a class="navbar-brand" href="#">Page builder</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -45,10 +45,7 @@
 
 
 {% block javascripts %}
-    <script
-            src="https://code.jquery.com/jquery-3.4.1.min.js"
-            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-            crossorigin="anonymous"></script>
+
 
     {% include('admin/variables.js.twig') %}
     <script src="{{ asset('js/admin/define.js') }}"></script>

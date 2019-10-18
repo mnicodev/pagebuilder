@@ -42,13 +42,27 @@ class PageBuilderController extends AbstractController
      * @return Response
      * @Route("/admin/popup/add-zone", name="admin.popup.addzone");
      */
-    public function zoneAdd(): Response {
+    public function popupZoneAdd(): Response {
 
         //print_r($zoneAddType);
 
         $form= $this->createForm(createZoneType::class);
 
         return $this->render("admin/popup_add_zone.html.twig", ["form"=>$form->createView()]);
+    }
+
+    /**
+     * @Route("/admin/popup/content", name="admin.popup.content")
+     */
+    public function popupContent(Request $request) {
+        //dump($request->request->get("editeur"));
+        if($request->request->get("editeur")!==null) {
+
+            $str=str_replace(chr(10),"",$request->request->get("editeur"));
+            $str=str_replace(chr(13),"",$str);
+
+            return $this->render("admin/popup_content.html.twig", ["str"=> $str]);
+        } else return $this->render("admin/popup_content.html.twig", ["bloc"=> $request->get("bloc")]);
     }
 
 }

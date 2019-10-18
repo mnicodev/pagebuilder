@@ -1,0 +1,46 @@
+
+
+
+
+    {% if bloc is defined %}
+<script src={{ asset('js/admin/ckeditor/ckeditor.js') }}></script>
+
+    <form target="data" method="post" action="{{ url('admin.popup.content') }}">
+<input type="hidden" id="bloc" value="{{ bloc }}">
+
+<div class="jumbotron">
+    <div class="display-8">Ajout d'un contenu</div>
+    <textarea id="editeur" name="editeur" rows="10" cols="60"></textarea>
+    <div class="row">
+        <div class="col-sm-12">
+            <button id="content-validate">Valider</button>
+            <button id="close">Fermer</button>
+        </div>
+
+    </div>
+
+</div>
+
+    </form>
+    <iframe id="data" name="data" style="width:300px;display:none"></iframe>
+        <script>
+            CKEDITOR.replace("editeur");
+
+        </script>
+
+    {% endif %}
+    {% if str is defined %}
+
+        <script>
+            window.onload=function() {
+                bloc=parent.document.getElementById("bloc").value
+                //parent.document.getElementById("content").value="{{ str|raw }}";
+                parent.put_content(bloc,"{{ str|raw }}");
+                parent.close();
+                //document.getElementById("content")
+            }
+        </script>
+
+    {%  endif %}
+
+

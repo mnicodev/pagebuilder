@@ -1,5 +1,5 @@
 .popup {
-  position: absolute;
+  position: fixed;
   width: 600px;
   display: none;
   top: 200px;
@@ -7,17 +7,30 @@
   transform: translateX(-50%);
   z-index: 10; }
 
-.popup > div {
+.popup .jumbotron {
   height: 100%;
   margin: 0; }
 
 .create {
-  background: #FFD6FC;
+  background: #FFECFF;
   min-height: 20px;
   width: 100%; }
   .create .row {
     min-height: 200px; }
     .create .row .col-md-1, .create .row .col-md-2, .create .row .col-md-3, .create .row .col-md-4, .create .row .col-md-5, .create .row .col-md-6, .create .row .col-md-7, .create .row .col-md-8, .create .row .col-md-9, .create .row .col-md-10, .create .row .col-md-11, .create .row .col-md-12 {
       border: 1px solid lightgrey; }
+    .create .row .for-action {
+      position: relative; }
+      .create .row .for-action .action {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        display: none;
+        background: #5eb5e0;
+        cursor: pointer; }
+      .create .row .for-action:hover .action {
+        display: block; }
 
 /*# sourceMappingURL=styles.css.map */

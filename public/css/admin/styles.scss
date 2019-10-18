@@ -1,5 +1,5 @@
 .popup {
-  position: absolute;
+  position: fixed;
   width: 600px;
 
   display: none;
@@ -8,12 +8,12 @@
   transform: translateX(-50%);
   z-index: 10;
 }
-.popup > div {
+.popup .jumbotron {
   height: 100%;
   margin: 0;
 }
 .create {
-  background: #FFD6FC;
+  background: #FFECFF;
   min-height: 20px;
   width: 100%;
 
@@ -24,5 +24,32 @@
     .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
       border: 1px solid lightgrey;
     }
+
+    .for-action {
+      position: relative;
+      .action {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 20px;
+        height: 20px;
+        display: none;
+        background: #5eb5e0;
+        cursor: pointer;
+
+      }
+
+      &:hover {
+        .action {
+          display: block;
+        }
+      }
+
+    }
+
+
+
+
+
   }
 }
