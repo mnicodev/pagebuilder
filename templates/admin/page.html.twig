@@ -4,27 +4,7 @@
 
 
 {% block stylesheets %}
-    <style>
-        .popup {
-            position: absolute;
-            width: 600px;
-
-            display: none;
-            top: 200px;
-            left: 50%;
-            transform: translateX(-50%);
-
-        }
-        .popup > div {
-            height: 100%;
-            margin: 0;
-        }
-        .new {
-            background: #FFD6FC;
-            min-height: 20px;
-            width: 100%;
-        }
-    </style>
+<link rel="stylesheet" media="screen" href="{{ asset('css/admin/styles.css') }}" />
 {% endblock %}
 {% block menu %}
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -70,95 +50,8 @@
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
 
-    <script>
-        var zone={
-            format: "",
-
-        }
-        var page={
-            name: "",
-            param: "",
-            zones: [],
-
-            refresh: function () {
-                $("#page").html("");
-                container=document.createElement("div");
-                $(container).addClass(this.param);
-
-                $("#page").append(container);
-            }
-        }
-
-        function close() {
-            $("#close").click(function () {
-                $("#popup").hide();
-            })
-        }
-
-        jQuery(document).ready(function() {
-            $("#create-page").click(function () {
-                $.ajax({
-                    url: "{{ url('admin.popup.create') }}",
-                    success: function(result) {
-                        $("#popup").html(result);
-                        $("#popup").show();
-                        $("#create-validate").click(function () {
-
-                            page.name=$("#name").val();
-
-                            if($("#fluid").is(":checked")) page.param="new container-fluid";
-                            else page.param="new container";
-                            $("#popup").hide();
-                            page.refresh();
-
-
-                        })
-
-                        close();
-
-                    }
-
-                })
-
-            })
-            
-            $("#add-zone").click(function () {
-                $.ajax({
-                    url: "{{ url('admin.popup.addzone') }}",
-                    success: function (result) {
-                        if(page.name==="") alert("Veuillez créer une page");
-                        else  {
-                            $("#popup").html(result);
-                            $("#popup").show();
-
-                            $("#zone-validate").click(function () {
-
-                                zone.format=$("#format").val();
-
-                                if($("#fluid").is(":checked")) page.param="new container-fluid";
-                                else page.param="new container";
-                                $("#popup").hide();
-                                page.refresh();
-
-
-                            })
-
-                            close();
-
-
-                        }
-
-                    }
-
-                })
-
-            })
-
-
-
-
-
-        })
-    </script>
+    {% include('admin/variables.js.twig') %}
+    <script src="{{ asset('js/admin/define.js') }}"></script>
+    <script src="{{ asset('js/admin/scripts.js') }}"></script>
 
 {% endblock %}
