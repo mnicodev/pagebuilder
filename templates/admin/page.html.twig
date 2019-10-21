@@ -7,7 +7,7 @@
 <link rel="stylesheet" media="screen" href="{{ asset('css/admin/styles.css') }}" />
 {% endblock %}
 {% block menu %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed">
         <a class="navbar-brand" href="#">Page builder</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -23,6 +23,9 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="add-zone">Ajouter une zone</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="save-page">Enregistrer la page</a>
                 </li>
 
 
@@ -46,8 +49,9 @@
 
 {% block javascripts %}
 
-
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     {% include('admin/variables.js.twig') %}
+
     <script src="{{ asset('js/admin/define.js') }}"></script>
     <script src="{{ asset('js/admin/scripts.js') }}"></script>
 

@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-sm-12">
             <button id="content-validate">Valider</button>
-            <button id="close">Fermer</button>
+            <input type="button" id="close" value="Fermer" />
         </div>
 
     </div>
@@ -34,10 +34,9 @@
         <script>
             window.onload=function() {
                 bloc=parent.document.getElementById("bloc").value
-                //parent.document.getElementById("content").value="{{ str|raw }}";
+
                 parent.put_content(bloc,"{{ str|raw }}");
-                parent.close();
-                //document.getElementById("content")
+
             }
         </script>
 

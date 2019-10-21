@@ -17,62 +17,58 @@ class Content
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\ContentType", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Bloc", inversedBy="contents")
      */
-    private $id_type_content;
+    private $id_bloc;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="text", nullable=true)
      */
-    private $bundle;
+    private $data;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $value;
-
-
+    private $param;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdTypeContent(): ?ContentType
+    public function getIdBloc(): ?Bloc
     {
-        return $this->id_type_content;
+        return $this->id_bloc;
     }
 
-    public function setIdTypeContent(?ContentType $id_type_content): self
+    public function setIdBloc(?Bloc $id_bloc): self
     {
-        $this->id_type_content = $id_type_content;
+        $this->id_bloc = $id_bloc;
 
         return $this;
     }
 
-    public function getBundle(): ?string
+    public function getData(): ?string
     {
-        return $this->bundle;
+        return $this->data;
     }
 
-    public function setBundle(string $bundle): self
+    public function setData(?string $data): self
     {
-        $this->bundle = $bundle;
+        $this->data = $data;
 
         return $this;
     }
 
-    public function getValue(): ?string
+    public function getParam(): ?string
     {
-        return $this->value;
+        return $this->param;
     }
 
-    public function setValue(string $value): self
+    public function setParam(?string $param): self
     {
-        $this->value = $value;
+        $this->param = $param;
 
         return $this;
     }
-
-
 }

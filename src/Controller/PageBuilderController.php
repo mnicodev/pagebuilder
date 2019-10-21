@@ -5,7 +5,8 @@ namespace App\Controller;
 
 
 
-use App\Form\App\Controller\createZoneType;
+
+use App\Form\CreateZoneType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,6 +30,15 @@ class PageBuilderController extends AbstractController
         $this->getDoctrine()->getRepository(Page::class);
     }
 
+    /**
+     * @Route("/admin/page/save", name="admin.page.save")
+     */
+    public function save(Request $request): Response {
+        $t=$request->get("b");
+        print_r(json_decode($t));
+        return new Response();
+    }
+
 
     /**
      * @return Response
@@ -46,7 +56,8 @@ class PageBuilderController extends AbstractController
 
         //print_r($zoneAddType);
 
-        $form= $this->createForm(createZoneType::class);
+        $form= $this->createForm(CreateZoneType::class);
+
 
         return $this->render("admin/popup_add_zone.html.twig", ["form"=>$form->createView()]);
     }

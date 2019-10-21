@@ -12,8 +12,16 @@
   height: 100%;
   margin: 0;
 }
+.navbar-fixed {
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+}
+#page {
+  padding-top: 70px;
+}
 .create {
-  background: #FFECFF;
+  background: #ffffee;
   min-height: 20px;
   width: 100%;
 
@@ -34,8 +42,9 @@
         width: 20px;
         height: 20px;
         display: none;
-        background: #5eb5e0;
+        background: #dadada;
         cursor: pointer;
+        z-index: 10;
 
       }
 
@@ -45,11 +54,26 @@
         }
       }
 
+      .contents {
+
+
+        .content {
+          position: relative;
+          border: 1px dashed #efefef;
+          .edit {
+            top: 0;
+            right: 0;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: red;
+            cursor: pointer;
+            z-index: 10;
+          }
+        }
+      }
+
     }
 
-
-
-
-
-  }
+ }
 }

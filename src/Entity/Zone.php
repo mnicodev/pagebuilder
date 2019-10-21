@@ -26,7 +26,7 @@ class Zone
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $options;
+    private $param;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Page", inversedBy="zones")
@@ -34,13 +34,16 @@ class Zone
     private $id_page;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Content", mappedBy="id_zone")
+     * @ORM\OneToMany(targetEntity="App\Entity\Bloc", mappedBy="id_zone")
      */
-    private $contents;
+    private $blocs;
+
+
 
     public function __construct()
     {
         $this->contents = new ArrayCollection();
+        $this->blocs = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -60,14 +63,14 @@ class Zone
         return $this;
     }
 
-    public function getOptions(): ?string
+    public function getParam(): ?string
     {
-        return $this->options;
+        return $this->param;
     }
 
-    public function setOptions(string $options): self
+    public function setParam(string $param): self
     {
-        $this->options = $options;
+        $this->param = $param;
 
         return $this;
     }
@@ -85,33 +88,37 @@ class Zone
     }
 
     /**
-     * @return Collection|Content[]
+     * @return Collection|Bloc[]
      */
-    public function getContents(): Collection
+    public function getBlocs(): Collection
     {
-        return $this->contents;
+        return $this->blocs;
     }
 
-    public function addContent(Content $content): self
+    public function addBloc(Bloc $bloc): self
     {
-        if (!$this->contents->contains($content)) {
-            $this->contents[] = $content;
-            $content->setIdZone($this);
+        if (!$this->blocs->contains($bloc)) {
+            $this->blocs[] = $bloc;
+            $bloc->setIdZone($this);
         }
 
         return $this;
     }
 
-    public function removeContent(Content $content): self
+    public function removeBloc(Bloc $bloc): self
     {
-        if ($this->contents->contains($content)) {
-            $this->contents->removeElement($content);
+        if ($this->blocs->contains($bloc)) {
+            $this->blocs->removeElement($bloc);
             // set the owning side to null (unless already changed)
-            if ($content->getIdZone() === $this) {
-                $content->setIdZone(null);
+            if ($bloc->getIdZone() === $this) {
+                $bloc->setIdZone(null);
             }
         }
 
         return $this;
     }
+
+
+
+
 }
