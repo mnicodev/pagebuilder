@@ -1,0 +1,30 @@
+<ul>
+    <li><a href="#" id="edit-content">Editer le contenu</a></li>
+    <li><a href="#" id="delete-content">Supprimer le contenu</a></li>
+
+</ul>
+<script>
+    $(document).ready(function () {
+        $("#edit-content").click(function () {
+
+            $.ajax({
+                url: url_popup_content,
+                method: "POST",
+                data: {bloc:"{{ bloc }}", content: "{{ content }}",id:"{{ id }}"},
+                success: function (result) {
+                    $("#popup").html(result);
+                    $("#popup").show();
+                    close();
+
+
+                }
+            })
+        })
+        $("#delete-content").click(function () {
+            if(window.confirm('Supprimer le contenu ?'))pagebuilder.del_content("{{ id }}");
+
+        })
+
+    })
+
+</script>

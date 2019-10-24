@@ -17,6 +17,7 @@ function o_zone() {
 }
 function o_page() {
     this.name="";
+    this.description="";
     this.param=new o_param();
     this.zones=[];
 
@@ -39,6 +40,54 @@ var pagebuilder={
 
     add_zone: function(z) {
         this.page.zones.push(z);
+    },
+
+    del_zone: function(id) {
+        this.page.zones.splice(id,1);
+        this.show();
+
+    },
+
+    update_content: function(id, str) {
+        t=id.split(":");
+        this.page.zones[t[0]].blocs[t[1]].contents[t[2]].data=str;
+
+        this.show();
+        $("#popup").hide();
+        action_content();
+
+        set_drag();
+
+
+        this.save();
+
+    },
+
+    add_content: function(bloc, str) {
+        console.log(bloc)
+        id=bloc.split(":");
+        c=new o_content();
+        c.data=str;
+
+
+        this.page.zones[id[0]].blocs[id[1]].contents.push(c);
+        this.show();
+        $("#popup").hide();
+        action_content();
+
+        set_drag();
+
+
+        this.save();
+    },
+
+    del_content: function(id) {
+        t=id.split(":");
+
+        this.page.zones[t[0]].blocs[t[1]].contents.splice(t[2],1);
+
+        this.show();
+
     },
 
     save: function() {
@@ -85,50 +134,79 @@ var pagebuilder={
     },
 
 
+
+
     show: function () {
         $("#page").html("");
-        container=document.createElement("div");
+
+        chapo=document.createElement("div");
+        h1=document.createElement("h1");
+        h2=document.createElement("h2");
+        $(chapo).addClass("jumbotron chapo");
+        $(h1).append(this.page.name);
+        $(h2).append(this.page.description);
+        chapo.appendChild(h1);
+        chapo.appendChild(h2);
+
+
+        $("#page").append(chapo);
+        $("#page").addClass(this.page.param.classes+" create");
+
+        container=document.createElement("ul");
         // on affecte les classes
-        $(container).addClass(this.page.param.classes);
+        //$(container).addClass(this.page.param.classes);
+        $(container).addClass("sortable connected");
 
 
 
         for(var i in this.page.zones) {
             element="";
             f=this.page.zones[i].format.split(":");
-            liste_blocs=this.page.zones[i].blocs;
-            element=document.createElement("div");
-            $(element).addClass("row zone");
+
+            element=document.createElement("li");
+            $(element).addClass("row zone  ");
             $(element).attr("data-line",i);
             $(element).attr("data-format",this.page.zones[i].format);
             $(element).attr("data-param-classes",this.page.zones[i].param.classes);
             $(element).attr("data-param-style",this.page.zones[i].param.style);
             $(element).attr("id","zone_"+i);
 
+            /*container_bloc=document.createElement("ul");
+            $(container_bloc).addClass("sortable row");*/
 
-            for(var j in liste_blocs) {
+            for(var j in this.page.zones[i].blocs) {
 
-                bloc=document.createElement("div");
-                action=document.createElement("div");
-                $(action).addClass("action");
-                $(bloc).addClass("for-action bloc col-md-"+f[j]);
+                bloc=document.createElement("ul");
+                /*action=document.createElement("div");
+                $(action).addClass("action");*/
+                $(bloc).addClass("connected sortable for-action bloc col-md-"+f[j]);
                 $(bloc).attr("id","bloc_"+i+"_"+j);
                 $(bloc).attr("data-param-classes",this.page.zones[i].blocs[j].param.classes);
                 $(bloc).attr("data-param-style",this.page.zones[i].blocs[j].param.style);
                 $(bloc).attr("data-bloc",i+":"+j);
-                bloc.appendChild(action);
+               // bloc.appendChild(action);
 
                 if(this.page.zones[i].blocs[j].contents.length) {
                     for(var c in this.page.zones[i].blocs[j].contents) {
-                        content=document.createElement("div");
-                        $(content).addClass("contents");
+                        content=document.createElement("li");
+                        $(content).addClass("content");
+                        $(content).attr("data-pos",i+":"+j+":"+c);
                         $(content).attr("data-param-classes", this.page.zones[i].blocs[j].contents[c].param.classes);
                         $(content).attr("data-param-style", this.page.zones[i].blocs[j].contents[c].param.style);
-                        $(content).append(this.page.zones[i].blocs[j].contents[c].data);
+                        //prefix="<div class='content' id='content-"+c+"'>";
+                        //suffix="</div>";
+                        prefix="";
+                        suffix="";
+                        $(content).append(prefix+this.page.zones[i].blocs[j].contents[c].data+suffix);
                         bloc.appendChild(content);
                     }
 
+                } else {
+                    content=document.createElement("li");
+                    $(content).addClass("vide");
+                    bloc.appendChild(content);
                 }
+                //container_bloc.appendChild(bloc)
 
                 element.appendChild(bloc);
 
@@ -139,21 +217,12 @@ var pagebuilder={
 
         $("#page").append(container);
 
-        $(".action").click(function () {
 
-            $.ajax({
-                url: url_popup_content,
-                method: "GET",
-                data: {bloc:$(this).parent().attr("data-bloc")},
-                success: function (result) {
-                    $("#popup").html(result);
-                    $("#popup").show();
-                    close();
-                }
-            })
-        })
 
         this.save();
+        set_drag();
+        action_content();
+
     }
 
 }

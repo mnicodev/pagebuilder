@@ -31,12 +31,17 @@ class Zone
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Page", inversedBy="zones")
      */
-    private $id_page;
+    private $page;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Bloc", mappedBy="id_zone")
+     * @ORM\OneToMany(targetEntity="App\Entity\Bloc", mappedBy="zone", cascade={"persist"})
      */
     private $blocs;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $position;
 
 
 
@@ -44,6 +49,11 @@ class Zone
     {
         $this->contents = new ArrayCollection();
         $this->blocs = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
     }
 
     public function getId(): ?int
@@ -75,14 +85,14 @@ class Zone
         return $this;
     }
 
-    public function getIdPage(): ?Page
+    public function getPage(): ?Page
     {
-        return $this->id_page;
+        return $this->page;
     }
 
-    public function setIdPage(?Page $id_page): self
+    public function setPage(?Page $page): self
     {
-        $this->id_page = $id_page;
+        $this->page = $page;
 
         return $this;
     }
@@ -99,7 +109,7 @@ class Zone
     {
         if (!$this->blocs->contains($bloc)) {
             $this->blocs[] = $bloc;
-            $bloc->setIdZone($this);
+            $bloc->setZone($this);
         }
 
         return $this;
@@ -110,10 +120,22 @@ class Zone
         if ($this->blocs->contains($bloc)) {
             $this->blocs->removeElement($bloc);
             // set the owning side to null (unless already changed)
-            if ($bloc->getIdZone() === $this) {
-                $bloc->setIdZone(null);
+            if ($bloc->getZone() === $this) {
+                $bloc->setZone(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(?int $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }

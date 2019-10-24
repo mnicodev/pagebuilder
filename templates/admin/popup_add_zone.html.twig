@@ -1,14 +1,22 @@
 <div class="jumbotron">
-    <div class="display-8">Options d'ajout de zone</div>
+    <h2 class="display-8">Options d'ajout de zone</h2>
+    <div class="row">
+        <div class="col-sm-12">
+
     {{  form_start(form) }}
     {{  form_widget(form) }}
 
     {{ form_end(form) }}
-
+        </div>
+    </div>
     <div class="row">
-        <div class="col-sm-12">
-            <button id="zone-validate">Valider</button>
-            <button id="close">Fermer</button>
+
+        <div class="col-sm-6">
+            <button id="zone-validate" class="form-control btn-primary">Valider</button>
+        </div>
+        <div class="col-sm-6">
+
+            <input type="button" id="close" value="Fermer" class="form-control btn-cancel" />
         </div>
 
     </div>

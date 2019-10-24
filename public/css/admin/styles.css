@@ -5,7 +5,7 @@
   top: 200px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10; }
+  z-index: 10000; }
 
 .popup .jumbotron {
   height: 100%;
@@ -18,40 +18,99 @@
 
 #page {
   padding-top: 70px; }
+  #page table tr {
+    cursor: pointer; }
+  #page .chapo h2 {
+    min-height: 50px;
+    border: 1px dashed transparent; }
+    #page .chapo h2:hover {
+      border: 1px dashed #000; }
+  #page .chapo h1 {
+    min-height: 50px;
+    border: 1px dashed transparent; }
+    #page .chapo h1:hover {
+      border: 1px dashed #000; }
 
 .create {
   background: #ffffee;
   min-height: 20px;
   width: 100%; }
-  .create .row {
-    min-height: 200px; }
-    .create .row .col-md-1, .create .row .col-md-2, .create .row .col-md-3, .create .row .col-md-4, .create .row .col-md-5, .create .row .col-md-6, .create .row .col-md-7, .create .row .col-md-8, .create .row .col-md-9, .create .row .col-md-10, .create .row .col-md-11, .create .row .col-md-12 {
-      border: 1px solid lightgrey; }
-    .create .row .for-action {
-      position: relative; }
-      .create .row .for-action .action {
+  .create > ul {
+    padding: 0; }
+    .create > ul .zone {
+      border: 3px solid transparent;
+      padding: 20px;
+      list-style: none;
+      position: relative;
+      min-height: 200px; }
+      .create > ul .zone:hover {
+        border: 3px solid darkred; }
+      .create > ul .zone .bloc:hover {
+        border: 1px solid deepskyblue; }
+      .create > ul .zone .bloc li.vide {
+        list-style: none; }
+      .create > ul .zone .bloc li.content {
+        list-style: none; }
+        .create > ul .zone .bloc li.content:hover {
+          border: 1px dashed darkmagenta; }
+      .create > ul .zone .z-action {
         position: absolute;
         top: 0;
-        left: 0;
+        left: 0px;
         width: 20px;
         height: 20px;
-        display: none;
-        background: #dadada;
+        background: aquamarine;
         cursor: pointer;
-        z-index: 10; }
-      .create .row .for-action:hover .action {
-        display: block; }
-      .create .row .for-action .contents .content {
-        position: relative;
-        border: 1px dashed #efefef; }
-        .create .row .for-action .contents .content .edit {
-          top: 0;
-          right: 0;
+        z-index: 1000;
+        transition: all 0.02s; }
+        .create > ul .zone .z-action.edit {
+          width: 120px;
+          height: 40px; }
+      .create > ul .zone .col-md-1, .create > ul .zone .col-md-2, .create > ul .zone .col-md-3, .create > ul .zone .col-md-4, .create > ul .zone .col-md-5, .create > ul .zone .col-md-6, .create > ul .zone .col-md-7, .create > ul .zone .col-md-8, .create > ul .zone .col-md-9, .create > ul .zone .col-md-10, .create > ul .zone .col-md-11, .create > ul .zone .col-md-12 {
+        border: 1px solid lightgrey; }
+      .create > ul .zone .for-action {
+        position: relative; }
+        .create > ul .zone .for-action .action {
           position: absolute;
+          top: 0;
+          left: 0;
           width: 20px;
           height: 20px;
-          background: red;
+          display: none;
+          background: #dadada;
           cursor: pointer;
-          z-index: 10; }
+          z-index: 10;
+          transition: all 0.02s; }
+          .create > ul .zone .for-action .action.edit {
+            width: 100px;
+            height: 30px; }
+        .create > ul .zone .for-action:hover .action {
+          display: block; }
+        .create > ul .zone .for-action .content {
+          position: relative;
+          border: 1px dashed #efefef; }
+          .create > ul .zone .for-action .content .c-action {
+            top: 0;
+            right: 0;
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: #1d75b3;
+            cursor: pointer;
+            z-index: 10; }
+            .create > ul .zone .for-action .content .c-action.edit {
+              width: 120px;
+              height: 40px; }
+              .create > ul .zone .for-action .content .c-action.edit li a {
+                color: #fff; }
+
+.edit ul {
+  padding: 0;
+  padding: 5px; }
+  .edit ul li {
+    font-size: 10px;
+    list-style: none; }
+    .edit ul li a {
+      color: #000; }
 
 /*# sourceMappingURL=styles.css.map */

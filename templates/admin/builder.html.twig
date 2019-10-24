@@ -1,0 +1,33 @@
+{# templates/admin/page.html.twig #}
+
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    <link rel="stylesheet" media="screen" href="{{ asset('css/admin/styles.css') }}" />
+{% endblock %}
+{% block menu %}
+{% include 'admin/menu.html.twig' %}
+{% endblock %}
+
+{% block body %}
+
+    <div id="popup" class="popup shadow"></div>
+
+    <div id="page"></div>
+
+
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    {% include('admin/variables.js.twig') %}
+
+    <script src="{{ asset('js/admin/define.js') }}"></script>
+    <script src="{{ asset('js/admin/scripts.js') }}"></script>
+
+{% endblock %}

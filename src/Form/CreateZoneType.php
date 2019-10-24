@@ -31,6 +31,9 @@ class CreateZoneType extends AbstractType
         $builder
             ->add('format', ChoiceType::class, [
                 'choices' => $c,
+                'attr' => [
+                    'class' => 'form-control',
+                ]
             ]);
     }
 

@@ -6,8 +6,9 @@
   top: 200px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 10;
+  z-index: 10000;
 }
+
 .popup .jumbotron {
   height: 100%;
   margin: 0;
@@ -18,62 +19,171 @@
   width: 100%;
 }
 #page {
+  table {
+    tr {
+      cursor: pointer;
+    }
+  }
   padding-top: 70px;
+
+  .chapo {
+    h2 {
+      min-height: 50px;
+      border: 1px dashed transparent;
+      &:hover {
+        border: 1px dashed #000;
+      }
+    }
+    h1 {
+      min-height: 50px;
+      border: 1px dashed transparent;
+      &:hover {
+        border: 1px dashed #000;
+      }
+    }
+  }
 }
 .create {
   background: #ffffee;
   min-height: 20px;
   width: 100%;
 
-  .row {
 
-    min-height: 200px;
 
-    .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
-      border: 1px solid lightgrey;
-    }
+  & > ul {
+    padding: 0;
+    .zone {
+      border: 3px solid transparent;
+      padding: 20px;
+      &:hover {
 
-    .for-action {
-      position: relative;
-      .action {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 20px;
-        height: 20px;
-        display: none;
-        background: #dadada;
-        cursor: pointer;
-        z-index: 10;
-
+        border: 3px solid darkred;
       }
 
-      &:hover {
-        .action {
-          display: block;
+      list-style: none;
+      position: relative;
+
+      .bloc {
+        &:hover {
+
+          border: 1px solid deepskyblue;
+        }
+
+        li.vide {
+          list-style: none;
+        }
+
+        li.content {
+          list-style: none;
+
+          &:hover {
+            border: 1px dashed darkmagenta;
+          }
+
         }
       }
 
-      .contents {
+      .z-action {
+        position: absolute;
+        top: 0;
+        left: 0px;
+        width: 20px;
+        height: 20px;
 
+        background: aquamarine;
+        cursor: pointer;
+        z-index: 1000;
+        transition: all 0.02s;
+
+        &.edit {
+          width: 120px;
+          height: 40px;
+        }
+      }
+
+      min-height: 200px;
+
+      .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+        border: 1px solid lightgrey;
+      }
+
+      .for-action {
+        position: relative;
+        .action {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 20px;
+          height: 20px;
+          display: none;
+          background: #dadada;
+          cursor: pointer;
+          z-index: 10;
+          transition: all 0.02s;
+
+          &.edit {
+            width: 100px;
+            height: 30px;
+          }
+
+
+        }
+
+        &:hover {
+          .action {
+            display: block;
+          }
+        }
 
         .content {
+
           position: relative;
           border: 1px dashed #efefef;
-          .edit {
+          .c-action {
             top: 0;
             right: 0;
             position: absolute;
             width: 20px;
             height: 20px;
-            background: red;
+            background: #1d75b3;
             cursor: pointer;
             z-index: 10;
+            &.edit {
+              width: 120px;
+              height: 40px;
+              li {
+                a {
+                  color: #fff;
+                }
+              }
+            }
+
           }
+
         }
+
       }
 
     }
+  }
 
- }
+
+}
+
+
+.edit {
+  ul {
+    padding: 0;
+
+    padding: 5px;
+    li {
+      a {
+        color: #000;
+      }
+
+      font-size: 10px;
+      list-style: none;
+    }
+  }
+
 }

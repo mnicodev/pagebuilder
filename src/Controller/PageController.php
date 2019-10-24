@@ -5,6 +5,8 @@ namespace App\Controller;
 
 
 
+
+use App\Entity\Page;
 use App\Form\App\Controller\createZoneType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,9 +20,17 @@ class PageController extends AbstractController
 
 
     /**
-     * @Route("/",name="page.create")
+     * @Route("/",name="page.home")
      */
     public function index(Request $request): Response {
+
+        $orm=$this->getDoctrine()->getManager();
+
+        $p=$orm->getRepository(Page::class)->find(5);
+
+
+
+
         return $this->render('page.html.twig',array("str"=>"hello world"));
 
     }

@@ -44,13 +44,35 @@ class Page
     private $status;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Zone", mappedBy="id_page")
+     * @ORM\OneToMany(targetEntity="App\Entity\Zone", mappedBy="page", cascade={"persist"})
      */
     private $zones;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $param;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $description;
 
     public function __construct()
     {
         $this->zones = new ArrayCollection();
+        $this->date_create= new \DateTime();
+        $this->date_update= new \DateTime();
+    }
+
+    public function __toString()
+    {
+        // TODO: Implement __toString() method.
     }
 
     public function getId(): ?int
@@ -130,7 +152,7 @@ class Page
     {
         if (!$this->zones->contains($zone)) {
             $this->zones[] = $zone;
-            $zone->setIdPage($this);
+            $zone->setPage($this);
         }
 
         return $this;
@@ -141,10 +163,46 @@ class Page
         if ($this->zones->contains($zone)) {
             $this->zones->removeElement($zone);
             // set the owning side to null (unless already changed)
-            if ($zone->getIdPage() === $this) {
-                $zone->setIdPage(null);
+            if ($zone->getPage() === $this) {
+                $zone->setPage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getParam(): ?string
+    {
+        return $this->param;
+    }
+
+    public function setParam(?string $param): self
+    {
+        $this->param = $param;
+
+        return $this;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

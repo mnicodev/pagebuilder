@@ -5,54 +5,43 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" media="screen" href="{{ asset('css/admin/styles.css') }}" />
+
 {% endblock %}
 {% block menu %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark navbar-fixed">
-        <a class="navbar-brand" href="#">Page builder</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    {% include 'admin/menu.html.twig' %}
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="create-page">Créer une page</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="add-zone">Ajouter une zone</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="save-page">Enregistrer la page</a>
-                </li>
-
-
-            </ul>
-
-        </div>
-    </nav>
 {% endblock %}
 
 {% block body %}
-
-    <div id="popup" class="popup shadow"></div>
-
-    <div id="page"></div>
-
+<div id="page" class="container">
+<table class="table  table-bordered table-hover" >
+    <thead class="thead-dark">
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Date de création</th>
+        <th scope="col">Date de mise à jour</th>
+    </tr>
+    </thead>
+    <tbody>
+{%  for item in liste %}
+    <tr data-url="{{ path('admin.page.edit', {slug: item.id}) }}">
+        <th scope="row">{{ item.id }}</th>
+        <td>{{ item.name }}</td>
+        <td>{{ item.datecreate|date }}</td>
+        <td>{{ item.dateupdate|date }}</td>
+    </tr>
+{% endfor %}
+    </tbody>
+</div>
 
 
 {% endblock %}
 
-
-
 {% block javascripts %}
-
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    {% include('admin/variables.js.twig') %}
-
-    <script src="{{ asset('js/admin/define.js') }}"></script>
-    <script src="{{ asset('js/admin/scripts.js') }}"></script>
-
+    <script>
+        $("table tbody tr").click(function () {
+            window.location=$(this).attr("data-url");
+        })
+    </script>
 {% endblock %}

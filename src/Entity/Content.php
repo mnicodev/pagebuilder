@@ -19,7 +19,7 @@ class Content
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Bloc", inversedBy="contents")
      */
-    private $id_bloc;
+    private $bloc;
 
     /**
      * @ORM\Column(type="text", nullable=true)
@@ -31,19 +31,24 @@ class Content
      */
     private $param;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $position;
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdBloc(): ?Bloc
+    public function getBloc(): ?Bloc
     {
-        return $this->id_bloc;
+        return $this->bloc;
     }
 
-    public function setIdBloc(?Bloc $id_bloc): self
+    public function setBloc(?Bloc $bloc): self
     {
-        $this->id_bloc = $id_bloc;
+        $this->bloc = $bloc;
 
         return $this;
     }
@@ -68,6 +73,18 @@ class Content
     public function setParam(?string $param): self
     {
         $this->param = $param;
+
+        return $this;
+    }
+
+    public function getPosition(): ?int
+    {
+        return $this->position;
+    }
+
+    public function setPosition(int $position): self
+    {
+        $this->position = $position;
 
         return $this;
     }

@@ -21,7 +21,7 @@ class Bloc
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Zone", inversedBy="blocs")
      */
-    private $id_zone;
+    private $zone;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -34,7 +34,7 @@ class Bloc
     private $param;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Content", mappedBy="id_bloc")
+     * @ORM\OneToMany(targetEntity="App\Entity\Content", mappedBy="bloc", cascade={"persist"})
      */
     private $contents;
 
@@ -48,14 +48,14 @@ class Bloc
         return $this->id;
     }
 
-    public function getIdZone(): ?Zone
+    public function getZone(): ?Zone
     {
-        return $this->id_zone;
+        return $this->zone;
     }
 
-    public function setIdZone(?Zone $id_zone): self
+    public function setZone(?Zone $zone): self
     {
-        $this->id_zone = $id_zone;
+        $this->zone = $zone;
 
         return $this;
     }
@@ -96,7 +96,7 @@ class Bloc
     {
         if (!$this->contents->contains($content)) {
             $this->contents[] = $content;
-            $content->setIdBloc($this);
+            $content->setBloc($this);
         }
 
         return $this;
@@ -107,8 +107,8 @@ class Bloc
         if ($this->contents->contains($content)) {
             $this->contents->removeElement($content);
             // set the owning side to null (unless already changed)
-            if ($content->getIdBloc() === $this) {
-                $content->setIdBloc(null);
+            if ($content->getBloc() === $this) {
+                $content->setBloc(null);
             }
         }
 
