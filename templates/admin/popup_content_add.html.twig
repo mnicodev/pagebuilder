@@ -1,0 +1,50 @@
+
+
+
+
+    {% if bloc is defined %}
+<script src={{ asset('js/admin/ckeditor/ckeditor.js') }}></script>
+
+    <form target="data" method="post" action="{{ url('admin.popup.content.add') }}">
+<input type="hidden" id="bloc" value="{{ bloc }}">
+        <input type="hidden" id="id" value="{{ id }}">
+<div class="jumbotron">
+    <div class="display-8">Ajout d'un contenu</div>
+    <textarea id="editeur" name="editeur" rows="10" cols="60">{%  if content is defined %}{{ content|raw }}{% endif %}</textarea>
+    <div class="row">
+        <div class="col-sm-6">
+            <button id="content-validate" class="form-control btn-primary">Valider</button>
+        </div>
+        <div class="col-sm-6">
+
+            <input type="button" id="close" value="Fermer" class="form-control btn-cancel" />
+        </div>
+
+    </div>
+
+</div>
+
+    </form>
+    <iframe id="data" name="data" style="width:300px;display:none"></iframe>
+        <script>
+            CKEDITOR.replace("editeur");
+
+        </script>
+
+    {% endif %}
+    {% if str is defined %}
+
+        <script>
+            window.onload=function() {
+                bloc=parent.document.getElementById("bloc").value
+                id=parent.document.getElementById("id").value;
+
+                if(id) parent.pagebuilder.update_content(id,"{{ str|raw }}");
+                else parent.pagebuilder.add_content(bloc,"{{ str|raw }}");
+
+            }
+        </script>
+
+    {%  endif %}
+
+
