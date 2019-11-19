@@ -138,7 +138,9 @@ var pagebuilder={
 
     show: function () {
         $("#page").html("");
-
+        // un element row
+        global_row=document.createElement("div");
+        $(global_row).addClass("global-row");
         chapo=document.createElement("div");
         h1=document.createElement("h1");
         h2=document.createElement("h2");
@@ -149,7 +151,8 @@ var pagebuilder={
         chapo.appendChild(h2);
 
 
-        $("#page").append(chapo);
+        //$("#page").append(chapo);
+        $(global_row).append(chapo);
         $("#page").addClass(this.page.param.classes+" create");
 
         container=document.createElement("ul");
@@ -164,7 +167,8 @@ var pagebuilder={
             f=this.page.zones[i].format.split(":");
 
             element=document.createElement("li");
-            $(element).addClass("row zone  ");
+            $(element).addClass("zone");
+            $(element).addClass(this.page.zones[i].param.classes);
             $(element).attr("data-line",i);
             $(element).attr("data-format",this.page.zones[i].format);
             $(element).attr("data-param-classes",this.page.zones[i].param.classes);
@@ -215,7 +219,8 @@ var pagebuilder={
 
         }
 
-        $("#page").append(container);
+        $(global_row).append(container);
+        $("#page").append(global_row);
 
 
 

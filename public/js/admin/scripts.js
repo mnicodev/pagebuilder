@@ -328,6 +328,7 @@ jQuery(document).ready(function() {
     $("#add-zone").click(function () {
         $.ajax({
             url:url_popup_addzone,
+            data: {"large": pagebuilder.page.param.classes},
             success: function (result) {
                 if(pagebuilder.page.name==="") alert("Veuillez créer une page");
                 else  {
@@ -342,6 +343,7 @@ jQuery(document).ready(function() {
                         /* objet zone */
                         z=new o_zone();
                         z.format=$("#create_zone_format").val();
+                        if($("#largeur_contenu").is(":checked")) z.param.classes="container";
                         for(i in f) {
                             /* objet bloc */
                             b=new o_bloc();

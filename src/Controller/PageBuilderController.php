@@ -202,14 +202,16 @@ class PageBuilderController extends AbstractController
      * @return Response
      * @Route("/admin/zone/add", name="admin.popup.zone.add");
      */
-    public function popupZoneAdd(): Response {
+    public function popupZoneAdd(Request $request): Response {
 
         //print_r($zoneAddType);
 
         $form= $this->createForm(CreateZoneType::class);
+        if($request->get("large")=="container-fluid") $large=1;
+        else $large=0;
 
 
-        return $this->render("admin/popup_add_zone.html.twig", ["form"=>$form->createView()]);
+        return $this->render("admin/popup_add_zone.html.twig", ["form"=>$form->createView(),"large"=>$large]);
     }
 
     /**

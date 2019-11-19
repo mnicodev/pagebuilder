@@ -6,6 +6,14 @@
     {{  form_start(form) }}
     {{  form_widget(form) }}
 
+            {% if large == 1 %}
+                <div>
+                    <label for="largeur">Largeur contenue: </label>
+                    <input type="checkbox" class="" name="largeur" id="largeur_contenu"/>
+                </div>
+
+            {% endif %}
+
     {{ form_end(form) }}
         </div>
     </div>

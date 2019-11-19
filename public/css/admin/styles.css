@@ -31,29 +31,30 @@
     #page .chapo h1:hover {
       border: 1px dashed #000; }
 
-.create {
+.create .global-row {
+  margin-left: -15px;
+  margin-right: -15px;
   background: #ffffee;
   min-height: 20px;
-  width: 100%; }
-  .create > ul {
+  /*width: 100%;*/ }
+  .create .global-row > ul {
     padding: 0; }
-    .create > ul .zone {
+    .create .global-row > ul .zone {
       border: 3px solid transparent;
       padding: 20px;
       list-style: none;
-      position: relative;
-      min-height: 200px; }
-      .create > ul .zone:hover {
+      position: relative; }
+      .create .global-row > ul .zone:hover {
         border: 3px solid darkred; }
-      .create > ul .zone .bloc:hover {
+      .create .global-row > ul .zone .bloc:hover {
         border: 1px solid deepskyblue; }
-      .create > ul .zone .bloc li.vide {
+      .create .global-row > ul .zone .bloc li.vide {
         list-style: none; }
-      .create > ul .zone .bloc li.content {
+      .create .global-row > ul .zone .bloc li.content {
         list-style: none; }
-        .create > ul .zone .bloc li.content:hover {
+        .create .global-row > ul .zone .bloc li.content:hover {
           border: 1px dashed darkmagenta; }
-      .create > ul .zone .z-action {
+      .create .global-row > ul .zone .z-action {
         position: absolute;
         top: 0;
         left: 0px;
@@ -63,14 +64,15 @@
         cursor: pointer;
         z-index: 1000;
         transition: all 0.02s; }
-        .create > ul .zone .z-action.edit {
+        .create .global-row > ul .zone .z-action.edit {
           width: 120px;
           height: 40px; }
-      .create > ul .zone .col-md-1, .create > ul .zone .col-md-2, .create > ul .zone .col-md-3, .create > ul .zone .col-md-4, .create > ul .zone .col-md-5, .create > ul .zone .col-md-6, .create > ul .zone .col-md-7, .create > ul .zone .col-md-8, .create > ul .zone .col-md-9, .create > ul .zone .col-md-10, .create > ul .zone .col-md-11, .create > ul .zone .col-md-12 {
+      .create .global-row > ul .zone .col-md-1, .create .global-row > ul .zone .col-md-2, .create .global-row > ul .zone .col-md-3, .create .global-row > ul .zone .col-md-4, .create .global-row > ul .zone .col-md-5, .create .global-row > ul .zone .col-md-6, .create .global-row > ul .zone .col-md-7, .create .global-row > ul .zone .col-md-8, .create .global-row > ul .zone .col-md-9, .create .global-row > ul .zone .col-md-10, .create .global-row > ul .zone .col-md-11, .create .global-row > ul .zone .col-md-12 {
         border: 1px solid lightgrey; }
-      .create > ul .zone .for-action {
-        position: relative; }
-        .create > ul .zone .for-action .action {
+      .create .global-row > ul .zone .for-action {
+        position: relative;
+        min-height: 20px; }
+        .create .global-row > ul .zone .for-action .action {
           position: absolute;
           top: 0;
           left: 0;
@@ -81,15 +83,15 @@
           cursor: pointer;
           z-index: 10;
           transition: all 0.02s; }
-          .create > ul .zone .for-action .action.edit {
+          .create .global-row > ul .zone .for-action .action.edit {
             width: 100px;
             height: 30px; }
-        .create > ul .zone .for-action:hover .action {
+        .create .global-row > ul .zone .for-action:hover .action {
           display: block; }
-        .create > ul .zone .for-action .content {
+        .create .global-row > ul .zone .for-action .content {
           position: relative;
           border: 1px dashed #efefef; }
-          .create > ul .zone .for-action .content .c-action {
+          .create .global-row > ul .zone .for-action .content .c-action {
             top: 0;
             right: 0;
             position: absolute;
@@ -98,10 +100,10 @@
             background: #1d75b3;
             cursor: pointer;
             z-index: 10; }
-            .create > ul .zone .for-action .content .c-action.edit {
+            .create .global-row > ul .zone .for-action .content .c-action.edit {
               width: 120px;
               height: 40px; }
-              .create > ul .zone .for-action .content .c-action.edit li a {
+              .create .global-row > ul .zone .for-action .content .c-action.edit li a {
                 color: #fff; }
 
 .edit ul {
