@@ -63,6 +63,11 @@ class Page
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $content;
+
     public function __construct()
     {
         $this->zones = new ArrayCollection();
@@ -203,6 +208,18 @@ class Page
     public function setDescription(?string $description): self
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
 
         return $this;
     }
