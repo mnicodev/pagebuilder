@@ -9,6 +9,26 @@ function close() {
 
 
 function action_content() {
+	/* si on survol la page (wrapper) */
+	$(".content-wrapper").hover(
+		function() {
+	        /* on supprimer une éventuelle action précédente */
+    	    $(this).find(".p-action").remove();
+        	/* on crée un objet div et on l'ajoute au content */
+	        d=document.createElement("div");
+    	    $(d).addClass("p-action");
+			$(d).attr("title","Ajouter une zone");
+			$(d).text("+");
+        	$(this).append(d);
+
+			$(".p-action").click(add_zone);
+	
+		},
+		function() {
+        	$(this).find(".p-action").remove();
+		}
+	);
+	
     /* si on survol un contenu */
     $(".content").hover(function () {
         /* on supprimer une éventuelle action précédente */
@@ -98,12 +118,25 @@ function action_content() {
 }
 
 function set_drag() {
-    $( ".sortable" ).sortable({
+	var nestedSortables = [].slice.call(document.querySelectorAll('.sortable'));
+
+	// Loop through each nested sortable element
+	for (var i = 0; i < nestedSortables.length; i++) {
+		new Sortable(nestedSortables[i], {
+			group: 'nested',
+			animation: 150,
+			fallbackOnBody: true,
+			swapThreshold: 0.65,
+			ghostClass: 'sortable_background',
+			//onEnd: refresh,
+		});
+	}
+    /*$( ".sortable" ).sortable({
         cursor: "move",
         opacity: 0.5,
         revert: true,
         connectWith: ".connected",
-       /* dropOnEmpty: false,*/
+		ghostClass: 'sortable_background',
 
 
         stop: function () {
@@ -112,13 +145,37 @@ function set_drag() {
 
     });
     $( ".sortable" ).disableSelection();
+*/
 
+}
+function read_zones(tz) {
+	console.log(tz);
+	// on lit le tableau des zones
+	for(var idz in tz) {
+		// si il y a des zones dans une zone
+		if(tz[idz].zones.length) {
+			console.log(tz[idz].zones);
+			read_zones(tz[idz].zones)
+		}
+		// sinon on lit les blocs
+		else {
+			for(var idb in tz[idz].blocs) {
+                if(tz[idz].blocs[idb].contents.length) {
+					for(var idc in tz[idz].blocs[idb].contents) {
+						console.log(tz[idz].blocs[idb].contents[idc].data);
+					}
+				}
 
+			}
+		}
+
+	}
 }
 
 function refresh() {
     p=new o_page();
 
+console.log("refresh");
     p.name=pagebuilder.page.name;
     p.description=pagebuilder.page.description;
     p.param=pagebuilder.page.param;
@@ -140,16 +197,20 @@ function refresh() {
                         c.param.classes = $(this).attr("data-param-classes");
                         c.param.style = $(this).attr("data-param-style");
                         c.data = $(this).html();
-                        b.contents.push(c);
+                        //b.contents.push(c);
+                        b.add_content(c);
                     })
-                    z.blocs.push(b);
+                    //z.blocs.push(b);
+                    z.add_bloc(b);
 
                 })
-                p.zones.push(z);
+                //p.zones.push(z);
+                p.add_zone(z);
             }
         }
 
     )
+
 
     pagebuilder.page=p;
     pagebuilder.save();
@@ -162,7 +223,9 @@ function refresh() {
     })
     set_drag();
     action_content();
+
 }
+
 
 function update_chapo(o,h) {
 
@@ -227,13 +290,57 @@ function update_chapo(o,h) {
     })
 }
 
+function add_zone() {
+        $.ajax({
+            url:url_popup_addzone,
+            data: {"large": pagebuilder.page.param.classes},
+            success: function (result) {
+                if(pagebuilder.page.name==="") alert("Veuillez créer une page");
+                else  {
+                    $("#popup").html(result);
+                    $("#popup").show();
+
+                    $("#zone-validate").click(function () {
+
+
+                        f=new String($("#create_zone_format").val()).split(":");
+
+                        /* objet zone */
+                        z=new o_zone();
+                        z.format=$("#create_zone_format").val();
+                        if($("#largeur_contenu").is(":checked")) z.param.classes="container";
+                        for(i in f) {
+                            /* objet bloc */
+                            b=new o_bloc();
+
+                            z.blocs.push(b);
+                        }
+
+                        pagebuilder.add_zone(z);
+
+
+                        $("#popup").hide();
+                        pagebuilder.show();
+
+
+                    })
+
+                    close();
+
+
+                }
+
+            }
+
+        })
+}
+
+
 jQuery(document).ready(function() {
-
-
-
     /* On recherche si un objet pagebuilder existe*/
     if(window.localStorage)
         if(localStorage.getItem("pagebuilder")) {
+			console.log("load");
             pagebuilder.page=JSON.parse(localStorage.getItem("pagebuilder"));
             pagebuilder.show();
             action_content();
@@ -258,10 +365,11 @@ jQuery(document).ready(function() {
     }
 
     $("#save-page").click(function () {
+		//console.log($("#page .content-wrapper").html());
         $.ajax({
             url:url_page_save,
             method: "POST",
-            data: {page:JSON.stringify(pagebuilder.page),id:id_page},
+            data: {page:JSON.stringify(pagebuilder.page),id:id_page,fulltext: $("#page .content-wrapper").html()},
             success: function(result) {
                 $("#popup").html(result);
                 $("#popup").show();
@@ -270,6 +378,7 @@ jQuery(document).ready(function() {
         })
 
     })
+	refresh();
 
     $(".chapo h1").click(function () {
         update_chapo(this, "h1")
@@ -325,51 +434,7 @@ jQuery(document).ready(function() {
 
     })
 
-    $("#add-zone").click(function () {
-        $.ajax({
-            url:url_popup_addzone,
-            data: {"large": pagebuilder.page.param.classes},
-            success: function (result) {
-                if(pagebuilder.page.name==="") alert("Veuillez créer une page");
-                else  {
-                    $("#popup").html(result);
-                    $("#popup").show();
-
-                    $("#zone-validate").click(function () {
-
-
-                        f=new String($("#create_zone_format").val()).split(":");
-
-                        /* objet zone */
-                        z=new o_zone();
-                        z.format=$("#create_zone_format").val();
-                        if($("#largeur_contenu").is(":checked")) z.param.classes="container";
-                        for(i in f) {
-                            /* objet bloc */
-                            b=new o_bloc();
-
-                            z.blocs.push(b);
-                        }
-
-                        pagebuilder.add_zone(z);
-
-
-                        $("#popup").hide();
-                        pagebuilder.show();
-
-
-                    })
-
-                    close();
-
-
-                }
-
-            }
-
-        })
-
-    })
+    $("#add-zone").click(add_zone);
 
 
 

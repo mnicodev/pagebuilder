@@ -9,17 +9,30 @@ function o_content() {
 function o_bloc() {
     this.param= new o_param();
     this.contents= [];
+	this.add_content=function(c) {
+		this.contents.push(c);
+	}
 }
 function o_zone() {
     this.param= new o_param();
     this.format= "";
     this.blocs= [];
+	this.zones=[];
+	this.add_zone=function(z) {
+		this.zones.push(z);
+	}
+	this.add_bloc=function(b) {
+		this.blocs.push(b);
+	}
 }
 function o_page() {
     this.name="";
     this.description="";
     this.param=new o_param();
     this.zones=[];
+	this.add_zone=function(z) {
+		this.zones.push(z);
+	}
 
 }
 var pagebuilder={
@@ -91,20 +104,18 @@ var pagebuilder={
     },
 
     save: function() {
-        if(window.localStorage) {
+        if(window.localStorage) {console.log("save");
             localStorage.setItem('pagebuilder',JSON.stringify(this.page));
         }
     },
 
-    refresh: function() {
-        console.log("ok");
+    /*refresh: function() {
         p=new o_page();
-
         p.name=this.page.name;
+    	p.description=this.page.description;
         p.param=this.page.param;
         $(".create").find(".zone").each(function() {
-            console.log($(this).attr("id"))
-                z = new o_zone();
+                z = new o_zone();console.log(z);
                 z.param.classes = $(this).attr("data-param-classes");
                 z.param.style = $(this).attr("data-param-style");
                 z.format=$(this).attr("data-format");
@@ -119,19 +130,19 @@ var pagebuilder={
                         c.param.classes= $(this).attr("data-param-classes");
                         c.param.style= $(this).attr("data-param-style");
                         c.data=$(this).html();
-                        b.contents.push(c);
+                        b.add_content(c);
                     })
-                    z.blocs.push(b);
+                    z.add_bloc(b);
 
                 })
-                p.zones.push(z);
+                p.add_zone(z);
 
             }
 
         )
 
         this.page=p;
-    },
+    },*/
 
 
 
@@ -155,15 +166,18 @@ var pagebuilder={
         $(global_row).append(chapo);
         $("#page").addClass(this.page.param.classes+" create");
 
+        content_wrapper=document.createElement("div");
         container=document.createElement("ul");
         // on affecte les classes
         //$(container).addClass(this.page.param.classes);
         $(container).addClass("sortable connected");
-
+		$(content_wrapper).addClass("content-wrapper");
+		
 
 
         for(var i in this.page.zones) {
             element="";
+			// on récupére le format de la zone, pour déterminer la largeur des blocs
             f=this.page.zones[i].format.split(":");
 
             element=document.createElement("li");
@@ -175,14 +189,16 @@ var pagebuilder={
             $(element).attr("data-param-style",this.page.zones[i].param.style);
             $(element).attr("id","zone_"+i);
 
-            /*container_bloc=document.createElement("ul");
-            $(container_bloc).addClass("sortable row");*/
+            container_bloc=document.createElement("div");
+            $(container_bloc).addClass("row");
 
             for(var j in this.page.zones[i].blocs) {
 
                 bloc=document.createElement("ul");
                 /*action=document.createElement("div");
                 $(action).addClass("action");*/
+
+				// on applique le format de la zone aux blocs
                 $(bloc).addClass("connected sortable for-action bloc col-md-"+f[j]);
                 $(bloc).attr("id","bloc_"+i+"_"+j);
                 $(bloc).attr("data-param-classes",this.page.zones[i].blocs[j].param.classes);
@@ -193,7 +209,7 @@ var pagebuilder={
                 if(this.page.zones[i].blocs[j].contents.length) {
                     for(var c in this.page.zones[i].blocs[j].contents) {
                         content=document.createElement("li");
-                        $(content).addClass("content");
+                        $(content).addClass("content ");
                         $(content).attr("data-pos",i+":"+j+":"+c);
                         $(content).attr("data-param-classes", this.page.zones[i].blocs[j].contents[c].param.classes);
                         $(content).attr("data-param-style", this.page.zones[i].blocs[j].contents[c].param.style);
@@ -210,16 +226,19 @@ var pagebuilder={
                     $(content).addClass("vide");
                     bloc.appendChild(content);
                 }
-                //container_bloc.appendChild(bloc)
+                container_bloc.appendChild(bloc)
 
-                element.appendChild(bloc);
+                element.appendChild(container_bloc);
+                //element.appendChild(bloc);
 
             }
             container.appendChild(element);
+			
 
         }
+		$(content_wrapper).append(container);
 
-        $(global_row).append(container);
+        $(global_row).append(content_wrapper);
         $("#page").append(global_row);
 
 

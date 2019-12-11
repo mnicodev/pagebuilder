@@ -19,6 +19,9 @@
   width: 100%;
 }
 #page {
+	.jumbotron {
+		margin-bottom: 0;
+	}
   table {
     tr {
       cursor: pointer;
@@ -50,6 +53,27 @@
     margin-right: -15px;
     background: #ffffee;
     min-height: 20px;
+
+	.content-wrapper {
+		cursor: default;
+		border: 1px solid transparent;
+		padding-top: 30px;
+		position: relative;
+		&:hover {
+			border: 1px solid green;
+		}
+		.p-action {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 20px;
+			height: 20px;
+			background: green;
+			cursor: pointer;
+			text-align: center;
+			color: #fff;
+
+		}
     /*width: 100%;*/
 
 
@@ -57,18 +81,26 @@
     & > ul {
       padding: 0;
       .zone {
-        border: 3px solid transparent;
+
+		  & > ul {
+			  padding-left: 5px;
+			  padding-right: 5px;
+		  }
+        border: 1px solid transparent;
         padding: 20px;
         &:hover {
-
-          border: 3px solid darkred;
+			cursor: grab;
+          border: 1px solid darkred;
         }
 
         list-style: none;
         position: relative;
 
         .bloc {
+			min-height: 50px;
+			background: #EFF6FC;
           &:hover {
+			cursor: default;
 
             border: 1px solid deepskyblue;
           }
@@ -79,9 +111,11 @@
 
           li.content {
             list-style: none;
+            border: 1px dashed transparent;
 
             &:hover {
-              border: 1px dashed darkmagenta;
+				cursor: grab;
+              border: 1px dashed #adadad;
             }
 
           }
@@ -94,10 +128,11 @@
           width: 20px;
           height: 20px;
 
-          background: aquamarine;
+          background: darkmagenta;
           cursor: pointer;
           z-index: 1000;
           transition: all 0.02s;
+		  a { color: #fff;}
 
           &.edit {
             width: 120px;
@@ -107,13 +142,14 @@
 
 
 
-        .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+        .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, 
+		.col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, 
+		.col-md-11, .col-md-12 {
           border: 1px solid lightgrey;
         }
 
         .for-action {
           position: relative;
-          min-height: 20px;
           .action {
             position: absolute;
             top: 0;
@@ -121,7 +157,7 @@
             width: 20px;
             height: 20px;
             display: none;
-            background: #dadada;
+            background: deepskyblue;
             cursor: pointer;
             z-index: 10;
             transition: all 0.02s;
@@ -143,14 +179,13 @@
           .content {
 
             position: relative;
-            border: 1px dashed #efefef;
             .c-action {
               top: 0;
               right: 0;
               position: absolute;
               width: 20px;
               height: 20px;
-              background: #1d75b3;
+              background: #adadad;
               cursor: pointer;
               z-index: 10;
               &.edit {
@@ -171,6 +206,7 @@
 
       }
     }
+	}
   }
 
 
@@ -193,4 +229,8 @@
     }
   }
 
+}
+
+.sortable_background {
+	background: #ffffaa;
 }
