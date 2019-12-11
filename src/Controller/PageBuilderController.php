@@ -104,8 +104,8 @@ class PageBuilderController extends AbstractController
     public function save(Request $request): Response {
         $pagebuilder=json_decode($request->request->get("page"));
         $entityManager=$this->getDoctrine()->getManager();
-        $id=0;
-        if($id=$request->request->get("id")) {
+		$id=0;
+		if($id=$request->request->get("id")) {
             $page=$entityManager->getRepository(Page::class)->find($id);
             foreach($page->getZones() as $zone) {
                 //$page->removeZone($zone);
@@ -137,6 +137,9 @@ class PageBuilderController extends AbstractController
             ->setIdSite(1)
             ->setStatus(1);
 
+		if($textfull=$request->request->get("fulltext")){ 
+			$page->setContent($textfull);
+		}
 
         foreach($pagebuilder->zones as $pz=>$z) {
             $zone=new Zone();
@@ -173,12 +176,10 @@ class PageBuilderController extends AbstractController
 
         }
 
-        if($id) {
-            $entityManager->persist($page);
-            $entityManager->persist($zone);
-            $entityManager->persist($bloc);
-            if(isset($content)) $entityManager->persist($content);
-        }
+        $entityManager->persist($page);
+        if(isset($zone)) $entityManager->persist($zone);
+        if(isset($bloc)) $entityManager->persist($bloc);
+        if(isset($content)) $entityManager->persist($content);
 
 
         $entityManager->flush();
