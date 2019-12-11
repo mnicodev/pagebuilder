@@ -78,14 +78,10 @@
 
 
 
-    & > ul {
+    & > .sortable{
       padding: 0;
       .zone {
-
-		  & > ul {
-			  padding-left: 5px;
-			  padding-right: 5px;
-		  }
+		margin: 0;
         border: 1px solid transparent;
         padding: 20px;
         &:hover {
@@ -105,20 +101,9 @@
             border: 1px solid deepskyblue;
           }
 
-          li.vide {
-            list-style: none;
-          }
+		  padding: 15px;
 
-          li.content {
-            list-style: none;
-            border: 1px dashed transparent;
 
-            &:hover {
-				cursor: grab;
-              border: 1px dashed #adadad;
-            }
-
-          }
         }
 
         .z-action {
@@ -145,7 +130,7 @@
         .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, 
 		.col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, 
 		.col-md-11, .col-md-12 {
-          border: 1px solid lightgrey;
+          border: 1px solid #adadad;
         }
 
         .for-action {
@@ -179,6 +164,12 @@
           .content {
 
             position: relative;
+			overflow: hidden;
+
+			border: 1px dashed transparent;
+			&:hover {
+				border: 1px dashed #adadad;
+			}
             .c-action {
               top: 0;
               right: 0;

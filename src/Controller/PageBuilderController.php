@@ -80,9 +80,12 @@ class PageBuilderController extends AbstractController
                         ];
                     }
                 }
-            }
-            //print_r(serialize(json_encode($pagebuilder)));
-            return new Response((json_encode($pagebuilder)));
+			}
+
+			//print_r(serialize(json_encode($pagebuilder)));
+			$t=[$page->getName(),$page->getContent()];
+            //return new Response($page->getName()."|".$page->getContent());
+            return new Response((json_encode($t)));
 
         }
 
@@ -107,24 +110,8 @@ class PageBuilderController extends AbstractController
 		$id=0;
 		if($id=$request->request->get("id")) {
             $page=$entityManager->getRepository(Page::class)->find($id);
-            foreach($page->getZones() as $zone) {
-                //$page->removeZone($zone);
-                foreach($zone->getBlocs() as $bloc) {
-                    foreach($bloc->getContents() as $content) {
-                        $entityManager->remove($content);
-                    }
-                    $entityManager->remove($bloc);
-
-                }
-                $entityManager->remove($zone);
-            }
-
-            $entityManager->flush();
-
 
         } else {
-
-
             $page=new Page();
         }
 
@@ -141,46 +128,8 @@ class PageBuilderController extends AbstractController
 			$page->setContent($textfull);
 		}
 
-        foreach($pagebuilder->zones as $pz=>$z) {
-            $zone=new Zone();
-
-            $zone->setParam(serialize($z->param))
-                ->setIdFormatZone($z->format)
-                ->setPosition($pz)
-                ->setPage($page);
-
-
-
-            foreach ($z->blocs as $pos=>$b) {
-                $bloc=new Bloc();
-                $bloc->setParam(serialize($b->param))
-                    ->setPosition($pos)
-                    ->setZone($zone);
-
-
-                foreach($b->contents as $pc=>$c) {
-                    $content=new Content();
-                    $content->setPosition($pc)
-                        ->setParam(serialize($c->param))
-                        ->setData($c->data)
-                        ->setPosition($pc)
-                        ->setBloc($bloc);
-                    $bloc->addContent($content);
-                }
-
-                $zone->addBloc($bloc);
-
-            }
-
-            $page->addZone($zone);
-
-        }
 
         $entityManager->persist($page);
-        if(isset($zone)) $entityManager->persist($zone);
-        if(isset($bloc)) $entityManager->persist($bloc);
-        if(isset($content)) $entityManager->persist($content);
-
 
         $entityManager->flush();
 

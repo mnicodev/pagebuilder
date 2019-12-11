@@ -4,7 +4,6 @@
 
     {% if bloc is defined %}
 <script src={{ asset('js/admin/ckeditor/ckeditor.js') }}></script>
-
     <form target="data" method="post" action="{{ url('admin.popup.content.add') }}">
 <input type="hidden" id="bloc" value="{{ bloc }}">
         <input type="hidden" id="id" value="{{ id }}">
@@ -38,9 +37,24 @@
             window.onload=function() {
                 bloc=parent.document.getElementById("bloc").value
                 id=parent.document.getElementById("id").value;
+				if(id) {
+					parent.document.getElementById(id).innerHTML="{{ str|raw }}";
+					parent.document.getElementById("popup").style.display="none";
+					parent.action_content();
 
-                if(id) parent.pagebuilder.update_content(id,"{{ str|raw }}");
-                else parent.pagebuilder.add_content(bloc,"{{ str|raw }}");
+				} else {
+				
+					uniqid=(new Date().getTime()).toString(16);
+					content=document.createElement("div");
+					content.setAttribute("id",uniqid);
+					content.classList.add("content");
+					content.innerHTML="{{ str|raw }}";
+					parent.document.getElementById(bloc).appendChild(content);
+					parent.document.getElementById("popup").style.display="none";
+					parent.action_content();
+				}
+
+
 
             }
         </script>

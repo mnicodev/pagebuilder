@@ -76,10 +76,14 @@ class __TwigTemplate_5eb90929d49f3677240543e25999f3506010b6bf0c27607d6955807d252
             integrity=\"sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=\"
             crossorigin=\"anonymous\"></script>
         <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
-        ";
+\t\t<script src=\"";
         // line 41
-        $this->displayBlock('javascripts', $context, $blocks);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/admin/sortable/Sortable.min.js"), "html", null, true);
+        echo "\"></script>
+        ";
         // line 42
+        $this->displayBlock('javascripts', $context, $blocks);
+        // line 43
         echo "    </body>
 </html>
 ";
@@ -186,7 +190,7 @@ class __TwigTemplate_5eb90929d49f3677240543e25999f3506010b6bf0c27607d6955807d252
 
     }
 
-    // line 41
+    // line 42
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -209,9 +213,14 @@ class __TwigTemplate_5eb90929d49f3677240543e25999f3506010b6bf0c27607d6955807d252
         return "base.html.twig";
     }
 
+    public function isTraitable()
+    {
+        return false;
+    }
+
     public function getDebugInfo()
     {
-        return array (  190 => 41,  172 => 35,  142 => 12,  132 => 11,  114 => 8,  95 => 5,  83 => 42,  81 => 41,  74 => 36,  72 => 35,  68 => 33,  66 => 11,  62 => 9,  60 => 8,  54 => 5,  48 => 1,);
+        return array (  194 => 42,  176 => 35,  146 => 12,  136 => 11,  118 => 8,  99 => 5,  87 => 43,  85 => 42,  81 => 41,  74 => 36,  72 => 35,  68 => 33,  66 => 11,  62 => 9,  60 => 8,  54 => 5,  48 => 1,);
     }
 
     public function getSourceContext()
@@ -256,6 +265,7 @@ class __TwigTemplate_5eb90929d49f3677240543e25999f3506010b6bf0c27607d6955807d252
             integrity=\"sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=\"
             crossorigin=\"anonymous\"></script>
         <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
+\t\t<script src=\"{{ asset('js/admin/sortable/Sortable.min.js') }}\"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>

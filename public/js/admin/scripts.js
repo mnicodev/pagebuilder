@@ -42,12 +42,11 @@ function action_content() {
             function () {
                 $(this).addClass("edit");
                 o=this;
-
                 /* on charge la page des actions de contenu, on envoie le contenu */
                 $.ajax({
                     url: url_content_action,
                     method: "POST",
-                    data: {bloc:$(this).parent().parent().attr("data-bloc"),content: $(this).parent().html(),id:$(this).parent().attr("data-pos")},
+                    data: {bloc:$(this).parent().parent().attr("id"),content: $(this).parent().html(),id:$(this).parent().attr("id")},
                     success: function (result) {
                         $(o).html(result);
                     },
@@ -68,10 +67,11 @@ function action_content() {
         $(".z-action").hover(function () {
             $(this).addClass("edit")
             o=this;
+				
             $.ajax({
                 url: url_zone_action,
                 method: "POST",
-                data: { zone:$(this).parent().attr("data-line")},
+                data: { zone:$(this).parent().attr("id")},
                 success: function (result) {
 
                     $(o).html(result);
@@ -99,7 +99,7 @@ function action_content() {
             $.ajax({
                 url: url_bloc_action,
                 method: "POST",
-                data: {bloc:$(this).parent().attr("data-bloc"), zone:$(this).parent().parent().attr("data-line")},
+                data: {bloc:$(this).parent().attr("id"), zone:$(this).parent().parent().attr("data-line")},
                 success: function (result) {
 
                     $(o).html(result);
@@ -131,101 +131,8 @@ function set_drag() {
 			//onEnd: refresh,
 		});
 	}
-    /*$( ".sortable" ).sortable({
-        cursor: "move",
-        opacity: 0.5,
-        revert: true,
-        connectWith: ".connected",
-		ghostClass: 'sortable_background',
-
-
-        stop: function () {
-            refresh();
-        },
-
-    });
-    $( ".sortable" ).disableSelection();
-*/
 
 }
-function read_zones(tz) {
-	console.log(tz);
-	// on lit le tableau des zones
-	for(var idz in tz) {
-		// si il y a des zones dans une zone
-		if(tz[idz].zones.length) {
-			console.log(tz[idz].zones);
-			read_zones(tz[idz].zones)
-		}
-		// sinon on lit les blocs
-		else {
-			for(var idb in tz[idz].blocs) {
-                if(tz[idz].blocs[idb].contents.length) {
-					for(var idc in tz[idz].blocs[idb].contents) {
-						console.log(tz[idz].blocs[idb].contents[idc].data);
-					}
-				}
-
-			}
-		}
-
-	}
-}
-
-function refresh() {
-    p=new o_page();
-
-console.log("refresh");
-    p.name=pagebuilder.page.name;
-    p.description=pagebuilder.page.description;
-    p.param=pagebuilder.page.param;
-    $(".create").find(".zone").each(function() {
-            if(typeof $(this).attr("id") !='undefined') {
-
-                z = new o_zone();
-                z.param.classes = $(this).attr("data-param-classes");
-                z.param.style = $(this).attr("data-param-style");
-                z.format = $(this).attr("data-format");
-
-                $(this).find(".bloc").each(function () {
-                    b = new o_bloc();
-                    b.param.classes = $(this).attr("data-param-classes");
-                    b.param.style = $(this).attr("data-param-style");
-
-                    $(this).find(".content").each(function () {
-                        c = new o_content();
-                        c.param.classes = $(this).attr("data-param-classes");
-                        c.param.style = $(this).attr("data-param-style");
-                        c.data = $(this).html();
-                        //b.contents.push(c);
-                        b.add_content(c);
-                    })
-                    //z.blocs.push(b);
-                    z.add_bloc(b);
-
-                })
-                //p.zones.push(z);
-                p.add_zone(z);
-            }
-        }
-
-    )
-
-
-    pagebuilder.page=p;
-    pagebuilder.save();
-    pagebuilder.show();
-    $(".chapo h1").click(function () {
-        update_chapo(this, "h1")
-    })
-    $(".chapo h2").click(function () {
-        update_chapo(this,"h2")
-    })
-    set_drag();
-    action_content();
-
-}
-
 
 function update_chapo(o,h) {
 
@@ -300,26 +207,42 @@ function add_zone() {
                     $("#popup").html(result);
                     $("#popup").show();
 
+					/* on applique l'action du clique */
                     $("#zone-validate").click(function () {
 
 
                         f=new String($("#create_zone_format").val()).split(":");
 
-                        /* objet zone */
-                        z=new o_zone();
-                        z.format=$("#create_zone_format").val();
-                        if($("#largeur_contenu").is(":checked")) z.param.classes="container";
+						nbz=$(".content-zone").find(".zone").length+1;
+						zone=document.createElement("div");
+						$(zone).addClass("zone row");
+						$(zone).attr("data-line",nbz);
+						$(zone).attr("data-format",$("#create_zone_format").val());
+						$(zone).attr("data-param-classes","");
+						$(zone).attr("data-param-style","");
+						$(zone).attr("id","zone_"+nbz);
+						console.log(zone);
+						
                         for(i in f) {
-                            /* objet bloc */
-                            b=new o_bloc();
+							bloc=document.createElement("div");
+							$(bloc).addClass("connected sortable for-action bloc col-md-"+f[i]);
+							$(bloc).attr("data-param-classes","");
+							$(bloc).attr("data-param-style","");
+							$(bloc).attr("id","bloc_"+nbz+"_"+i);
 
-                            z.blocs.push(b);
+							console.log(bloc);
+							$(zone).append(bloc);
                         }
-
-                        pagebuilder.add_zone(z);
+						if(!$(".content-zone").length) {
+							cz=document.createElement("div");
+							$(cz).addClass("sortable connected content-zone");
+							$(".content-wrapper").append(cz);
+						}
+						$(".content-zone").append(zone);
 
 
                         $("#popup").hide();
+						pagebuilder.content=$(".content-wrapper").html();
                         pagebuilder.show();
 
 
@@ -338,14 +261,8 @@ function add_zone() {
 
 jQuery(document).ready(function() {
     /* On recherche si un objet pagebuilder existe*/
-    if(window.localStorage)
-        if(localStorage.getItem("pagebuilder")) {
-			console.log("load");
-            pagebuilder.page=JSON.parse(localStorage.getItem("pagebuilder"));
-            pagebuilder.show();
-            action_content();
-            set_drag();
-        }
+    if(window.localStorage) {
+	}
 
     if(id_page) {
         $.ajax({
@@ -353,12 +270,11 @@ jQuery(document).ready(function() {
             method: "GET",
             data: {load:1},
             success: function (result) {
-                p=eval("("+result+")");
-
-                pagebuilder.page=p;
+				p=eval("("+result+")");
+				pagebuilder.page.name=p[0];
+				pagebuilder.content=p[1];
                 pagebuilder.show();
                 pagebuilder.save();
-                action_content();
                 set_drag();
             }
         })
@@ -378,14 +294,15 @@ jQuery(document).ready(function() {
         })
 
     })
-	refresh();
 
-    $(".chapo h1").click(function () {
+
+    /*$(".chapo h1").click(function () {
+		alert("ok");
         update_chapo(this, "h1")
     })
     $(".chapo h2").click(function () {
         update_chapo(this,"h2")
-    })
+    })*/
 
 
 

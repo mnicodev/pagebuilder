@@ -6,7 +6,6 @@
 <script>
     $(document).ready(function () {
         $("#edit-content").click(function () {
-
             $.ajax({
                 url: url_popup_content,
                 method: "POST",
@@ -21,7 +20,7 @@
             })
         })
         $("#delete-content").click(function () {
-            if(window.confirm('Supprimer le contenu ?'))pagebuilder.del_content("{{ id }}");
+            if(window.confirm('Supprimer le contenu ?')) parent.document.getElementById("{{ id }}").remove();
 
         })
 

@@ -42,19 +42,21 @@ class __TwigTemplate_80da675003ba32d313968900192f25fce563ec773586d1c82c5b42072ab
         // line 1
         echo "<ul>
 
-    <li><a href=\"#\" id=\"edit-zone\">Editer la zone</a></li>
+\t<!--<li><a href=\"#\" id=\"edit-zone\">Editer la zone</a></li>-->
     <li><a href=\"#\" id=\"delete-zone\">Supprimer la zone</a></li>
 </ul>
 <script>
     \$(document).ready(function () {
 
-
         \$(\"#delete-zone\").click(function () {
-            if(window.confirm(\"Suppimer la zone ?\"))
-                pagebuilder.del_zone(";
-        // line 12
-        echo twig_escape_filter($this->env, (isset($context["zone"]) || array_key_exists("zone", $context) ? $context["zone"] : (function () { throw new RuntimeError('Variable "zone" does not exist.', 12, $this->source); })()), "html", null, true);
-        echo ");
+\t\t\tif(window.confirm(\"Suppimer la zone ";
+        // line 10
+        echo twig_escape_filter($this->env, (isset($context["zone"]) || array_key_exists("zone", $context) ? $context["zone"] : (function () { throw new RuntimeError('Variable "zone" does not exist.', 10, $this->source); })()), "html", null, true);
+        echo " ?\"))
+                parent.document.getElementById(\"";
+        // line 11
+        echo twig_escape_filter($this->env, (isset($context["zone"]) || array_key_exists("zone", $context) ? $context["zone"] : (function () { throw new RuntimeError('Variable "zone" does not exist.', 11, $this->source); })()), "html", null, true);
+        echo "\").remove();
         })
     })
 
@@ -79,23 +81,22 @@ class __TwigTemplate_80da675003ba32d313968900192f25fce563ec773586d1c82c5b42072ab
 
     public function getDebugInfo()
     {
-        return array (  56 => 12,  43 => 1,);
+        return array (  58 => 11,  54 => 10,  43 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("<ul>
 
-    <li><a href=\"#\" id=\"edit-zone\">Editer la zone</a></li>
+\t<!--<li><a href=\"#\" id=\"edit-zone\">Editer la zone</a></li>-->
     <li><a href=\"#\" id=\"delete-zone\">Supprimer la zone</a></li>
 </ul>
 <script>
     \$(document).ready(function () {
 
-
         \$(\"#delete-zone\").click(function () {
-            if(window.confirm(\"Suppimer la zone ?\"))
-                pagebuilder.del_zone({{ zone }});
+\t\t\tif(window.confirm(\"Suppimer la zone {{ zone }} ?\"))
+                parent.document.getElementById(\"{{ zone }}\").remove();
         })
     })
 
