@@ -43,10 +43,6 @@ class Page
      */
     private $status;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Zone", mappedBy="page", cascade={"persist"})
-     */
-    private $zones;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -145,36 +141,6 @@ class Page
         return $this;
     }
 
-    /**
-     * @return Collection|Zone[]
-     */
-    public function getZones(): Collection
-    {
-        return $this->zones;
-    }
-
-    public function addZone(Zone $zone): self
-    {
-        if (!$this->zones->contains($zone)) {
-            $this->zones[] = $zone;
-            $zone->setPage($this);
-        }
-
-        return $this;
-    }
-
-    public function removeZone(Zone $zone): self
-    {
-        if ($this->zones->contains($zone)) {
-            $this->zones->removeElement($zone);
-            // set the owning side to null (unless already changed)
-            if ($zone->getPage() === $this) {
-                $zone->setPage(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getName(): ?string
     {

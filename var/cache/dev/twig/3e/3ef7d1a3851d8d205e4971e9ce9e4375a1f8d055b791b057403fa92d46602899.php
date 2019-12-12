@@ -41,8 +41,8 @@ class __TwigTemplate_934145e2dc38869611a92bf3ea2375440c8c93fe8c2d228240a5d8319a7
 
         // line 1
         echo "<ul>
-    <li><a href=\"#\" id=\"edit-content\">Editer le contenu</a></li>
-    <li><a href=\"#\" id=\"delete-content\">Supprimer le contenu</a></li>
+    <li><a  id=\"edit-content\">Editer le contenu</a></li>
+    <li><a  id=\"delete-content\">Supprimer le contenu</a></li>
 
 </ul>
 <script>
@@ -105,8 +105,8 @@ class __TwigTemplate_934145e2dc38869611a92bf3ea2375440c8c93fe8c2d228240a5d8319a7
     public function getSourceContext()
     {
         return new Source("<ul>
-    <li><a href=\"#\" id=\"edit-content\">Editer le contenu</a></li>
-    <li><a href=\"#\" id=\"delete-content\">Supprimer le contenu</a></li>
+    <li><a  id=\"edit-content\">Editer le contenu</a></li>
+    <li><a  id=\"delete-content\">Supprimer le contenu</a></li>
 
 </ul>
 <script>
@@ -132,6 +132,6 @@ class __TwigTemplate_934145e2dc38869611a92bf3ea2375440c8c93fe8c2d228240a5d8319a7
 
     })
 
-</script>", "admin/popup_content_action.html.twig", "/home/nico/0TRAVAUX/TEST/SYMFONY4/pagebuilder/templates/admin/popup_content_action.html.twig");
+</script>", "admin/popup_content_action.html.twig", "/home/nico/SYMFONY4/pagebuilder/templates/admin/popup_content_action.html.twig");
     }
 }

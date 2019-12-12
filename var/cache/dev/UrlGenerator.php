@@ -25,5 +25,5 @@ return [
     'admin.popup.bloc.action' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupBlocAction'], [], [['text', '/admin/bloc/action']], [], []],
     'admin.popup.content.action' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupContentAction'], [], [['text', '/admin/content/action']], [], []],
     'admin.popup.content.add' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupContentAdd'], [], [['text', '/admin/content/add']], [], []],
-    'page.home' => [[], ['_controller' => 'App\\Controller\\PageController::index'], [], [['text', '/']], [], []],
+    'page.view' => [['id'], ['_controller' => 'App\\Controller\\PageController::index'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/page']], [], []],
 ];

@@ -225,6 +225,6 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
     {%  endif %}
 
 
-", "admin/popup_content_add.html.twig", "/home/nico/0TRAVAUX/TEST/SYMFONY4/pagebuilder/templates/admin/popup_content_add.html.twig");
+", "admin/popup_content_add.html.twig", "/home/nico/SYMFONY4/pagebuilder/templates/admin/popup_content_add.html.twig");
     }
 }

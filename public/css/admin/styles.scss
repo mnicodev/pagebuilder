@@ -1,12 +1,16 @@
 .popup {
   position: fixed;
-  width: 600px;
+  width: 70%;
+  min-width: 800px;
 
   display: none;
-  top: 200px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10000;
+  form {
+	  height: 100%;
+  }
 }
 
 .popup .jumbotron {
@@ -30,17 +34,23 @@
   padding-top: 70px;
 
   .chapo {
-    h2 {
+    .h2 {
       min-height: 50px;
+	  background: transparent;
       border: 1px dashed transparent;
+	  width: 100%;
       &:hover {
         border: 1px dashed #000;
+		background: #fff;
       }
     }
-    h1 {
+    .h1 {
       min-height: 50px;
       border: 1px dashed transparent;
+	  background: transparent;
+	  width: 100%;
       &:hover {
+		  background: #fff;
         border: 1px dashed #000;
       }
     }
@@ -178,7 +188,7 @@
               height: 20px;
               background: #adadad;
               cursor: pointer;
-              z-index: 10;
+              z-index: 1000;
               &.edit {
                 width: 120px;
                 height: 40px;

@@ -124,41 +124,46 @@ class __TwigTemplate_0dc0cd0e883a2c56e56d9842b50019273e02f6e421471d8c3c2892938cd
         <th scope=\"col\">Titre</th>
         <th scope=\"col\">Date de création</th>
         <th scope=\"col\">Date de mise à jour</th>
+        <th scope=\"col\"></th>
     </tr>
     </thead>
     <tbody>
 ";
-        // line 27
+        // line 28
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["liste"]) || array_key_exists("liste", $context) ? $context["liste"] : (function () { throw new RuntimeError('Variable "liste" does not exist.', 27, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["liste"]) || array_key_exists("liste", $context) ? $context["liste"] : (function () { throw new RuntimeError('Variable "liste" does not exist.', 28, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["item"]) {
-            // line 28
+            // line 29
             echo "    <tr data-url=\"";
-            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin.page.edit", ["slug" => twig_get_attribute($this->env, $this->source, $context["item"], "id", [], "any", false, false, false, 28)]), "html", null, true);
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin.page.edit", ["slug" => twig_get_attribute($this->env, $this->source, $context["item"], "id", [], "any", false, false, false, 29)]), "html", null, true);
             echo "\">
         <th scope=\"row\">";
-            // line 29
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["item"], "id", [], "any", false, false, false, 29), "html", null, true);
+            // line 30
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["item"], "id", [], "any", false, false, false, 30), "html", null, true);
             echo "</th>
         <td>";
-            // line 30
-            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["item"], "name", [], "any", false, false, false, 30), "html", null, true);
-            echo "</td>
-        <td>";
             // line 31
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["item"], "datecreate", [], "any", false, false, false, 31)), "html", null, true);
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["item"], "name", [], "any", false, false, false, 31), "html", null, true);
             echo "</td>
         <td>";
             // line 32
-            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["item"], "dateupdate", [], "any", false, false, false, 32)), "html", null, true);
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["item"], "datecreate", [], "any", false, false, false, 32)), "html", null, true);
             echo "</td>
+        <td>";
+            // line 33
+            echo twig_escape_filter($this->env, twig_date_format_filter($this->env, twig_get_attribute($this->env, $this->source, $context["item"], "dateupdate", [], "any", false, false, false, 33)), "html", null, true);
+            echo "</td>
+\t\t<td><a target=\"blank\" href=\"";
+            // line 34
+            echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("page.view", ["id" => twig_get_attribute($this->env, $this->source, $context["item"], "id", [], "any", false, false, false, 34)]), "html", null, true);
+            echo "\">Voir</a></td>
     </tr>
 ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['item'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 35
+        // line 37
         echo "    </tbody>
 </div>
 
@@ -172,7 +177,7 @@ class __TwigTemplate_0dc0cd0e883a2c56e56d9842b50019273e02f6e421471d8c3c2892938cd
 
     }
 
-    // line 41
+    // line 43
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -182,7 +187,7 @@ class __TwigTemplate_0dc0cd0e883a2c56e56d9842b50019273e02f6e421471d8c3c2892938cd
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 42
+        // line 44
         echo "    <script>
         \$(\"table tbody tr\").click(function () {
             window.location=\$(this).attr(\"data-url\");
@@ -209,7 +214,7 @@ class __TwigTemplate_0dc0cd0e883a2c56e56d9842b50019273e02f6e421471d8c3c2892938cd
 
     public function getDebugInfo()
     {
-        return array (  186 => 42,  176 => 41,  162 => 35,  153 => 32,  149 => 31,  145 => 30,  141 => 29,  136 => 28,  132 => 27,  119 => 16,  109 => 15,  98 => 12,  95 => 11,  85 => 10,  71 => 7,  61 => 6,  38 => 3,);
+        return array (  191 => 44,  181 => 43,  167 => 37,  158 => 34,  154 => 33,  150 => 32,  146 => 31,  142 => 30,  137 => 29,  133 => 28,  119 => 16,  109 => 15,  98 => 12,  95 => 11,  85 => 10,  71 => 7,  61 => 6,  38 => 3,);
     }
 
     public function getSourceContext()
@@ -237,6 +242,7 @@ class __TwigTemplate_0dc0cd0e883a2c56e56d9842b50019273e02f6e421471d8c3c2892938cd
         <th scope=\"col\">Titre</th>
         <th scope=\"col\">Date de création</th>
         <th scope=\"col\">Date de mise à jour</th>
+        <th scope=\"col\"></th>
     </tr>
     </thead>
     <tbody>
@@ -246,6 +252,7 @@ class __TwigTemplate_0dc0cd0e883a2c56e56d9842b50019273e02f6e421471d8c3c2892938cd
         <td>{{ item.name }}</td>
         <td>{{ item.datecreate|date }}</td>
         <td>{{ item.dateupdate|date }}</td>
+\t\t<td><a target=\"blank\" href=\"{{ path('page.view', {id: item.id}) }}\">Voir</a></td>
     </tr>
 {% endfor %}
     </tbody>
@@ -261,6 +268,6 @@ class __TwigTemplate_0dc0cd0e883a2c56e56d9842b50019273e02f6e421471d8c3c2892938cd
         })
     </script>
 {% endblock %}
-", "admin/page.html.twig", "/home/nico/0TRAVAUX/TEST/SYMFONY4/pagebuilder/templates/admin/page.html.twig");
+", "admin/page.html.twig", "/home/nico/SYMFONY4/pagebuilder/templates/admin/page.html.twig");
     }
 }

@@ -6,6 +6,11 @@ function close() {
     })
 }
 
+function close_popup() {
+       $("#popup").hide();
+
+}
+
 
 
 function action_content() {
@@ -134,68 +139,6 @@ function set_drag() {
 
 }
 
-function update_chapo(o,h) {
-
-    if(h==="h2") {
-        text=document.createElement("textarea");
-        $(text).attr("cols", 60);
-        if($(".chapo").find("#text_h1").length) {
-            stext=$(".chapo").find("#text_h1").val();
-            $(".chapo").find("h1").text(stext);
-
-            $(".chapo").find("h1").show();
-            $(".chapo").find("#text_h1").remove();
-            $(".chapo").find("#btn_h1").remove();
-            pagebuilder.page.name=stext;
-            pagebuilder.save();
-        }
-    } else {
-        text=document.createElement("input");
-        $(text).attr("type", "text");
-        if($(".chapo").find("#text_h2").length) {
-            stext=$(".chapo").find("#text_h2").val();
-            $(".chapo").find("h2").text(stext);
-
-            $(".chapo").find("h2").show();
-            $(".chapo").find("#text_h2").remove();
-            $(".chapo").find("#btn_h2").remove();
-            pagebuilder.page.description=stext;
-            pagebuilder.save();
-        }
-    }
-    btn=document.createElement("button");
-    $(btn).text("OK");
-    $(btn).attr("id","btn_"+h);
-    $(btn).addClass("form-control btn-primary")
-    $(text).attr("id","text_"+h);
-    $(text).addClass("form-control")
-
-    $(text).val($(o).text());
-    if(h==="h2") {
-        $(btn).css("display","block");
-        $(o).parent().append(text);
-        $(o).parent().append(btn);
-    } else {
-        $(o).parent().prepend(btn);
-        $(o).parent().prepend(text);
-
-    }
-
-    $(o).hide();
-
-    $("#btn_"+h).click(function () {
-        text=$(".chapo").find("#text_"+h).val();
-
-        $(".chapo").find(h).text(text);
-
-        $(".chapo").find(h).show();
-        $(".chapo").find("#text_"+h).remove();
-        $(".chapo").find("#btn_"+h).remove();
-        if(h=="h2") pagebuilder.page.description=text;
-        else pagebuilder.page.name=text;
-        pagebuilder.save();
-    })
-}
 
 function add_zone() {
         $.ajax({
@@ -258,66 +201,7 @@ function add_zone() {
         })
 }
 
-
-jQuery(document).ready(function() {
-    /* On recherche si un objet pagebuilder existe*/
-    if(window.localStorage) {
-	}
-
-    if(id_page) {
-        $.ajax({
-            url: url_page_edit,
-            method: "GET",
-            data: {load:1},
-            success: function (result) {
-				p=eval("("+result+")");
-				pagebuilder.page.name=p[0];
-				pagebuilder.content=p[1];
-                pagebuilder.show();
-                pagebuilder.save();
-                set_drag();
-            }
-        })
-    }
-
-    $("#save-page").click(function () {
-		//console.log($("#page .content-wrapper").html());
-        $.ajax({
-            url:url_page_save,
-            method: "POST",
-            data: {page:JSON.stringify(pagebuilder.page),id:id_page,fulltext: $("#page .content-wrapper").html()},
-            success: function(result) {
-                $("#popup").html(result);
-                $("#popup").show();
-            }
-
-        })
-
-    })
-
-
-    /*$(".chapo h1").click(function () {
-		alert("ok");
-        update_chapo(this, "h1")
-    })
-    $(".chapo h2").click(function () {
-        update_chapo(this,"h2")
-    })*/
-
-
-
-
-
-
-    /* création d'une page
-    *  on ajoute les classes
-    *  et les paramétres
-    * */
-    $("#create-page").click(function () {
-
-        if(pagebuilder.get_name()!='undefined' && window.confirm("Une page existe. Voulez vous la supprimer ?")) {
-            pagebuilder.create();
-
+function creer_page() {
             $.ajax({
                 url: url_popup_create,
                 success: function (result) {
@@ -332,13 +216,6 @@ jQuery(document).ready(function() {
                         else pagebuilder.page.param.classes = "container";
                         $("#popup").hide();
                         pagebuilder.show();
-                        $(".chapo h1").click(function () {
-                            update_chapo(this, "h1")
-                        })
-                        $(".chapo h2").click(function () {
-                            update_chapo(this,"h2")
-                        })
-
 
                     })
 
@@ -347,6 +224,66 @@ jQuery(document).ready(function() {
                 }
 
             })
+
+}
+
+jQuery(document).ready(function() {
+    /* On recherche si un objet pagebuilder existe*/
+    if(window.localStorage) {
+	}
+
+
+    if(id_page) {
+        $.ajax({
+            url: url_page_edit,
+            method: "GET",
+            data: {load:1},
+            success: function (result) {
+				p=eval("("+result+")");
+				pagebuilder.page.name=p[0];
+				pagebuilder.page.description=p[1];
+				pagebuilder.content=p[2];
+                pagebuilder.show();
+                pagebuilder.save();
+                set_drag();
+            }
+        })
+    }
+
+    $("#save-page").click(function () {
+		pagebuilder.set_name($(".h1").val());
+		pagebuilder.set_description($(".h2").val());
+		pagebuilder.set_content($("#page .content-wrapper").html());
+		//console.log($("#page .content-wrapper").html());
+        $.ajax({
+            url:url_page_save,
+            method: "POST",
+            data: {page:JSON.stringify(pagebuilder.page),id:id_page,fulltext: $("#page .content-wrapper").html()},
+            success: function(result) {
+                $("#popup").html(result);
+                $("#popup").show();
+				setTimeout(close_popup,2000);
+            }
+
+        })
+
+    })
+
+
+	if(id_page==0) creer_page();
+
+
+
+
+    /* création d'une page
+    *  on ajoute les classes
+    *  et les paramétres
+    * */
+    $("#create-page").click(function () {
+        if(pagebuilder.get_name() && window.confirm("Une page existe. Voulez vous en créer une autre ?")) {
+            pagebuilder.create();
+			creer_page();
+
         }
 
     })

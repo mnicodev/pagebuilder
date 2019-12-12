@@ -41,7 +41,7 @@ class __TwigTemplate_bb06fcb9054f7309e38af716d70457e0f921099f3e12c6fb043e42e6328
 
         // line 1
         echo "<ul>
-    <li><a href=\"#\" id=\"add-content\">Ajouter un contenu</a></li>
+    <li><a  id=\"add-content\">Ajouter un contenu</a></li>
 
 </ul>
 <script>
@@ -95,7 +95,7 @@ class __TwigTemplate_bb06fcb9054f7309e38af716d70457e0f921099f3e12c6fb043e42e6328
     public function getSourceContext()
     {
         return new Source("<ul>
-    <li><a href=\"#\" id=\"add-content\">Ajouter un contenu</a></li>
+    <li><a  id=\"add-content\">Ajouter un contenu</a></li>
 
 </ul>
 <script>
@@ -119,6 +119,6 @@ class __TwigTemplate_bb06fcb9054f7309e38af716d70457e0f921099f3e12c6fb043e42e6328
 
     })
 
-</script>", "admin/popup_bloc_action.html.twig", "/home/nico/0TRAVAUX/TEST/SYMFONY4/pagebuilder/templates/admin/popup_bloc_action.html.twig");
+</script>", "admin/popup_bloc_action.html.twig", "/home/nico/SYMFONY4/pagebuilder/templates/admin/popup_bloc_action.html.twig");
     }
 }

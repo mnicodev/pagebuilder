@@ -5,6 +5,7 @@ function o_param() {
 function o_page() {
     this.name="";
     this.description="";
+	this.content="",
     this.param=new o_param();
     this.zones=[];
 
@@ -25,6 +26,20 @@ var pagebuilder={
 
     },
 
+	set_name: function(name) {
+		this.page.name=name;
+	},
+
+	set_description: function(str) {
+		this.page.description=str;
+	},
+
+	set_content: function(str) {
+		this.page.content=str;
+	},
+
+
+
 
     save: function() {
         if(window.localStorage) {console.log("save");
@@ -41,11 +56,14 @@ var pagebuilder={
         global_row=document.createElement("div");
         $(global_row).addClass("global-row");
         chapo=document.createElement("div");
-        h1=document.createElement("h1");
-        h2=document.createElement("h2");
+        h1=document.createElement("input");
+        h2=document.createElement("textarea");
         $(chapo).addClass("jumbotron chapo");
-        $(h1).append(this.page.name);
-        $(h2).append(this.page.description);
+		$(h1).attr("type","text");
+		$(h1).addClass("h1");
+		$(h2).addClass("h2");
+        $(h1).val(this.page.name);
+        $(h2).val(this.page.description);
         chapo.appendChild(h1);
         chapo.appendChild(h2);
 

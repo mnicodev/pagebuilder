@@ -51,44 +51,34 @@ class __TwigTemplate_075112c60037648e17b1f6a94baf99d69ad6bfd2622fed376cc56906392
     <div class=\"collapse navbar-collapse\" id=\"navbarNavDropdown\">
         <ul class=\"navbar-nav\">
             <li class=\"nav-item active\">
-                <a class=\"nav-link\" href=\"";
-        // line 12
-        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("admin.page");
-        echo "\">Home <span class=\"sr-only\">(current)</span></a>
+                <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>
             </li>
 
             <li class=\"nav-item dropdown\">
-                ";
-        // line 16
-        if (((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 16, $this->source); })()), "request", [], "any", false, false, false, 16), "attributes", [], "any", false, false, false, 16), "get", [0 => "_route"], "method", false, false, false, 16) == "admin.page.create") || (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 16, $this->source); })()), "request", [], "any", false, false, false, 16), "attributes", [], "any", false, false, false, 16), "get", [0 => "_route"], "method", false, false, false, 16) == "admin.page.edit"))) {
-            // line 17
-            echo "                <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                    Créer une page
+                <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
+                    Gestion des pages
                 </a>
                 <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">
-                    <a class=\"dropdown-item\" ";
-            // line 21
-            if ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 21, $this->source); })()), "request", [], "any", false, false, false, 21), "attributes", [], "any", false, false, false, 21), "get", [0 => "_route"], "method", false, false, false, 21) == "admin.page.edit")) {
-                echo "href=\"";
-                echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("admin.page.create");
-                echo "\"";
-            } else {
-                echo "href=\"#\" id=\"create-page\"";
-            }
-            echo " >Nouvelle page</a>
-                    <a class=\"dropdown-item\" href=\"#\" id=\"add-zone\">Ajouter une zone</a>
-                    <a class=\"dropdown-item\" href=\"#\" id=\"save-page\">Enregistrer la page</a>
-                </div>
-                ";
-        } else {
-            // line 26
-            echo "                    <a class=\"nav-link\" href=\"";
-            echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("admin.page.create");
-            echo "\">Créer une page</a>
-                ";
+\t\t\t\t\t<a class=\"dropdown-item\" href=\"";
+        // line 20
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("admin.page.create");
+        echo "\" id=\"create-page\" >Nouvelle page</a>
+                    <a class=\"dropdown-item\"  id=\"save-page\">Enregistrer la page</a>
+\t\t\t\t\t<a class=\"dropdown-item\" href=\"";
+        // line 22
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("admin.page");
+        echo "\" >Liste des pages</a>
+\t\t\t\t\t";
+        // line 23
+        if ((twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new RuntimeError('Variable "app" does not exist.', 23, $this->source); })()), "request", [], "any", false, false, false, 23), "attributes", [], "any", false, false, false, 23), "get", [0 => "_route"], "method", false, false, false, 23) == "admin.page.edit")) {
+            // line 24
+            echo "\t\t\t\t\t<a class=\"dropdown-item\" id=\"add-zone\" >Ajouter une zone</a>
+\t\t\t\t\t";
         }
-        // line 28
-        echo "            </li>
+        // line 26
+        echo "
+                </div>
+            </li>
         </ul>
     </div>
 </nav>";
@@ -112,7 +102,7 @@ class __TwigTemplate_075112c60037648e17b1f6a94baf99d69ad6bfd2622fed376cc56906392
 
     public function getDebugInfo()
     {
-        return array (  91 => 28,  85 => 26,  71 => 21,  65 => 17,  63 => 16,  56 => 12,  43 => 1,);
+        return array (  79 => 26,  75 => 24,  73 => 23,  69 => 22,  64 => 20,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -128,25 +118,25 @@ class __TwigTemplate_075112c60037648e17b1f6a94baf99d69ad6bfd2622fed376cc56906392
     <div class=\"collapse navbar-collapse\" id=\"navbarNavDropdown\">
         <ul class=\"navbar-nav\">
             <li class=\"nav-item active\">
-                <a class=\"nav-link\" href=\"{{ url('admin.page') }}\">Home <span class=\"sr-only\">(current)</span></a>
+                <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>
             </li>
 
             <li class=\"nav-item dropdown\">
-                {% if(app.request.attributes.get('_route')=='admin.page.create' or app.request.attributes.get('_route')=='admin.page.edit') %}
                 <a class=\"nav-link dropdown-toggle\" href=\"#\" id=\"navbarDropdownMenuLink\" role=\"button\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">
-                    Créer une page
+                    Gestion des pages
                 </a>
                 <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdownMenuLink\">
-                    <a class=\"dropdown-item\" {% if(app.request.attributes.get('_route')=='admin.page.edit') %}href=\"{{ url('admin.page.create') }}\"{% else %}href=\"#\" id=\"create-page\"{% endif %} >Nouvelle page</a>
-                    <a class=\"dropdown-item\" href=\"#\" id=\"add-zone\">Ajouter une zone</a>
-                    <a class=\"dropdown-item\" href=\"#\" id=\"save-page\">Enregistrer la page</a>
+\t\t\t\t\t<a class=\"dropdown-item\" href=\"{{ url('admin.page.create') }}\" id=\"create-page\" >Nouvelle page</a>
+                    <a class=\"dropdown-item\"  id=\"save-page\">Enregistrer la page</a>
+\t\t\t\t\t<a class=\"dropdown-item\" href=\"{{ url('admin.page') }}\" >Liste des pages</a>
+\t\t\t\t\t{% if(app.request.attributes.get(\"_route\")=='admin.page.edit') %}
+\t\t\t\t\t<a class=\"dropdown-item\" id=\"add-zone\" >Ajouter une zone</a>
+\t\t\t\t\t{% endif %}
+
                 </div>
-                {% else %}
-                    <a class=\"nav-link\" href=\"{{ url('admin.page.create') }}\">Créer une page</a>
-                {% endif %}
             </li>
         </ul>
     </div>
-</nav>", "admin/menu.html.twig", "/home/nico/0TRAVAUX/TEST/SYMFONY4/pagebuilder/templates/admin/menu.html.twig");
+</nav>", "admin/menu.html.twig", "/home/nico/SYMFONY4/pagebuilder/templates/admin/menu.html.twig");
     }
 }

@@ -22,7 +22,6 @@ return [
         '/admin/bloc/action' => [[['_route' => 'admin.popup.bloc.action', '_controller' => 'App\\Controller\\PageBuilderController::popupBlocAction'], null, null, null, false, false, null]],
         '/admin/content/action' => [[['_route' => 'admin.popup.content.action', '_controller' => 'App\\Controller\\PageBuilderController::popupContentAction'], null, null, null, false, false, null]],
         '/admin/content/add' => [[['_route' => 'admin.popup.content.add', '_controller' => 'App\\Controller\\PageBuilderController::popupContentAdd'], null, null, null, false, false, null]],
-        '/' => [[['_route' => 'page.home', '_controller' => 'App\\Controller\\PageController::index'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -42,6 +41,7 @@ return [
                     .')'
                 .')'
                 .'|/admin/page/builder/([0-9]*)(*:197)'
+                .'|/page/([^/]++)(*:219)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -52,8 +52,9 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception::showAction'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception::cssAction'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        197 => [
-            [['_route' => 'admin.page.edit', '_controller' => 'App\\Controller\\PageBuilderController::edit'], ['slug'], null, null, false, true, null],
+        197 => [[['_route' => 'admin.page.edit', '_controller' => 'App\\Controller\\PageBuilderController::edit'], ['slug'], null, null, false, true, null]],
+        219 => [
+            [['_route' => 'page.view', '_controller' => 'App\\Controller\\PageController::index'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],

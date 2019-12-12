@@ -20,20 +20,34 @@ class PageController extends AbstractController
 
 
     /**
-     * @Route("/",name="page.home")
+     * @Route("/page/{id}",name="page.view")
      */
-    public function index(Request $request): Response {
+    public function index(Request $request,$id): Response {
 
         $orm=$this->getDoctrine()->getManager();
 
-        $p=$orm->getRepository(Page::class)->find(5);
+        $p=$orm->getRepository(Page::class)->find($id);
 
 
 
 
-        return $this->render('page.html.twig',array("str"=>"hello world"));
+        return $this->render('page.html.twig',array("page"=>$p));
 
-    }
+	}
+
+	/**
+ 	 * @Route("/page/{id}, name="page.viewkk")
+	 */
+/*	public function page($id): Response {
+
+        $entityManager=$this->getDoctrine()->getManager();
+        $page=$orm->getRepository(Page::class)->find($id);
+
+		return $this->render("page.html.twig", array("page"=>$page));
+
+	
+}
+ */
 
 
 

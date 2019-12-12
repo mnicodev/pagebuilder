@@ -64,26 +64,22 @@ class __TwigTemplate_5eb90929d49f3677240543e25999f3506010b6bf0c27607d6955807d252
     ";
         // line 11
         $this->displayBlock('menu', $context, $blocks);
-        // line 33
+        // line 13
         echo "
 
             ";
-        // line 35
+        // line 15
         $this->displayBlock('body', $context, $blocks);
-        // line 36
+        // line 16
         echo "        <script
             src=\"https://code.jquery.com/jquery-3.4.1.min.js\"
             integrity=\"sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=\"
             crossorigin=\"anonymous\"></script>
         <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
-\t\t<script src=\"";
-        // line 41
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/admin/sortable/Sortable.min.js"), "html", null, true);
-        echo "\"></script>
         ";
-        // line 42
+        // line 21
         $this->displayBlock('javascripts', $context, $blocks);
-        // line 43
+        // line 22
         echo "    </body>
 </html>
 ";
@@ -143,27 +139,7 @@ class __TwigTemplate_5eb90929d49f3677240543e25999f3506010b6bf0c27607d6955807d252
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "menu"));
 
         // line 12
-        echo "        <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">
-            <a class=\"navbar-brand\" href=\"#\">Navbar</a>
-            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
-                <span class=\"navbar-toggler-icon\"></span>
-            </button>
-
-            <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
-                <ul class=\"navbar-nav mr-auto\">
-                    <li class=\"nav-item active\">
-                        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>
-                    </li>
-                    <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"#\">Link</a>
-                    </li>
-
-
-                </ul>
-
-            </div>
-        </nav>
-    ";
+        echo "    ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
 
@@ -172,7 +148,7 @@ class __TwigTemplate_5eb90929d49f3677240543e25999f3506010b6bf0c27607d6955807d252
 
     }
 
-    // line 35
+    // line 15
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -190,7 +166,7 @@ class __TwigTemplate_5eb90929d49f3677240543e25999f3506010b6bf0c27607d6955807d252
 
     }
 
-    // line 42
+    // line 21
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -213,14 +189,9 @@ class __TwigTemplate_5eb90929d49f3677240543e25999f3506010b6bf0c27607d6955807d252
         return "base.html.twig";
     }
 
-    public function isTraitable()
-    {
-        return false;
-    }
-
     public function getDebugInfo()
     {
-        return array (  194 => 42,  176 => 35,  146 => 12,  136 => 11,  118 => 8,  99 => 5,  87 => 43,  85 => 42,  81 => 41,  74 => 36,  72 => 35,  68 => 33,  66 => 11,  62 => 9,  60 => 8,  54 => 5,  48 => 1,);
+        return array (  170 => 21,  152 => 15,  142 => 12,  132 => 11,  114 => 8,  95 => 5,  83 => 22,  81 => 21,  74 => 16,  72 => 15,  68 => 13,  66 => 11,  62 => 9,  60 => 8,  54 => 5,  48 => 1,);
     }
 
     public function getSourceContext()
@@ -236,26 +207,6 @@ class __TwigTemplate_5eb90929d49f3677240543e25999f3506010b6bf0c27607d6955807d252
     </head>
     <body>
     {%  block menu %}
-        <nav class=\"navbar navbar-expand-lg navbar-dark bg-primary\">
-            <a class=\"navbar-brand\" href=\"#\">Navbar</a>
-            <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarSupportedContent\" aria-controls=\"navbarSupportedContent\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">
-                <span class=\"navbar-toggler-icon\"></span>
-            </button>
-
-            <div class=\"collapse navbar-collapse\" id=\"navbarSupportedContent\">
-                <ul class=\"navbar-nav mr-auto\">
-                    <li class=\"nav-item active\">
-                        <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>
-                    </li>
-                    <li class=\"nav-item\">
-                        <a class=\"nav-link\" href=\"#\">Link</a>
-                    </li>
-
-
-                </ul>
-
-            </div>
-        </nav>
     {%  endblock %}
 
 
@@ -265,10 +216,9 @@ class __TwigTemplate_5eb90929d49f3677240543e25999f3506010b6bf0c27607d6955807d252
             integrity=\"sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=\"
             crossorigin=\"anonymous\"></script>
         <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\" integrity=\"sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM\" crossorigin=\"anonymous\"></script>
-\t\t<script src=\"{{ asset('js/admin/sortable/Sortable.min.js') }}\"></script>
         {% block javascripts %}{% endblock %}
     </body>
 </html>
-", "base.html.twig", "/home/nico/0TRAVAUX/TEST/SYMFONY4/pagebuilder/templates/base.html.twig");
+", "base.html.twig", "/home/nico/SYMFONY4/pagebuilder/templates/base.html.twig");
     }
 }

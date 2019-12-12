@@ -25,6 +25,7 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
         $this->source = $this->getSourceContext();
 
         $this->blocks = [
+            'title' => [$this, 'block_title'],
             'stylesheets' => [$this, 'block_stylesheets'],
             'body' => [$this, 'block_body'],
             'javascripts' => [$this, 'block_javascripts'],
@@ -56,7 +57,26 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
 
     }
 
-    // line 6
+    // line 5
+    public function block_title($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "title"));
+
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, (isset($context["page"]) || array_key_exists("page", $context) ? $context["page"] : (function () { throw new RuntimeError('Variable "page" does not exist.', 5, $this->source); })()), "name", [], "any", false, false, false, 5), "html", null, true);
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+    }
+
+    // line 8
     public function block_stylesheets($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -66,7 +86,7 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "stylesheets"));
 
-        // line 7
+        // line 9
         echo "
 ";
         
@@ -77,7 +97,7 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
 
     }
 
-    // line 10
+    // line 12
     public function block_body($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -87,8 +107,14 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "body"));
 
-        // line 11
+        // line 13
         echo "
+<div class=\"container\">
+";
+        // line 15
+        echo twig_get_attribute($this->env, $this->source, (isset($context["page"]) || array_key_exists("page", $context) ? $context["page"] : (function () { throw new RuntimeError('Variable "page" does not exist.', 15, $this->source); })()), "content", [], "any", false, false, false, 15);
+        echo "
+</div>
 
 
 
@@ -101,7 +127,7 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
 
     }
 
-    // line 19
+    // line 24
     public function block_javascripts($context, array $blocks = [])
     {
         $macros = $this->macros;
@@ -111,7 +137,7 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
-        // line 20
+        // line 25
         echo "
 ";
         
@@ -134,7 +160,7 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
 
     public function getDebugInfo()
     {
-        return array (  115 => 20,  105 => 19,  91 => 11,  81 => 10,  70 => 7,  60 => 6,  37 => 3,);
+        return array (  141 => 25,  131 => 24,  115 => 15,  111 => 13,  101 => 12,  90 => 9,  80 => 8,  61 => 5,  38 => 3,);
     }
 
     public function getSourceContext()
@@ -143,6 +169,8 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
 
 {% extends 'base.html.twig' %}
 
+{% block title %}{{ page.name }}{% endblock %}
+
 
 {% block stylesheets %}
 
@@ -150,6 +178,9 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
 
 {% block body %}
 
+<div class=\"container\">
+{{ page.content|raw }}
+</div>
 
 
 
@@ -159,6 +190,6 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
 
 {% block javascripts %}
 
-{% endblock %}", "page.html.twig", "/home/nico/0TRAVAUX/TEST/SYMFONY4/pagebuilder/templates/page.html.twig");
+{% endblock %}", "page.html.twig", "/home/nico/SYMFONY4/pagebuilder/templates/page.html.twig");
     }
 }

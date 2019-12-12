@@ -6,10 +6,7 @@ namespace App\Controller;
 
 
 
-use App\Entity\Bloc;
-use App\Entity\Content;
 use App\Entity\Page;
-use App\Entity\Zone;
 use App\Form\CreateZoneType;
 use phpDocumentor\Reflection\Types\Integer;
 use Psr\Container\ContainerInterface;
@@ -62,28 +59,8 @@ class PageBuilderController extends AbstractController
                 "zones" => []
             ];
 
-            foreach($page->getZones() as $i=>$zone) {
-                $pagebuilder["zones"][]=[
-                    "param"=>unserialize($zone->getParam()),
-                    "format" => $zone->getIdFormatZone(),
-                    "blocs" => [],
-                ];
-                foreach($zone->getBlocs() as $j=>$bloc) {
-                    $pagebuilder["zones"][$i]["blocs"][]=[
-                        "param" => unserialize($bloc->getParam()),
-                        "contents"=>[],
-                    ];
-                    foreach ($bloc->getContents() as $k=>$content) {
-                        $pagebuilder["zones"][$i]["blocs"][$j]["contents"][]=[
-                            "param" => unserialize($content->getParam()),
-                            "data" => $content->getData(),
-                        ];
-                    }
-                }
-			}
-
 			//print_r(serialize(json_encode($pagebuilder)));
-			$t=[$page->getName(),$page->getContent()];
+			$t=[$page->getName(),$page->getDescription(),$page->getContent()];
             //return new Response($page->getName()."|".$page->getContent());
             return new Response((json_encode($t)));
 
@@ -116,17 +93,14 @@ class PageBuilderController extends AbstractController
         }
 
 
-
         $page->setName($pagebuilder->name)
-            ->setDescription($pagebuilder->description)
+			 ->setDescription($pagebuilder->description)
+			->setContent($pagebuilder->content)
             ->setParam(serialize($pagebuilder->param))
             ->setType("page")
             ->setIdSite(1)
             ->setStatus(1);
 
-		if($textfull=$request->request->get("fulltext")){ 
-			$page->setContent($textfull);
-		}
 
 
         $entityManager->persist($page);
