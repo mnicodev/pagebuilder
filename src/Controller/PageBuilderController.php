@@ -7,14 +7,19 @@ namespace App\Controller;
 
 
 use App\Entity\Page;
+use App\Entity\Bloc;
 use App\Form\CreateZoneType;
+use App\Form\BlocType;
 use phpDocumentor\Reflection\Types\Integer;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PageBuilderController extends AbstractController
 {
@@ -171,19 +176,49 @@ class PageBuilderController extends AbstractController
      * @Route("/admin/content/add", name="admin.popup.content.add")
      */
     public function popupContentAdd(Request $request) {
-        //dump($request->request->get("editeur"));
-        if($request->request->get("editeur")!==null) {
+		//dump($request->request->get("editeur"));
+		$bloc=new Bloc();
 
-            $str=str_replace(chr(10),"",$request->request->get("editeur"));
+
+
+		$form=$this->createFormBuilder($bloc)
+			 ->add('data')
+		 	->add("valider",SubmitType::class)
+		 	->add("fermer",ButtonType::class)
+			->getForm();
+
+
+		$form->handleRequest($request);
+    	if ($form->isSubmitted() && $form->isValid()) {
+        	$entityManager=$this->getDoctrine()->getManager();
+			//if($request->request->get("editeur")!==null) {
+			$bloc=$form->getData();
+			print_r($request->request->get("ContentFromEditor"));
+
+			$bloc->setData($request->request->get("ContentFromEditor"));
+			$bloc->setName(uniqid());
+			$entityManager->persist($bloc);
+			$entityManager->flush();
+			$bloc->setCle($request->request->get("bloc"));
+
+            /*$str=str_replace(chr(10),"",$request->request->get("editeur"));
             $str=str_replace(chr(13),"",$str);
-            $str=addslashes($str);
+			$str=addslashes($str);*/
+			$t=["data"=>$bloc->getData(),"bloc"=>$bloc->getCle()];
 
-            return $this->render("admin/popup_content_add.html.twig", ["str"=> $str]);
-        } else return $this->render("admin/popup_content_add.html.twig", [
-            "bloc"=> $request->request->get("bloc"),
-            "content"=>$request->request->get("content"),
-            "id" => $request->request->get("id")
-        ]);
+			return new Response(json_encode($t));
+            //return $this->render("admin/popup_content_add.html.twig", ["str"=> $str]);
+		} else {
+
+
+			return $this->render("admin/popup_content_add.html.twig", [
+            	"bloc"=> $request->request->get("bloc"),
+            	"content"=>$request->request->get("content"),
+				"id" => $request->request->get("id"),
+				'form' => $form->createView(),
+			]);
+		}
     }
 
 }
+

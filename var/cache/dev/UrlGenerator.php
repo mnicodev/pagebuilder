@@ -15,6 +15,7 @@ return [
     '_profiler_router' => [['token'], ['_controller' => 'web_profiler.controller.router::panelAction'], [], [['text', '/router'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], []],
     '_profiler_exception' => [['token'], ['_controller' => 'web_profiler.controller.exception::showAction'], [], [['text', '/exception'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], []],
     '_profiler_exception_css' => [['token'], ['_controller' => 'web_profiler.controller.exception::cssAction'], [], [['text', '/exception.css'], ['variable', '/', '[^/]++', 'token', true], ['text', '/_profiler']], [], []],
+    'bloc' => [[], ['_controller' => 'App\\Controller\\BlocController::index'], [], [['text', '/bloc']], [], []],
     'admin.page' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::index'], [], [['text', '/admin/page']], [], []],
     'admin.page.create' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::builder'], [], [['text', '/admin/page/builder']], [], []],
     'admin.page.edit' => [['slug'], ['_controller' => 'App\\Controller\\PageBuilderController::edit'], ['slug' => '[0-9]*'], [['variable', '/', '[0-9]*', 'slug', true], ['text', '/admin/page/builder']], [], []],

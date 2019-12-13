@@ -383,6 +383,13 @@
     <service id="EasyCorp\EasyLog\EasyLogHandler" class="EasyCorp\EasyLog\EasyLogHandler" public="false">
       <argument>/home/nico/SYMFONY4/pagebuilder/var/log/dev.log</argument>
     </service>
+    <service id="App\Controller\BlocController" class="App\Controller\BlocController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CDOTD6..App\Controller\BlocController"/>
+      </call>
+    </service>
     <service id="App\Controller\PageBuilderController" class="App\Controller\PageBuilderController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -397,6 +404,9 @@
         <argument type="service" id=".service_locator.CDOTD6..App\Controller\PageController"/>
       </call>
     </service>
+    <service id="App\Form\BlocType" class="App\Form\BlocType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\CreateZoneType" class="App\Form\CreateZoneType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
       <argument type="service" id="doctrine.orm.default_entity_manager"/>
@@ -409,6 +419,10 @@
       <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\ApplicationRepository" class="App\Repository\ApplicationRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\BlocRepository" class="App\Repository\BlocRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -759,6 +773,7 @@
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\BlocType</argument>
         <argument>App\Form\CreateZoneType</argument>
         <argument>App\Form\FormatZoneType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
@@ -1026,7 +1041,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension" public="false">
-      <argument type="service" id=".service_locator.0yhHgfj"/>
+      <argument type="service" id=".service_locator.U.eZXVj"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -2959,7 +2974,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory" public="false">
-      <argument type="service" id=".service_locator..y0ee33"/>
+      <argument type="service" id=".service_locator.5Zi4Nop"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -4506,12 +4521,17 @@
         <argument>server:log</argument>
       </call>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\BlocController" class="App\Controller\BlocController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\BlocController" class="App\Controller\BlocController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\BlocController" class="App\Controller\BlocController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PageBuilderController" class="App\Controller\PageBuilderController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PageBuilderController" class="App\Controller\PageBuilderController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\PageBuilderController" class="App\Controller\PageBuilderController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\PageController" class="App\Controller\PageController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\PageController" class="App\Controller\PageController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\PageController" class="App\Controller\PageController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\BlocType" class="App\Form\BlocType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\BlocType" class="App\Form\BlocType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CreateZoneType" class="App\Form\CreateZoneType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\CreateZoneType" class="App\Form\CreateZoneType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\FormatZoneType" class="App\Form\FormatZoneType" autowire="true" abstract="true"/>
@@ -4520,6 +4540,8 @@
     <service id=".abstract.instanceof.App\Repository\AdvertRepository" class="App\Repository\AdvertRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ApplicationRepository" class="App\Repository\ApplicationRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ApplicationRepository" class="App\Repository\ApplicationRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\BlocRepository" class="App\Repository\BlocRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\BlocRepository" class="App\Repository\BlocRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\BundlePage\PageRepository" class="App\Repository\BundlePage\PageRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\BundlePage\PageRepository" class="App\Repository\BundlePage\PageRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ContentTypeRepository" class="App\Repository\ContentTypeRepository" autowire="true" abstract="true"/>
@@ -4753,9 +4775,10 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.0yhHgfj" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.U.eZXVj" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\BlocType" type="service" id="App\Form\BlocType"/>
         <argument key="App\Form\CreateZoneType" type="service" id="App\Form\CreateZoneType"/>
         <argument key="App\Form\FormatZoneType" type="service" id="App\Form\FormatZoneType"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service" id="form.type.entity"/>
@@ -4770,11 +4793,12 @@
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator..y0ee33" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.5Zi4Nop" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\AdvertRepository" type="service" id="App\Repository\AdvertRepository"/>
         <argument key="App\Repository\ApplicationRepository" type="service" id="App\Repository\ApplicationRepository"/>
+        <argument key="App\Repository\BlocRepository" type="service" id="App\Repository\BlocRepository"/>
         <argument key="App\Repository\BundlePage\PageRepository" type="service" id="App\Repository\BundlePage\PageRepository"/>
         <argument key="App\Repository\ContentTypeRepository" type="service" id="App\Repository\ContentTypeRepository"/>
         <argument key="App\Repository\FormatZoneRepository" type="service" id="App\Repository\FormatZoneRepository"/>
@@ -4976,6 +5000,12 @@
         <argument key="session" type="service" id="session" on-invalid="ignore"/>
         <argument key="twig" type="service" id="twig" on-invalid="ignore"/>
       </argument>
+    </service>
+    <service id=".service_locator.CDOTD6..App\Controller\BlocController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+      <tag name="container.service_locator_context" id="App\Controller\BlocController"/>
+      <argument>App\Controller\BlocController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CDOTD6." method="withContext"/>
     </service>
     <service id=".service_locator.CDOTD6..App\Controller\PageBuilderController" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator_context" id="App\Controller\PageBuilderController"/>

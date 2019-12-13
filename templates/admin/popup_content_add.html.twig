@@ -1,32 +1,40 @@
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 
 
     {% if bloc is defined %}
 <script src={{ asset('js/admin/ckeditor/ckeditor.js') }}></script>
-    <form target="data" method="post" action="{{ url('admin.popup.content.add') }}">
-<input type="hidden" id="bloc" value="{{ bloc }}">
-        <input type="hidden" id="id" value="{{ id }}">
 <div class="jumbotron">
     <div class="display-8">Ajout d'un contenu</div>
-    <textarea id="editeur" name="editeur" rows="10" cols="60">{%  if content is defined %}{{ content|raw }}{% endif %}</textarea>
+	{{ form_start(form) }}
+		<input type="hidden" id="bloc" value="{{ bloc }}">
+        <input type="hidden" id="id" value="{{ id }}">
+	{{ form_widget(form.data) }}
     <div class="row">
         <div class="col-sm-6">
-            <button id="content-validate" class="form-control btn-primary">Valider</button>
+			{{ form_row(form.valider) }}
         </div>
         <div class="col-sm-6">
+			{{ form_row(form.fermer) }}
 
-            <input type="button" id="close" value="Fermer" class="form-control btn-cancel" />
         </div>
 
     </div>
+	{{ form_end(form) }}
+
 
 </div>
 
-    </form>
     <iframe id="data" name="data" style="width:300px;display:none"></iframe>
         <script>
-            CKEDITOR.replace("editeur");
+            CKEDITOR.replace("form_data", {
+    			extraPlugins : 'autogrow',
+    			removePlugins : 'resize',
+    			entities : false
+			});
+			parent.close();
+			parent.validate_form();
 
         </script>
 

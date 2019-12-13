@@ -138,7 +138,11 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new \Twig\Profiler\Profile($this->getTemplateName(), "block", "javascripts"));
 
         // line 25
-        echo "
+        echo "\t<script>
+\$('.carousel').carousel({
+  interval: 2000
+})
+\t</script>
 ";
         
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
@@ -189,7 +193,11 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
 
 
 {% block javascripts %}
-
+\t<script>
+\$('.carousel').carousel({
+  interval: 2000
+})
+\t</script>
 {% endblock %}", "page.html.twig", "/home/nico/SYMFONY4/pagebuilder/templates/page.html.twig");
     }
 }

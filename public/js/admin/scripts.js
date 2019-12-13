@@ -4,6 +4,9 @@ function close() {
     $("#close").click(function () {
         $("#popup").hide();
     })
+    $("#form_fermer").click(function () {
+        $("#popup").hide();
+    })
 }
 
 function close_popup() {
@@ -227,10 +230,42 @@ function creer_page() {
 
 }
 
+function validate_form() {
+	$("#form_valider").click(function(event) {
+		event.preventDefault();
+        	var ContentFromEditor = CKEDITOR.instances.form_data.getData();
+
+        	var dataString = $("form[name=form]").serialize();
+
+            dataString += '&ContentFromEditor='+ContentFromEditor;          
+		console.log(dataString);
+        	$.ajax({
+        		type: "POST",
+        		url: url_popup_content,
+        		data: dataString,
+		        cache: false,
+        		success: function(r){
+					console.log(r);
+					p=eval("("+r+")");
+       			},
+       			error: function(xhr, ajaxOptions, thrownError){ 
+            		console.log(xhr.responseText);
+        		}
+     		});
+	})
+
+}
+
 jQuery(document).ready(function() {
     /* On recherche si un objet pagebuilder existe*/
     if(window.localStorage) {
 	}
+
+
+	validate_form();
+
+
+
 
 
     if(id_page) {
@@ -289,7 +324,6 @@ jQuery(document).ready(function() {
     })
 
     $("#add-zone").click(add_zone);
-
 
 
 

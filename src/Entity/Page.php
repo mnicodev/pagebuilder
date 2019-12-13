@@ -64,11 +64,17 @@ class Page
      */
     private $content;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Bloc", mappedBy="page")
+     */
+    private $blocs;
+
     public function __construct()
     {
         $this->zones = new ArrayCollection();
         $this->date_create= new \DateTime();
         $this->date_update= new \DateTime();
+        $this->blocs = new ArrayCollection();
     }
 
     public function __toString()
@@ -186,6 +192,34 @@ class Page
     public function setContent(?string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bloc[]
+     */
+    public function getBlocs(): Collection
+    {
+        return $this->blocs;
+    }
+
+    public function addBloc(Bloc $bloc): self
+    {
+        if (!$this->blocs->contains($bloc)) {
+            $this->blocs[] = $bloc;
+            $bloc->addPage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBloc(Bloc $bloc): self
+    {
+        if ($this->blocs->contains($bloc)) {
+            $this->blocs->removeElement($bloc);
+            $bloc->removePage($this);
+        }
 
         return $this;
     }

@@ -117,6 +117,6 @@ class __TwigTemplate_450f291b9c51f5eb87b0b1c5953561c45dde84faa32fdacca9b7efe995d
 
     var id_page={{ id }};
 
-</script>", "admin/variables.js.twig", "/home/nico/0TRAVAUX/TEST/SYMFONY4/pagebuilder/templates/admin/variables.js.twig");
+</script>", "admin/variables.js.twig", "/home/nico/SYMFONY4/pagebuilder/templates/admin/variables.js.twig");
     }
 }
