@@ -14,7 +14,12 @@ function close_popup() {
 
 }
 
-
+function del_action() {
+	$(".z-action").remove();
+	$(".c-action").remove();
+	//$(".action").remove();
+	$(".p-action").remove();
+}
 
 function action_content() {
 	/* si on survol la page (wrapper) */
@@ -136,7 +141,6 @@ function set_drag() {
 			fallbackOnBody: true,
 			swapThreshold: 0.65,
 			ghostClass: 'sortable_background',
-			//onEnd: refresh,
 		});
 	}
 
@@ -161,7 +165,9 @@ function add_zone() {
 
 						nbz=$(".content-zone").find(".zone").length+1;
 						zone=document.createElement("div");
-						$(zone).addClass("zone row");
+						row=document.createElement("div");
+						$(zone).addClass("zone ");
+						$(row).addClass("row");
 						$(zone).attr("data-line",nbz);
 						$(zone).attr("data-format",$("#create_zone_format").val());
 						$(zone).attr("data-param-classes","");
@@ -177,13 +183,14 @@ function add_zone() {
 							$(bloc).attr("id","bloc_"+nbz+"_"+i);
 
 							console.log(bloc);
-							$(zone).append(bloc);
+							$(row).append(bloc);
                         }
 						if(!$(".content-zone").length) {
 							cz=document.createElement("div");
 							$(cz).addClass("sortable connected content-zone");
 							$(".content-wrapper").append(cz);
 						}
+						$(zone).append(row);
 						$(".content-zone").append(zone);
 
 
@@ -230,6 +237,12 @@ function creer_page() {
 
 }
 
+function add_content(content) {
+
+}
+
+
+
 function validate_form() {
 	$("#form_valider").click(function(event) {
 		event.preventDefault();
@@ -238,15 +251,24 @@ function validate_form() {
         	var dataString = $("form[name=form]").serialize();
 
             dataString += '&ContentFromEditor='+ContentFromEditor;          
-		console.log(dataString);
         	$.ajax({
         		type: "POST",
         		url: url_popup_content,
         		data: dataString,
 		        cache: false,
         		success: function(r){
+					res=JSON.parse(r);
 					console.log(r);
-					p=eval("("+r+")");
+					uniqid=(new Date().getTime()).toString(16);
+					content=document.createElement("div");
+					content.setAttribute("id",uniqid);
+					content.classList.add("content");
+					$(content).html(res.data);
+					$("#"+res.bloc).html(content);
+					action_content();
+					close_popup();
+
+					//p=eval("("+r+")");
        			},
        			error: function(xhr, ajaxOptions, thrownError){ 
             		console.log(xhr.responseText);
@@ -286,6 +308,7 @@ jQuery(document).ready(function() {
     }
 
     $("#save-page").click(function () {
+		del_action();
 		pagebuilder.set_name($(".h1").val());
 		pagebuilder.set_description($(".h2").val());
 		pagebuilder.set_content($("#page .content-wrapper").html());

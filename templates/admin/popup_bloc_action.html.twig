@@ -9,7 +9,7 @@
             $.ajax({
                 url: url_popup_content,
                 method: "POST",
-				data: {bloc:"{{ bloc }}",id: "{{ id }}"},
+				data: {bloc:"{{ bloc }}",id: ""},
                 success: function (result) {
                     $("#popup").html(result);
                     $("#popup").show();

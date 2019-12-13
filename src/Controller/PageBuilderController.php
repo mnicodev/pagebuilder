@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
@@ -187,13 +188,11 @@ class PageBuilderController extends AbstractController
 		 	->add("fermer",ButtonType::class)
 			->getForm();
 
-
 		$form->handleRequest($request);
     	if ($form->isSubmitted() && $form->isValid()) {
         	$entityManager=$this->getDoctrine()->getManager();
 			//if($request->request->get("editeur")!==null) {
 			$bloc=$form->getData();
-			print_r($request->request->get("ContentFromEditor"));
 
 			$bloc->setData($request->request->get("ContentFromEditor"));
 			$bloc->setName(uniqid());
@@ -204,12 +203,10 @@ class PageBuilderController extends AbstractController
             /*$str=str_replace(chr(10),"",$request->request->get("editeur"));
             $str=str_replace(chr(13),"",$str);
 			$str=addslashes($str);*/
-			$t=["data"=>$bloc->getData(),"bloc"=>$bloc->getCle()];
-
+			$t=["data"=>$bloc->getData(),"bloc"=>$request->request->get("bloc")];
 			return new Response(json_encode($t));
             //return $this->render("admin/popup_content_add.html.twig", ["str"=> $str]);
 		} else {
-
 
 			return $this->render("admin/popup_content_add.html.twig", [
             	"bloc"=> $request->request->get("bloc"),

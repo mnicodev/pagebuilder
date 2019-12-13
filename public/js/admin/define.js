@@ -48,8 +48,6 @@ var pagebuilder={
     },
 
 
-
-
     show: function () {
         $("#page").html("");
         // un element row

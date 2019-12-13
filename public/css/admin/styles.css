@@ -26,6 +26,7 @@
   #page table tr {
     cursor: pointer; }
   #page .chapo .h2 {
+    color: #000;
     min-height: 50px;
     background: transparent;
     border: 1px dashed transparent;
@@ -34,6 +35,7 @@
       border: 1px dashed #000;
       background: #fff; }
   #page .chapo .h1 {
+    color: #000;
     min-height: 50px;
     border: 1px dashed transparent;
     background: transparent;
@@ -43,14 +45,14 @@
       border: 1px dashed #000; }
 
 .create .global-row {
-  margin-left: -15px;
-  margin-right: -15px;
+  /*margin-left: -15px;
+  margin-right: -15px;*/
   background: #ffffee;
   min-height: 20px; }
   .create .global-row .content-wrapper {
     cursor: default;
     border: 1px solid transparent;
-    padding-top: 30px;
+    /*padding-top: 30px;*/
     position: relative;
     /*width: 100%;*/ }
     .create .global-row .content-wrapper:hover {
@@ -68,9 +70,10 @@
     .create .global-row .content-wrapper > .sortable {
       padding: 0; }
       .create .global-row .content-wrapper > .sortable .zone {
-        margin: 0;
+        margin: 20px;
         border: 1px solid transparent;
         padding: 20px;
+        padding-top: 30px;
         list-style: none;
         position: relative; }
         .create .global-row .content-wrapper > .sortable .zone:hover {
@@ -97,7 +100,7 @@
             color: #fff; }
           .create .global-row .content-wrapper > .sortable .zone .z-action.edit {
             width: 120px;
-            height: 40px; }
+            height: 30px; }
         .create .global-row .content-wrapper > .sortable .zone .col-md-1, .create .global-row .content-wrapper > .sortable .zone .col-md-2, .create .global-row .content-wrapper > .sortable .zone .col-md-3, .create .global-row .content-wrapper > .sortable .zone .col-md-4, .create .global-row .content-wrapper > .sortable .zone .col-md-5,
         .create .global-row .content-wrapper > .sortable .zone .col-md-6, .create .global-row .content-wrapper > .sortable .zone .col-md-7, .create .global-row .content-wrapper > .sortable .zone .col-md-8, .create .global-row .content-wrapper > .sortable .zone .col-md-9, .create .global-row .content-wrapper > .sortable .zone .col-md-10,
         .create .global-row .content-wrapper > .sortable .zone .col-md-11, .create .global-row .content-wrapper > .sortable .zone .col-md-12 {
