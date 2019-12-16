@@ -7,6 +7,7 @@ namespace App\Controller;
 
 
 use App\Entity\Page;
+use App\Entity\Classe;
 use App\Entity\Bloc;
 use App\Form\CreateZoneType;
 use App\Form\BlocType;
@@ -20,6 +21,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PageBuilderController extends AbstractController
@@ -147,16 +149,55 @@ class PageBuilderController extends AbstractController
     /**
      * @Route("/admin/zone/action", name="admin.popup.zone.action")
      */
-    public function popupZoneAction(Request $request): Response {
+	public function popupZoneAction(Request $request): Response {
         return $this->render("admin/popup_zone_action.html.twig", ["zone"=>$request->request->get("zone")]);
-    }
+	}
+
+	/**
+	 * @Route("/admin/zone/styles", name="admin.popup.styles")
+	 */
+	public function popupStyles(Request $request): Response {
+		$repository=$this->getDoctrine()->getRepository(Classe::class);
+		$classe=$repository->findOneBy(["name"=>$request->request->get("zone")]);
+		if(!$classe)	$classe=new Classe();
+		$form=$this->createFormBuilder($classe)
+			->add("param",TextareaType::class, [
+				"data"=>$request->request->get("style")
+			])
+			->add("container",ChoiceType::class,["choices"=>["sans"=>"","container"=>"container","container fluid"=>"container-fluid"]])
+			//->add("page",HiddenType::class,["data"=>$request->request->get("id_page")])
+			->add("valider",SubmitType::class)
+			->add("apercu",ButtonType::class,["label"=>"Aperçu"])
+			->add("fermer",ButtonType::class)
+			->getForm();
+		$form->handleRequest($request);
+		if ($form->isSubmitted() && $form->isValid()) {
+			$entityManager=$this->getDoctrine()->getManager();
+            $page=$entityManager->getRepository(Page::class)->find($request->request->get("id_page"));
+
+			$classe->setName($request->request->get("zone"));
+			$classe->setPage($page);
+			$page->addClass($classe);
+			$entityManager->persist($classe);
+			$entityManager->persist($page);
+
+
+			$entityManager->flush();
+
+			$t=["param"=>$classe->getParam(),"id"=>$classe->getId(),"container"=>$classe->getContainer()];
+
+			return new Response(json_encode($t));
+
+		}
+		return $this->render("admin/popup_zone_styles.html.twig",["form"=>$form->createView(),"zone"=>$request->request->get("zone"),"style"=>$request->request->get("style"),"id_page"=>$request->request->get("id_page")]);
+	}
 
     /**
      * @Route("/admin/bloc/action", name="admin.popup.bloc.action")
      */
     public function popupBlocAction(Request $request): Response {
 
-        return $this->render("admin/popup_bloc_action.html.twig", ["bloc" => $request->request->get("bloc"), "zone"=>$request->request->get("zone")]);
+        return $this->render("admin/popup_bloc_action.html.twig", [ "zone"=>$request->request->get("zone")]);
 
     }
 
@@ -164,11 +205,9 @@ class PageBuilderController extends AbstractController
      * @Route("/admin/content/action", name="admin.popup.content.action")
      */
     public function popupContentAction(Request $request): Response {
-
         return $this->render("admin/popup_content_action.html.twig", [
-            "bloc" => $request->request->get("bloc"),
             "content"=>$request->request->get("content"),
-            "id"=> $request->request->get("id")
+            "data"=> $request->request->get("data")
         ]);
 
     }
@@ -178,12 +217,15 @@ class PageBuilderController extends AbstractController
      */
     public function popupContentAdd(Request $request) {
 		//dump($request->request->get("editeur"));
-		$bloc=new Bloc();
-
+		$content="";
+		if($content=$request->request->get("content")) {
+			$repository=$this->getDoctrine()->getRepository(Bloc::class);
+			$bloc=$repository->findOneBy(["name"=>$content]);
+		} else $bloc=new Bloc();
 
 
 		$form=$this->createFormBuilder($bloc)
-			 ->add('data')
+			 ->add('data',TextareaType::class)
 		 	->add("valider",SubmitType::class)
 		 	->add("fermer",ButtonType::class)
 			->getForm();
@@ -192,18 +234,14 @@ class PageBuilderController extends AbstractController
     	if ($form->isSubmitted() && $form->isValid()) {
         	$entityManager=$this->getDoctrine()->getManager();
 			//if($request->request->get("editeur")!==null) {
-			$bloc=$form->getData();
-
+			//$bloc=$form->getData();
 			$bloc->setData($request->request->get("ContentFromEditor"));
-			$bloc->setName(uniqid());
+			if(empty($content)) $bloc->setName(uniqid());
 			$entityManager->persist($bloc);
 			$entityManager->flush();
 			$bloc->setCle($request->request->get("bloc"));
 
-            /*$str=str_replace(chr(10),"",$request->request->get("editeur"));
-            $str=str_replace(chr(13),"",$str);
-			$str=addslashes($str);*/
-			$t=["data"=>$bloc->getData(),"bloc"=>$request->request->get("bloc")];
+			$t=["data"=>$bloc->getData(),"bloc"=>$request->request->get("bloc"),"content"=>$bloc->getName()];
 			return new Response(json_encode($t));
             //return $this->render("admin/popup_content_add.html.twig", ["str"=> $str]);
 		} else {
@@ -211,11 +249,12 @@ class PageBuilderController extends AbstractController
 			return $this->render("admin/popup_content_add.html.twig", [
             	"bloc"=> $request->request->get("bloc"),
             	"content"=>$request->request->get("content"),
-				"id" => $request->request->get("id"),
 				'form' => $form->createView(),
 			]);
 		}
-    }
+	}
+
+
 
 }
 

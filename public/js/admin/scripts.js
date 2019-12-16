@@ -55,11 +55,13 @@ function action_content() {
             function () {
                 $(this).addClass("edit");
                 o=this;
+				content=$(this).parent().attr("id");
+				console.log(content);
                 /* on charge la page des actions de contenu, on envoie le contenu */
                 $.ajax({
                     url: url_content_action,
                     method: "POST",
-                    data: {bloc:$(this).parent().parent().attr("id"),content: $(this).parent().html(),id:$(this).parent().attr("id")},
+                    data: {content: content},
                     success: function (result) {
                         $(o).html(result);
                     },
@@ -80,7 +82,6 @@ function action_content() {
         $(".z-action").hover(function () {
             $(this).addClass("edit")
             o=this;
-				
             $.ajax({
                 url: url_zone_action,
                 method: "POST",
@@ -101,7 +102,7 @@ function action_content() {
     $(".bloc").hover(function () {
         $(this).find(".action").remove();
 
-        d=document.createElement("li");
+        d=document.createElement("div");
         $(d).addClass("action");
         console.log("je passe")
         $(this).append(d);
@@ -112,7 +113,7 @@ function action_content() {
             $.ajax({
                 url: url_bloc_action,
                 method: "POST",
-                data: {bloc:$(this).parent().attr("id"), zone:$(this).parent().parent().attr("data-line")},
+                data: {zone:$(this).parent().attr("id")},
                 success: function (result) {
 
                     $(o).html(result);
@@ -146,6 +147,20 @@ function set_drag() {
 
 }
 
+function open_popup_style(zone) {
+	console.log($("#"+zone).attr("style"))
+			$.ajax({
+				url: url_popup_styles,
+				method: "POST",
+				data: {zone:zone,style:$("#"+zone).attr("style"),id_page:id_page},
+				success: function(result) {
+					$("#popup").html(result);
+					$("#popup").show();
+					
+				}
+			})
+}
+
 
 function add_zone() {
         $.ajax({
@@ -163,8 +178,10 @@ function add_zone() {
 
                         f=new String($("#create_zone_format").val()).split(":");
 
-						nbz=$(".content-zone").find(".zone").length+1;
-						zone=document.createElement("div");
+						//nbz=$(".content-zone").find(".zone").length+1;
+						uniqid=(new Date().getTime()).toString(16);
+						nbz=uniqid
+						zone=document.createElement("section");
 						row=document.createElement("div");
 						$(zone).addClass("zone ");
 						$(row).addClass("row");
@@ -172,22 +189,22 @@ function add_zone() {
 						$(zone).attr("data-format",$("#create_zone_format").val());
 						$(zone).attr("data-param-classes","");
 						$(zone).attr("data-param-style","");
-						$(zone).attr("id","zone_"+nbz);
+						$(zone).attr("id","s_"+uniqid);
 						console.log(zone);
 						
                         for(i in f) {
 							bloc=document.createElement("div");
-							$(bloc).addClass("connected sortable for-action bloc col-md-"+f[i]);
+							$(bloc).addClass("sortable for-action bloc col-md-"+f[i]);
 							$(bloc).attr("data-param-classes","");
 							$(bloc).attr("data-param-style","");
-							$(bloc).attr("id","bloc_"+nbz+"_"+i);
+							$(bloc).attr("id","b_"+nbz+"_"+i);
 
 							console.log(bloc);
 							$(row).append(bloc);
                         }
 						if(!$(".content-zone").length) {
 							cz=document.createElement("div");
-							$(cz).addClass("sortable connected content-zone");
+							$(cz).addClass("sortable content-zone");
 							$(".content-wrapper").append(cz);
 						}
 						$(zone).append(row);
@@ -243,48 +260,12 @@ function add_content(content) {
 
 
 
-function validate_form() {
-	$("#form_valider").click(function(event) {
-		event.preventDefault();
-        	var ContentFromEditor = CKEDITOR.instances.form_data.getData();
-
-        	var dataString = $("form[name=form]").serialize();
-
-            dataString += '&ContentFromEditor='+ContentFromEditor;          
-        	$.ajax({
-        		type: "POST",
-        		url: url_popup_content,
-        		data: dataString,
-		        cache: false,
-        		success: function(r){
-					res=JSON.parse(r);
-					console.log(r);
-					uniqid=(new Date().getTime()).toString(16);
-					content=document.createElement("div");
-					content.setAttribute("id",uniqid);
-					content.classList.add("content");
-					$(content).html(res.data);
-					$("#"+res.bloc).html(content);
-					action_content();
-					close_popup();
-
-					//p=eval("("+r+")");
-       			},
-       			error: function(xhr, ajaxOptions, thrownError){ 
-            		console.log(xhr.responseText);
-        		}
-     		});
-	})
-
-}
 
 jQuery(document).ready(function() {
     /* On recherche si un objet pagebuilder existe*/
     if(window.localStorage) {
 	}
 
-
-	validate_form();
 
 
 
@@ -306,6 +287,7 @@ jQuery(document).ready(function() {
             }
         })
     }
+
 
     $("#save-page").click(function () {
 		del_action();

@@ -2,19 +2,18 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 
-
-    {% if bloc is defined %}
+    {% if bloc is defined or content is defined %}
 <script src={{ asset('js/admin/ckeditor/ckeditor.js') }}></script>
-<div class="jumbotron">
+<div class="jumbotron" id="content_add">
     <div class="display-8">Ajout d'un contenu</div>
 	{{ form_start(form) }}
 		<input type="hidden" id="bloc" name="bloc" value="{{ bloc }}">
-        <input type="hidden" id="id" value="{{ id }}">
+        <input type="hidden" id="content" name="content" value="{{ content }}">
 	{{ form_widget(form.data) }}
     <div class="row">
         <div class="col-sm-6">
 			{{ form_row(form.valider) }}
-        </div>
+	</div>
         <div class="col-sm-6">
 			{{ form_row(form.fermer) }}
 
@@ -31,8 +30,42 @@
     			removePlugins : 'resize',
     			entities : false
 			});
-			parent.close();
-			parent.validate_form();
+			close();
+		$("#form_valider").click(function(event) {
+			event.preventDefault();
+        	var ContentFromEditor = CKEDITOR.instances.form_data.getData();
+
+        	var dataString = $("form[name=form]").serialize();
+
+            dataString += '&ContentFromEditor='+ContentFromEditor; 
+			console.log(dataString);
+        	$.ajax({
+        		type: "POST",
+        		url: url_popup_content,
+        		data: dataString,
+		        cache: false,
+        		success: function(r){
+					res=JSON.parse(r);
+					console.log(res);
+					if(res.bloc) {
+						content=document.createElement("div");
+						content.setAttribute("id",res.content);
+						content.classList.add("content");
+						$(content).html(res.data);
+						$("#"+res.bloc).append(content);
+					} else if(res.content) {
+						$("#"+res.content).html(res.data);
+					}
+					action_content();
+					close_popup();
+
+					//p=eval("("+r+")");
+       			},
+       			error: function(xhr, ajaxOptions, thrownError){ 
+            		console.log(xhr.responseText);
+        		}
+     		});
+	})
 
         </script>
 
@@ -42,9 +75,9 @@
         <script>
             window.onload=function() {
                 bloc=parent.document.getElementById("bloc").value
-                id=parent.document.getElementById("id").value;
-				if(id) {
-					parent.document.getElementById(id).innerHTML="{{ str|raw }}";
+                content=parent.document.getElementById("content").value;
+				if(content) {
+					parent.document.getElementById(content).innerHTML="{{ str|raw }}";
 					parent.document.getElementById("popup").style.display="none";
 					parent.action_content();
 

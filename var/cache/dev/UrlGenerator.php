@@ -23,6 +23,7 @@ return [
     'admin.popup.page.create' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupCreate'], [], [['text', '/admin/page/create']], [], []],
     'admin.popup.zone.add' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupZoneAdd'], [], [['text', '/admin/zone/add']], [], []],
     'admin.popup.zone.action' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupZoneAction'], [], [['text', '/admin/zone/action']], [], []],
+    'admin.popup.styles' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupStyles'], [], [['text', '/admin/zone/styles']], [], []],
     'admin.popup.bloc.action' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupBlocAction'], [], [['text', '/admin/bloc/action']], [], []],
     'admin.popup.content.action' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupContentAction'], [], [['text', '/admin/content/action']], [], []],
     'admin.popup.content.add' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupContentAdd'], [], [['text', '/admin/content/add']], [], []],

@@ -1,5 +1,5 @@
 <ul>
-    <li><a  id="edit-content">Editer le contenu</a></li>
+	<li><a  id="edit-content">Editer le contenu</a></li>
     <li><a  id="delete-content">Supprimer le contenu</a></li>
 
 </ul>
@@ -9,7 +9,7 @@
             $.ajax({
                 url: url_popup_content,
                 method: "POST",
-                data: {bloc:"{{ bloc }}", content: "{{ content }}",id:""},
+				data: {content: "{{ content }}"},
                 success: function (result) {
                     $("#popup").html(result);
                     $("#popup").show();
@@ -20,7 +20,7 @@
             })
         })
         $("#delete-content").click(function () {
-            if(window.confirm('Supprimer le contenu ?')) parent.document.getElementById("{{ id }}").remove();
+            if(window.confirm('Supprimer le contenu ?')) parent.document.getElementById("{{ content }}").remove();
 
         })
 

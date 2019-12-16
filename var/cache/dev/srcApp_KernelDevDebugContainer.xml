@@ -430,6 +430,10 @@
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
+    <service id="App\Repository\ClasseRepository" class="App\Repository\ClasseRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
     <service id="App\Repository\ContentTypeRepository" class="App\Repository\ContentTypeRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
@@ -439,6 +443,10 @@
       <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\PageRepository" class="App\Repository\PageRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\StylesRepository" class="App\Repository\StylesRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
       <argument type="service" id="doctrine"/>
     </service>
@@ -2168,14 +2176,6 @@
         <argument>2048</argument>
       </call>
       <call method="addListener">
-        <argument>console.command</argument>
-        <argument type="collection">
-          <argument type="service" id="debug.debug_handlers_listener"/>
-          <argument>configure</argument>
-        </argument>
-        <argument>2048</argument>
-      </call>
-      <call method="addListener">
         <argument>kernel.exception</argument>
         <argument type="collection">
           <argument type="service" id="debug.debug_handlers_listener"/>
@@ -2982,7 +2982,7 @@
       <factory class="Doctrine\ORM\EntityManager" method="create"/>
     </service>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory" public="false">
-      <argument type="service" id=".service_locator.5Zi4Nop"/>
+      <argument type="service" id=".service_locator.rfegXWr"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -4552,12 +4552,16 @@
     <service id=".abstract.instanceof.App\Repository\BlocRepository" class="App\Repository\BlocRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\BundlePage\PageRepository" class="App\Repository\BundlePage\PageRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\BundlePage\PageRepository" class="App\Repository\BundlePage\PageRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ClasseRepository" class="App\Repository\ClasseRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\ClasseRepository" class="App\Repository\ClasseRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ContentTypeRepository" class="App\Repository\ContentTypeRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ContentTypeRepository" class="App\Repository\ContentTypeRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\FormatZoneRepository" class="App\Repository\FormatZoneRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\FormatZoneRepository" class="App\Repository\FormatZoneRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\PageRepository" class="App\Repository\PageRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\PageRepository" class="App\Repository\PageRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\StylesRepository" class="App\Repository\StylesRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\StylesRepository" class="App\Repository\StylesRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id="maker.auto_command.make_auth" class="Symfony\Bundle\MakerBundle\Command\MakerCommand" public="false">
       <tag name="console.command" command="make:auth"/>
       <argument type="service" id="maker.maker.make_authenticator"/>
@@ -4801,16 +4805,18 @@
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
       </argument>
     </service>
-    <service id=".service_locator.5Zi4Nop" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
+    <service id=".service_locator.rfegXWr" class="Symfony\Component\DependencyInjection\ServiceLocator" public="false">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Repository\AdvertRepository" type="service" id="App\Repository\AdvertRepository"/>
         <argument key="App\Repository\ApplicationRepository" type="service" id="App\Repository\ApplicationRepository"/>
         <argument key="App\Repository\BlocRepository" type="service" id="App\Repository\BlocRepository"/>
         <argument key="App\Repository\BundlePage\PageRepository" type="service" id="App\Repository\BundlePage\PageRepository"/>
+        <argument key="App\Repository\ClasseRepository" type="service" id="App\Repository\ClasseRepository"/>
         <argument key="App\Repository\ContentTypeRepository" type="service" id="App\Repository\ContentTypeRepository"/>
         <argument key="App\Repository\FormatZoneRepository" type="service" id="App\Repository\FormatZoneRepository"/>
         <argument key="App\Repository\PageRepository" type="service" id="App\Repository\PageRepository"/>
+        <argument key="App\Repository\StylesRepository" type="service" id="App\Repository\StylesRepository"/>
       </argument>
     </service>
     <service id="debug.security.voter.security.access.authenticated_voter" class="Symfony\Component\Security\Core\Authorization\Voter\TraceableVoter">

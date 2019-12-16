@@ -69,17 +69,24 @@ class Page
      */
     private $blocs;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Classe", mappedBy="page")
+     */
+    private $classes;
+
     public function __construct()
     {
         $this->zones = new ArrayCollection();
         $this->date_create= new \DateTime();
         $this->date_update= new \DateTime();
         $this->blocs = new ArrayCollection();
+        $this->classes = new ArrayCollection();
     }
 
     public function __toString()
     {
-        // TODO: Implement __toString() method.
+		// TODO: Implement __toString() method.
+		return $this->name;
     }
 
     public function getId(): ?int
@@ -223,4 +230,37 @@ class Page
 
         return $this;
     }
+
+    /**
+     * @return Collection|Classe[]
+     */
+    public function getClasses(): Collection
+    {
+        return $this->classes;
+    }
+
+    public function addClass(Classe $class): self
+    {
+        if (!$this->classes->contains($class)) {
+            $this->classes[] = $class;
+            $class->setPage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClass(Classe $class): self
+    {
+        if ($this->classes->contains($class)) {
+            $this->classes->removeElement($class);
+            // set the owning side to null (unless already changed)
+            if ($class->getPage() === $this) {
+                $class->setPage(null);
+            }
+        }
+
+        return $this;
+	}
+
+
 }

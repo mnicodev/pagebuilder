@@ -1,0 +1,51 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+<div id="zone_styles" class="jumbotron">
+{{ form_start(form) }}
+<input type="hidden" id="zone" name="zone" value="{{ zone }}" />
+<input type="hidden" id="id_page" name="id_page" value="{{ id_page }}" />
+{{ form_end(form) }}
+</div>
+<script>
+
+$(document).ready(function() {
+	close();
+	save="";
+	$("#form_apercu").click(function() {
+		zone=$("#zone").val();
+		if(save=="") save={"style":$("#"+zone).attr("style"),"class":$("#"+zone).attr("class")};
+		$("#"+zone).attr("style",$("#form_param").val());
+		$("#"+zone).removeClass("container container-fluid");
+		$("#"+zone).addClass($("#form_container").val());
+console.log(save);
+	})
+	$("#form_fermer").click(function() {
+console.log(save);
+		$("#"+zone).attr("style",save.style);
+		$("#"+zone).removeClass("container container-fluid");
+		$("#"+zone).addClass(save.class);
+
+	})
+	$("#form_valider").click(function(event) {
+		event.preventDefault();
+        var dataString = $("form[name=form]").serialize();
+		$.ajax({
+			url:url_popup_styles,
+			method: "POST",
+			data: dataString,
+			cache: false,
+			success: function(result) {
+				r=eval("("+result+")");
+				console.log(r);
+				zone=$("#zone").val();
+				$("#"+zone).attr("style",r.param);
+				$("#"+zone).addClass(r.container);
+				$("#"+zone).attr("data-style-id",r.id);
+				close_popup();
+			},
+		})
+	})
+	
+});
+
+</script>
+

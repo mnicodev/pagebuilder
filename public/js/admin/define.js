@@ -68,7 +68,7 @@ var pagebuilder={
 
         //$("#page").append(chapo);
         $(global_row).append(chapo);
-        $("#page").addClass("container create");
+        $("#page").addClass("create");
 
         content_wrapper=document.createElement("div");
         container=document.createElement("div");
