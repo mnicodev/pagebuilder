@@ -41,7 +41,7 @@ class __TwigTemplate_934145e2dc38869611a92bf3ea2375440c8c93fe8c2d228240a5d8319a7
 
         // line 1
         echo "<ul>
-    <li><a  id=\"edit-content\">Editer le contenu</a></li>
+\t<li><a  id=\"edit-content\">Editer le contenu</a></li>
     <li><a  id=\"delete-content\">Supprimer le contenu</a></li>
 
 </ul>
@@ -51,13 +51,9 @@ class __TwigTemplate_934145e2dc38869611a92bf3ea2375440c8c93fe8c2d228240a5d8319a7
             \$.ajax({
                 url: url_popup_content,
                 method: \"POST\",
-                data: {bloc:\"";
+\t\t\t\tdata: {content: \"";
         // line 12
-        echo twig_escape_filter($this->env, (isset($context["bloc"]) || array_key_exists("bloc", $context) ? $context["bloc"] : (function () { throw new RuntimeError('Variable "bloc" does not exist.', 12, $this->source); })()), "html", null, true);
-        echo "\", content: \"";
         echo twig_escape_filter($this->env, (isset($context["content"]) || array_key_exists("content", $context) ? $context["content"] : (function () { throw new RuntimeError('Variable "content" does not exist.', 12, $this->source); })()), "html", null, true);
-        echo "\",id:\"";
-        echo twig_escape_filter($this->env, (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 12, $this->source); })()), "html", null, true);
         echo "\"},
                 success: function (result) {
                     \$(\"#popup\").html(result);
@@ -71,7 +67,7 @@ class __TwigTemplate_934145e2dc38869611a92bf3ea2375440c8c93fe8c2d228240a5d8319a7
         \$(\"#delete-content\").click(function () {
             if(window.confirm('Supprimer le contenu ?')) parent.document.getElementById(\"";
         // line 23
-        echo twig_escape_filter($this->env, (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 23, $this->source); })()), "html", null, true);
+        echo twig_escape_filter($this->env, (isset($context["content"]) || array_key_exists("content", $context) ? $context["content"] : (function () { throw new RuntimeError('Variable "content" does not exist.', 23, $this->source); })()), "html", null, true);
         echo "\").remove();
 
         })
@@ -99,13 +95,13 @@ class __TwigTemplate_934145e2dc38869611a92bf3ea2375440c8c93fe8c2d228240a5d8319a7
 
     public function getDebugInfo()
     {
-        return array (  74 => 23,  56 => 12,  43 => 1,);
+        return array (  70 => 23,  56 => 12,  43 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("<ul>
-    <li><a  id=\"edit-content\">Editer le contenu</a></li>
+\t<li><a  id=\"edit-content\">Editer le contenu</a></li>
     <li><a  id=\"delete-content\">Supprimer le contenu</a></li>
 
 </ul>
@@ -115,7 +111,7 @@ class __TwigTemplate_934145e2dc38869611a92bf3ea2375440c8c93fe8c2d228240a5d8319a7
             \$.ajax({
                 url: url_popup_content,
                 method: \"POST\",
-                data: {bloc:\"{{ bloc }}\", content: \"{{ content }}\",id:\"{{ id }}\"},
+\t\t\t\tdata: {content: \"{{ content }}\"},
                 success: function (result) {
                     \$(\"#popup\").html(result);
                     \$(\"#popup\").show();
@@ -126,7 +122,7 @@ class __TwigTemplate_934145e2dc38869611a92bf3ea2375440c8c93fe8c2d228240a5d8319a7
             })
         })
         \$(\"#delete-content\").click(function () {
-            if(window.confirm('Supprimer le contenu ?')) parent.document.getElementById(\"{{ id }}\").remove();
+            if(window.confirm('Supprimer le contenu ?')) parent.document.getElementById(\"{{ content }}\").remove();
 
         })
 

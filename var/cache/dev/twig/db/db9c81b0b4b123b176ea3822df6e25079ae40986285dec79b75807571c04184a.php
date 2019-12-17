@@ -171,10 +171,18 @@ class __TwigTemplate_21c051a3cc85c318e99ea11efc400e7db81704c7ab752580220b74c6758
         echo "
     <script src=\"";
         // line 31
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/admin/define.js"), "html", null, true);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/admin/component.js"), "html", null, true);
         echo "\"></script>
     <script src=\"";
         // line 32
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/admin/genactions.js"), "html", null, true);
+        echo "\"></script>
+    <script src=\"";
+        // line 33
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/admin/define.js"), "html", null, true);
+        echo "\"></script>
+    <script src=\"";
+        // line 34
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/admin/scripts.js"), "html", null, true);
         echo "\"></script>
 
@@ -199,7 +207,7 @@ class __TwigTemplate_21c051a3cc85c318e99ea11efc400e7db81704c7ab752580220b74c6758
 
     public function getDebugInfo()
     {
-        return array (  178 => 32,  174 => 31,  171 => 30,  169 => 29,  165 => 28,  161 => 26,  151 => 25,  134 => 14,  124 => 13,  114 => 10,  104 => 9,  91 => 7,  81 => 6,  62 => 5,  39 => 3,);
+        return array (  186 => 34,  182 => 33,  178 => 32,  174 => 31,  171 => 30,  169 => 29,  165 => 28,  161 => 26,  151 => 25,  134 => 14,  124 => 13,  114 => 10,  104 => 9,  91 => 7,  81 => 6,  62 => 5,  39 => 3,);
     }
 
     public function getSourceContext()
@@ -234,6 +242,8 @@ class __TwigTemplate_21c051a3cc85c318e99ea11efc400e7db81704c7ab752580220b74c6758
 \t\t<script src=\"{{ asset('js/admin/sortable/Sortable.min.js') }}\"></script>
     {% include('admin/variables.js.twig') %}
 
+    <script src=\"{{ asset('js/admin/component.js') }}\"></script>
+    <script src=\"{{ asset('js/admin/genactions.js') }}\"></script>
     <script src=\"{{ asset('js/admin/define.js') }}\"></script>
     <script src=\"{{ asset('js/admin/scripts.js') }}\"></script>
 

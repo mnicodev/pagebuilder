@@ -56,7 +56,8 @@
 					} else if(res.content) {
 						$("#"+res.content).html(res.data);
 					}
-					action_content();
+					action_on_zone();
+					pagebuilder.set_bloc(res);
 					close_popup();
 
 					//p=eval("("+r+")");

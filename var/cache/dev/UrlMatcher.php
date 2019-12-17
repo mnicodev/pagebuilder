@@ -19,10 +19,7 @@ return [
         '/admin/page/save' => [[['_route' => 'admin.page.save', '_controller' => 'App\\Controller\\PageBuilderController::save'], null, null, null, false, false, null]],
         '/admin/page/create' => [[['_route' => 'admin.popup.page.create', '_controller' => 'App\\Controller\\PageBuilderController::popupCreate'], null, null, null, false, false, null]],
         '/admin/zone/add' => [[['_route' => 'admin.popup.zone.add', '_controller' => 'App\\Controller\\PageBuilderController::popupZoneAdd'], null, null, null, false, false, null]],
-        '/admin/zone/action' => [[['_route' => 'admin.popup.zone.action', '_controller' => 'App\\Controller\\PageBuilderController::popupZoneAction'], null, null, null, false, false, null]],
         '/admin/zone/styles' => [[['_route' => 'admin.popup.styles', '_controller' => 'App\\Controller\\PageBuilderController::popupStyles'], null, null, null, false, false, null]],
-        '/admin/bloc/action' => [[['_route' => 'admin.popup.bloc.action', '_controller' => 'App\\Controller\\PageBuilderController::popupBlocAction'], null, null, null, false, false, null]],
-        '/admin/content/action' => [[['_route' => 'admin.popup.content.action', '_controller' => 'App\\Controller\\PageBuilderController::popupContentAction'], null, null, null, false, false, null]],
         '/admin/content/add' => [[['_route' => 'admin.popup.content.add', '_controller' => 'App\\Controller\\PageBuilderController::popupContentAdd'], null, null, null, false, false, null]],
     ],
     [ // $regexpList

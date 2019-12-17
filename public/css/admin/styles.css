@@ -47,7 +47,7 @@
 
 .create .global-row {
   /*margin-left: -15px;
-  margin-right: -15px;*/
+    margin-right: -15px;*/
   background: #ffffee;
   min-height: 20px; }
   .create .global-row .content-wrapper {
@@ -130,14 +130,14 @@
             overflow: hidden;
             border: 1px dashed transparent; }
             .create .global-row .content-wrapper > .sortable section.zone .for-action .content:hover {
-              border: 1px dashed #adadad; }
+              border: 1px dashed red; }
             .create .global-row .content-wrapper > .sortable section.zone .for-action .content .c-action {
               top: 0;
               right: 0;
               position: absolute;
               width: 20px;
               height: 20px;
-              background: #adadad;
+              background: red;
               cursor: pointer;
               z-index: 1000; }
               .create .global-row .content-wrapper > .sortable section.zone .for-action .content .c-action.edit {
@@ -166,5 +166,3 @@
     top: 0 !important;
     transform: none !important;
     margin: auto; } }
-
-/*# sourceMappingURL=styles.css.map */

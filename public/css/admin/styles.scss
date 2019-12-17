@@ -1,5 +1,5 @@
 .popup {
-  position: fixed;
+ 	position: fixed;
   width: 70%;
   min-width: 800px;
   background: #efefef;
@@ -186,7 +186,7 @@
 
 			border: 1px dashed transparent;
 			&:hover {
-				border: 1px dashed #adadad;
+				border: 1px dashed red;
 			}
             .c-action {
               top: 0;
@@ -194,7 +194,7 @@
               position: absolute;
               width: 20px;
               height: 20px;
-              background: #adadad;
+              background: red;
               cursor: pointer;
               z-index: 1000;
               &.edit {

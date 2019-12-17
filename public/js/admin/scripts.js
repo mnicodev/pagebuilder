@@ -21,7 +21,7 @@ function del_action() {
 	$(".p-action").remove();
 }
 
-function action_content() {
+function action_on_zone() {
 	/* si on survol la page (wrapper) */
 	$(".content-wrapper").hover(
 		function() {
@@ -32,7 +32,7 @@ function action_content() {
     	    $(d).addClass("p-action");
 			$(d).attr("title","Ajouter une zone");
 			$(d).text("+");
-        	$(this).append(d);
+        	$(this).append(action_add_zone);
 
 			$(".p-action").click(add_zone);
 	
@@ -43,7 +43,7 @@ function action_content() {
 	);
 	
     /* si on survol un contenu */
-    $(".content").hover(function () {
+    $(".content").hover(function () {console.log("CONTENT");
         /* on supprimer une éventuelle action précédente */
         $(this).find(".c-action").remove();
         /* on crée un objet div et on l'ajoute au content */
@@ -52,20 +52,14 @@ function action_content() {
         $(this).append(d);
         /* action au survol du bloc action précédemment créé */
         $(".c-action").hover(
+
             function () {
                 $(this).addClass("edit");
                 o=this;
-				content=$(this).parent().attr("id");
-				console.log(content);
-                /* on charge la page des actions de contenu, on envoie le contenu */
-                $.ajax({
-                    url: url_content_action,
-                    method: "POST",
-                    data: {content: content},
-                    success: function (result) {
-                        $(o).html(result);
-                    },
-                })
+				$(this).html(action_edit_content);
+				content_id=$(this).parent().attr("id");
+				action_content(content_id);
+
             },
             function () {
                 $(this).remove()
@@ -82,16 +76,9 @@ function action_content() {
         $(".z-action").hover(function () {
             $(this).addClass("edit")
             o=this;
-            $.ajax({
-                url: url_zone_action,
-                method: "POST",
-                data: { zone:$(this).parent().attr("id")},
-                success: function (result) {
-
-                    $(o).html(result);
-
-                }
-            })
+			$(o).html(action_add_bloc);
+			zone_id=$(this).parent().attr("id");
+			action_zone(zone_id);
         },function () {
             $(this).remove()
 
@@ -109,17 +96,10 @@ function action_content() {
         $(".action").hover(function () {
             $(this).addClass("edit")
             o=this;
+			$(this).html(action_add_content);
+			bloc_id=$(this).parent().attr("id");
+			action_bloc(bloc_id);
 
-            $.ajax({
-                url: url_bloc_action,
-                method: "POST",
-                data: {zone:$(this).parent().attr("id")},
-                success: function (result) {
-
-                    $(o).html(result);
-
-                }
-            })
         },function () {
             $(this).remove()
 
@@ -212,7 +192,7 @@ function add_zone() {
 
 
                         $("#popup").hide();
-						pagebuilder.content=$(".content-wrapper").html();
+						pagebuilder.set_content($(".content-wrapper").html());
                         pagebuilder.show();
 
 
@@ -267,22 +247,22 @@ jQuery(document).ready(function() {
 	}
 
 
-
-
-
-
     if(id_page) {
         $.ajax({
             url: url_page_edit,
             method: "GET",
             data: {load:1},
             success: function (result) {
-				p=eval("("+result+")");
-				pagebuilder.page.name=p[0];
-				pagebuilder.page.description=p[1];
-				pagebuilder.content=p[2];
+				console.log(result);
+				//p=eval("("+result+")");
+				p=JSON.parse(result);
+				console.log(p);
+				pagebuilder.page.name=p.name;
+				pagebuilder.page.description=p.description;
+				pagebuilder.page.content=p.content;
                 pagebuilder.show();
-                pagebuilder.save();
+        		action_on_zone();
+                //pagebuilder.save();
                 set_drag();
             }
         })
@@ -291,9 +271,7 @@ jQuery(document).ready(function() {
 
     $("#save-page").click(function () {
 		del_action();
-		pagebuilder.set_name($(".h1").val());
-		pagebuilder.set_description($(".h2").val());
-		pagebuilder.set_content($("#page .content-wrapper").html());
+		pagebuilder.save()
 		//console.log($("#page .content-wrapper").html());
         $.ajax({
             url:url_page_save,
@@ -302,6 +280,8 @@ jQuery(document).ready(function() {
             success: function(result) {
                 $("#popup").html(result);
                 $("#popup").show();
+        		set_drag();
+        		action_on_zone();
 				setTimeout(close_popup,2000);
             }
 

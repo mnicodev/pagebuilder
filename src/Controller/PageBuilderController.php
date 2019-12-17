@@ -64,13 +64,14 @@ class PageBuilderController extends AbstractController
                 "name" =>   $page->getName(),
                 "description" => $page->getDescription(),
                 "param" => unserialize($page->getParam()),
-                "zones" => []
+				"classes" => $page->getClasses(),
+				"blocs"=>$page->getBlocs(),
+				"content"=>$page->getContent(),
             ];
-
 			//print_r(serialize(json_encode($pagebuilder)));
 			$t=[$page->getName(),$page->getDescription(),$page->getContent()];
             //return new Response($page->getName()."|".$page->getContent());
-            return new Response((json_encode($t)));
+            return new Response((json_encode($pagebuilder)));
 
         }
 
@@ -146,12 +147,6 @@ class PageBuilderController extends AbstractController
         return $this->render("admin/popup_add_zone.html.twig", ["form"=>$form->createView(),"large"=>$large]);
     }
 
-    /**
-     * @Route("/admin/zone/action", name="admin.popup.zone.action")
-     */
-	public function popupZoneAction(Request $request): Response {
-        return $this->render("admin/popup_zone_action.html.twig", ["zone"=>$request->request->get("zone")]);
-	}
 
 	/**
 	 * @Route("/admin/zone/styles", name="admin.popup.styles")
@@ -192,25 +187,7 @@ class PageBuilderController extends AbstractController
 		return $this->render("admin/popup_zone_styles.html.twig",["form"=>$form->createView(),"zone"=>$request->request->get("zone"),"style"=>$request->request->get("style"),"id_page"=>$request->request->get("id_page")]);
 	}
 
-    /**
-     * @Route("/admin/bloc/action", name="admin.popup.bloc.action")
-     */
-    public function popupBlocAction(Request $request): Response {
 
-        return $this->render("admin/popup_bloc_action.html.twig", [ "zone"=>$request->request->get("zone")]);
-
-    }
-
-    /**
-     * @Route("/admin/content/action", name="admin.popup.content.action")
-     */
-    public function popupContentAction(Request $request): Response {
-        return $this->render("admin/popup_content_action.html.twig", [
-            "content"=>$request->request->get("content"),
-            "data"=> $request->request->get("data")
-        ]);
-
-    }
 
     /**
      * @Route("/admin/content/add", name="admin.popup.content.add")

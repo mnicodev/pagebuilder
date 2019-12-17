@@ -10,9 +10,32 @@ function o_page() {
     this.zones=[];
 
 }
+classe={
+	param:"",
+	container:"",
+}
+// ZONE
+section={
+	name:"",
+}
+content={
+	name:"",
+	data:"",
+}
 var pagebuilder={
-    page: new o_page(),
-	content: "",
+    //page: new o_page(),
+	page: {
+		name:"",
+		description:"",
+		blocs: [],
+		classes: [],
+		content: "",
+		param: "",
+		structure: "",
+	},
+	contents: [],
+	classes: [],
+	structure: "",
 
     create: function() {
         localStorage.setItem('pagebuilder','');
@@ -34,14 +57,31 @@ var pagebuilder={
 		this.page.description=str;
 	},
 
-	set_content: function(str) {
-		this.page.content=str;
+	get_content: function() {
+		return this.page.content;
+	},
+
+	set_content: function(c) {
+		this.page.content=c;
+		console.log(c);
 	},
 
 
 
+	set_bloc: function(res) {
+		this.page.blocs[res.content]=res.data;
+	},
+
 
     save: function() {
+
+		this.page.name=$(".h1").val();
+		this.page.description=$(".h2").val();
+		this.page.content=$("#page .content-wrapper").html();
+
+
+
+
         if(window.localStorage) {console.log("save");
             localStorage.setItem('pagebuilder',JSON.stringify(this.page));
         }
@@ -71,13 +111,13 @@ var pagebuilder={
         $("#page").addClass("create");
 
         content_wrapper=document.createElement("div");
-        container=document.createElement("div");
+       container=document.createElement("div");
         // on affecte les classes
         //$(container).addClass(this.page.param.classes);
         $(container).addClass("sortable connected");
 		$(content_wrapper).addClass("content-wrapper");
 
-		$(content_wrapper).html(this.content);
+		$(content_wrapper).html(this.get_content());
 		
 
 
@@ -89,7 +129,7 @@ var pagebuilder={
 
         this.save();
         set_drag();
-        action_content();
+        action_on_zone();
     }
 
 }

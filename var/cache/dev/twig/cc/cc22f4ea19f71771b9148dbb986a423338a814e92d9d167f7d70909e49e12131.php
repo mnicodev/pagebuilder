@@ -42,20 +42,26 @@ class __TwigTemplate_80da675003ba32d313968900192f25fce563ec773586d1c82c5b42072ab
         // line 1
         echo "<ul>
 
-\t<!--<li><a href=\"#\" id=\"edit-zone\">Editer la zone</a></li>-->
+\t<li><a  id=\"style-zone\">Style de la zone</a></li>
     <li><a href=\"#\" id=\"delete-zone\">Supprimer la zone</a></li>
 </ul>
 <script>
     \$(document).ready(function () {
+\t\t\$(\"#style-zone\").click(function() {
+\t\t\topen_popup_style(\"";
+        // line 9
+        echo twig_escape_filter($this->env, (isset($context["zone"]) || array_key_exists("zone", $context) ? $context["zone"] : (function () { throw new RuntimeError('Variable "zone" does not exist.', 9, $this->source); })()), "html", null, true);
+        echo "\");
+\t\t})
 
         \$(\"#delete-zone\").click(function () {
 \t\t\tif(window.confirm(\"Suppimer la zone ";
-        // line 10
-        echo twig_escape_filter($this->env, (isset($context["zone"]) || array_key_exists("zone", $context) ? $context["zone"] : (function () { throw new RuntimeError('Variable "zone" does not exist.', 10, $this->source); })()), "html", null, true);
+        // line 13
+        echo twig_escape_filter($this->env, (isset($context["zone"]) || array_key_exists("zone", $context) ? $context["zone"] : (function () { throw new RuntimeError('Variable "zone" does not exist.', 13, $this->source); })()), "html", null, true);
         echo " ?\"))
                 parent.document.getElementById(\"";
-        // line 11
-        echo twig_escape_filter($this->env, (isset($context["zone"]) || array_key_exists("zone", $context) ? $context["zone"] : (function () { throw new RuntimeError('Variable "zone" does not exist.', 11, $this->source); })()), "html", null, true);
+        // line 14
+        echo twig_escape_filter($this->env, (isset($context["zone"]) || array_key_exists("zone", $context) ? $context["zone"] : (function () { throw new RuntimeError('Variable "zone" does not exist.', 14, $this->source); })()), "html", null, true);
         echo "\").remove();
         })
     })
@@ -81,18 +87,21 @@ class __TwigTemplate_80da675003ba32d313968900192f25fce563ec773586d1c82c5b42072ab
 
     public function getDebugInfo()
     {
-        return array (  58 => 11,  54 => 10,  43 => 1,);
+        return array (  64 => 14,  60 => 13,  53 => 9,  43 => 1,);
     }
 
     public function getSourceContext()
     {
         return new Source("<ul>
 
-\t<!--<li><a href=\"#\" id=\"edit-zone\">Editer la zone</a></li>-->
+\t<li><a  id=\"style-zone\">Style de la zone</a></li>
     <li><a href=\"#\" id=\"delete-zone\">Supprimer la zone</a></li>
 </ul>
 <script>
     \$(document).ready(function () {
+\t\t\$(\"#style-zone\").click(function() {
+\t\t\topen_popup_style(\"{{ zone }}\");
+\t\t})
 
         \$(\"#delete-zone\").click(function () {
 \t\t\tif(window.confirm(\"Suppimer la zone {{ zone }} ?\"))

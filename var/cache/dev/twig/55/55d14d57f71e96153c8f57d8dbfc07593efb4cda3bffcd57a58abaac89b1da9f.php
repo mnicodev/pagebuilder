@@ -57,26 +57,18 @@ class __TwigTemplate_450f291b9c51f5eb87b0b1c5953561c45dde84faa32fdacca9b7efe995d
         // line 5
         echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("admin.page.save"), "js", null, true);
         echo "\";
-    var url_bloc_action=\"";
+    var url_popup_styles=\"";
         // line 6
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("admin.popup.bloc.action"), "js", null, true);
-        echo "\";
-    var url_content_action=\"";
-        // line 7
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("admin.popup.content.action"), "js", null, true);
-        echo "\";
-    var url_zone_action=\"";
-        // line 8
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("admin.popup.zone.action"), "js", null, true);
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getUrl("admin.popup.styles"), "js", null, true);
         echo "\";
     var url_page_edit=\"";
-        // line 9
-        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin.page.edit", ["slug" => (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 9, $this->source); })())]), "js", null, true);
+        // line 7
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("admin.page.edit", ["slug" => (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 7, $this->source); })())]), "js", null, true);
         echo "\";
 
     var id_page=";
-        // line 11
-        echo twig_escape_filter($this->env, (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 11, $this->source); })()), "js", null, true);
+        // line 9
+        echo twig_escape_filter($this->env, (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 9, $this->source); })()), "js", null, true);
         echo ";
 
 </script>";
@@ -100,7 +92,7 @@ class __TwigTemplate_450f291b9c51f5eb87b0b1c5953561c45dde84faa32fdacca9b7efe995d
 
     public function getDebugInfo()
     {
-        return array (  79 => 11,  74 => 9,  70 => 8,  66 => 7,  62 => 6,  58 => 5,  54 => 4,  50 => 3,  46 => 2,  43 => 1,);
+        return array (  71 => 9,  66 => 7,  62 => 6,  58 => 5,  54 => 4,  50 => 3,  46 => 2,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -110,9 +102,7 @@ class __TwigTemplate_450f291b9c51f5eb87b0b1c5953561c45dde84faa32fdacca9b7efe995d
     var url_popup_addzone= \"{{ url('admin.popup.zone.add') }}\";
     var url_popup_content= \"{{ url('admin.popup.content.add') }}\";
     var url_page_save=\"{{ url('admin.page.save') }}\";
-    var url_bloc_action=\"{{ url('admin.popup.bloc.action') }}\";
-    var url_content_action=\"{{ url('admin.popup.content.action') }}\";
-    var url_zone_action=\"{{ url('admin.popup.zone.action') }}\";
+    var url_popup_styles=\"{{ url('admin.popup.styles') }}\";
     var url_page_edit=\"{{ path('admin.page.edit', {slug:id}) }}\";
 
     var id_page={{ id }};

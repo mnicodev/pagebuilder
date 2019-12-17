@@ -47,83 +47,115 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
         // line 3
         echo "
 
-
     ";
-        // line 6
-        if ((isset($context["bloc"]) || array_key_exists("bloc", $context))) {
-            // line 7
+        // line 5
+        if (((isset($context["bloc"]) || array_key_exists("bloc", $context)) || (isset($context["content"]) || array_key_exists("content", $context)))) {
+            // line 6
             echo "<script src=";
             echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/admin/ckeditor/ckeditor.js"), "html", null, true);
             echo "></script>
-<input type=\"hidden\" id=\"bloc\" value=\"";
-            // line 8
-            echo twig_escape_filter($this->env, (isset($context["bloc"]) || array_key_exists("bloc", $context) ? $context["bloc"] : (function () { throw new RuntimeError('Variable "bloc" does not exist.', 8, $this->source); })()), "html", null, true);
-            echo "\">
-        <input type=\"hidden\" id=\"id\" value=\"";
-            // line 9
-            echo twig_escape_filter($this->env, (isset($context["id"]) || array_key_exists("id", $context) ? $context["id"] : (function () { throw new RuntimeError('Variable "id" does not exist.', 9, $this->source); })()), "html", null, true);
-            echo "\">
-<div class=\"jumbotron\">
+<div class=\"jumbotron\" id=\"content_add\">
     <div class=\"display-8\">Ajout d'un contenu</div>
 \t";
-            // line 12
-            echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 12, $this->source); })()), 'form_start');
+            // line 9
+            echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 9, $this->source); })()), 'form_start');
             echo "
+\t\t<input type=\"hidden\" id=\"bloc\" name=\"bloc\" value=\"";
+            // line 10
+            echo twig_escape_filter($this->env, (isset($context["bloc"]) || array_key_exists("bloc", $context) ? $context["bloc"] : (function () { throw new RuntimeError('Variable "bloc" does not exist.', 10, $this->source); })()), "html", null, true);
+            echo "\">
+        <input type=\"hidden\" id=\"content\" name=\"content\" value=\"";
+            // line 11
+            echo twig_escape_filter($this->env, (isset($context["content"]) || array_key_exists("content", $context) ? $context["content"] : (function () { throw new RuntimeError('Variable "content" does not exist.', 11, $this->source); })()), "html", null, true);
+            echo "\">
 \t";
-            // line 13
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 13, $this->source); })()), "data", [], "any", false, false, false, 13), 'widget');
+            // line 12
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 12, $this->source); })()), "data", [], "any", false, false, false, 12), 'widget');
             echo "
     <div class=\"row\">
         <div class=\"col-sm-6\">
 \t\t\t";
-            // line 16
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 16, $this->source); })()), "valider", [], "any", false, false, false, 16), 'row');
+            // line 15
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 15, $this->source); })()), "valider", [], "any", false, false, false, 15), 'row');
             echo "
-        </div>
+\t</div>
         <div class=\"col-sm-6\">
 \t\t\t";
-            // line 19
-            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 19, $this->source); })()), "fermer", [], "any", false, false, false, 19), 'row');
+            // line 18
+            echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 18, $this->source); })()), "fermer", [], "any", false, false, false, 18), 'row');
             echo "
 
         </div>
 
     </div>
 \t";
-            // line 24
-            echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 24, $this->source); })()), 'form_end');
+            // line 23
+            echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 23, $this->source); })()), 'form_end');
             echo "
 
 
 </div>
-
-    <iframe id=\"data\" name=\"data\" style=\"width:300px;display:none\"></iframe>
         <script>
             CKEDITOR.replace(\"form_data\", {
     \t\t\textraPlugins : 'autogrow',
     \t\t\tremovePlugins : 'resize',
     \t\t\tentities : false
 \t\t\t});
-\t\t\tparent.close();
-\t\t\tparent.validate_form();
+\t\t\tclose();
+\t\t\$(\"#form_valider\").click(function(event) {
+\t\t\tevent.preventDefault();
+        \tvar ContentFromEditor = CKEDITOR.instances.form_data.getData();
+
+        \tvar dataString = \$(\"form[name=form]\").serialize();
+
+            dataString += '&ContentFromEditor='+ContentFromEditor; 
+\t\t\tconsole.log(dataString);
+        \t\$.ajax({
+        \t\ttype: \"POST\",
+        \t\turl: url_popup_content,
+        \t\tdata: dataString,
+\t\t        cache: false,
+        \t\tsuccess: function(r){
+\t\t\t\t\tres=JSON.parse(r);
+\t\t\t\t\tconsole.log(res);
+\t\t\t\t\tif(res.bloc) {
+\t\t\t\t\t\tcontent=document.createElement(\"div\");
+\t\t\t\t\t\tcontent.setAttribute(\"id\",res.content);
+\t\t\t\t\t\tcontent.classList.add(\"content\");
+\t\t\t\t\t\t\$(content).html(res.data);
+\t\t\t\t\t\t\$(\"#\"+res.bloc).append(content);
+\t\t\t\t\t} else if(res.content) {
+\t\t\t\t\t\t\$(\"#\"+res.content).html(res.data);
+\t\t\t\t\t}
+\t\t\t\t\taction_on_zone();
+\t\t\t\t\tpagebuilder.set_bloc(res);
+\t\t\t\t\tclose_popup();
+
+\t\t\t\t\t//p=eval(\"(\"+r+\")\");
+       \t\t\t},
+       \t\t\terror: function(xhr, ajaxOptions, thrownError){ 
+            \t\tconsole.log(xhr.responseText);
+        \t\t}
+     \t\t});
+\t})
 
         </script>
 
     ";
         }
-        // line 42
+        // line 74
         echo "    ";
         if ((isset($context["str"]) || array_key_exists("str", $context))) {
-            // line 43
+            // line 75
             echo "
         <script>
             window.onload=function() {
                 bloc=parent.document.getElementById(\"bloc\").value
-                id=parent.document.getElementById(\"id\").value;
-\t\t\t\tif(id) {
-\t\t\t\t\tparent.document.getElementById(id).innerHTML=\"";
-            // line 49
-            echo (isset($context["str"]) || array_key_exists("str", $context) ? $context["str"] : (function () { throw new RuntimeError('Variable "str" does not exist.', 49, $this->source); })());
+                content=parent.document.getElementById(\"content\").value;
+\t\t\t\tif(content) {
+\t\t\t\t\tparent.document.getElementById(content).innerHTML=\"";
+            // line 81
+            echo (isset($context["str"]) || array_key_exists("str", $context) ? $context["str"] : (function () { throw new RuntimeError('Variable "str" does not exist.', 81, $this->source); })());
             echo "\";
 \t\t\t\t\tparent.document.getElementById(\"popup\").style.display=\"none\";
 \t\t\t\t\tparent.action_content();
@@ -135,8 +167,8 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 \t\t\t\t\tcontent.setAttribute(\"id\",uniqid);
 \t\t\t\t\tcontent.classList.add(\"content\");
 \t\t\t\t\tcontent.innerHTML=\"";
-            // line 59
-            echo (isset($context["str"]) || array_key_exists("str", $context) ? $context["str"] : (function () { throw new RuntimeError('Variable "str" does not exist.', 59, $this->source); })());
+            // line 91
+            echo (isset($context["str"]) || array_key_exists("str", $context) ? $context["str"] : (function () { throw new RuntimeError('Variable "str" does not exist.', 91, $this->source); })());
             echo "\";
 \t\t\t\t\tparent.document.getElementById(bloc).appendChild(content);
 \t\t\t\t\tparent.document.getElementById(\"popup\").style.display=\"none\";
@@ -150,7 +182,7 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 
     ";
         }
-        // line 71
+        // line 103
         echo "
 
 ";
@@ -174,7 +206,7 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 
     public function getDebugInfo()
     {
-        return array (  154 => 71,  139 => 59,  126 => 49,  118 => 43,  115 => 42,  94 => 24,  86 => 19,  80 => 16,  74 => 13,  70 => 12,  64 => 9,  60 => 8,  55 => 7,  53 => 6,  48 => 3,  46 => 2,  43 => 1,);
+        return array (  186 => 103,  171 => 91,  158 => 81,  150 => 75,  147 => 74,  93 => 23,  85 => 18,  79 => 15,  73 => 12,  69 => 11,  65 => 10,  61 => 9,  54 => 6,  52 => 5,  48 => 3,  46 => 2,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -183,19 +215,18 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 
-
-    {% if bloc is defined %}
+    {% if bloc is defined or content is defined %}
 <script src={{ asset('js/admin/ckeditor/ckeditor.js') }}></script>
-<input type=\"hidden\" id=\"bloc\" value=\"{{ bloc }}\">
-        <input type=\"hidden\" id=\"id\" value=\"{{ id }}\">
-<div class=\"jumbotron\">
+<div class=\"jumbotron\" id=\"content_add\">
     <div class=\"display-8\">Ajout d'un contenu</div>
 \t{{ form_start(form) }}
+\t\t<input type=\"hidden\" id=\"bloc\" name=\"bloc\" value=\"{{ bloc }}\">
+        <input type=\"hidden\" id=\"content\" name=\"content\" value=\"{{ content }}\">
 \t{{ form_widget(form.data) }}
     <div class=\"row\">
         <div class=\"col-sm-6\">
 \t\t\t{{ form_row(form.valider) }}
-        </div>
+\t</div>
         <div class=\"col-sm-6\">
 \t\t\t{{ form_row(form.fermer) }}
 
@@ -206,16 +237,49 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 
 
 </div>
-
-    <iframe id=\"data\" name=\"data\" style=\"width:300px;display:none\"></iframe>
         <script>
             CKEDITOR.replace(\"form_data\", {
     \t\t\textraPlugins : 'autogrow',
     \t\t\tremovePlugins : 'resize',
     \t\t\tentities : false
 \t\t\t});
-\t\t\tparent.close();
-\t\t\tparent.validate_form();
+\t\t\tclose();
+\t\t\$(\"#form_valider\").click(function(event) {
+\t\t\tevent.preventDefault();
+        \tvar ContentFromEditor = CKEDITOR.instances.form_data.getData();
+
+        \tvar dataString = \$(\"form[name=form]\").serialize();
+
+            dataString += '&ContentFromEditor='+ContentFromEditor; 
+\t\t\tconsole.log(dataString);
+        \t\$.ajax({
+        \t\ttype: \"POST\",
+        \t\turl: url_popup_content,
+        \t\tdata: dataString,
+\t\t        cache: false,
+        \t\tsuccess: function(r){
+\t\t\t\t\tres=JSON.parse(r);
+\t\t\t\t\tconsole.log(res);
+\t\t\t\t\tif(res.bloc) {
+\t\t\t\t\t\tcontent=document.createElement(\"div\");
+\t\t\t\t\t\tcontent.setAttribute(\"id\",res.content);
+\t\t\t\t\t\tcontent.classList.add(\"content\");
+\t\t\t\t\t\t\$(content).html(res.data);
+\t\t\t\t\t\t\$(\"#\"+res.bloc).append(content);
+\t\t\t\t\t} else if(res.content) {
+\t\t\t\t\t\t\$(\"#\"+res.content).html(res.data);
+\t\t\t\t\t}
+\t\t\t\t\taction_on_zone();
+\t\t\t\t\tpagebuilder.set_bloc(res);
+\t\t\t\t\tclose_popup();
+
+\t\t\t\t\t//p=eval(\"(\"+r+\")\");
+       \t\t\t},
+       \t\t\terror: function(xhr, ajaxOptions, thrownError){ 
+            \t\tconsole.log(xhr.responseText);
+        \t\t}
+     \t\t});
+\t})
 
         </script>
 
@@ -225,9 +289,9 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
         <script>
             window.onload=function() {
                 bloc=parent.document.getElementById(\"bloc\").value
-                id=parent.document.getElementById(\"id\").value;
-\t\t\t\tif(id) {
-\t\t\t\t\tparent.document.getElementById(id).innerHTML=\"{{ str|raw }}\";
+                content=parent.document.getElementById(\"content\").value;
+\t\t\t\tif(content) {
+\t\t\t\t\tparent.document.getElementById(content).innerHTML=\"{{ str|raw }}\";
 \t\t\t\t\tparent.document.getElementById(\"popup\").style.display=\"none\";
 \t\t\t\t\tparent.action_content();
 
