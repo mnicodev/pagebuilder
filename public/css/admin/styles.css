@@ -13,6 +13,7 @@
 
 .popup .jumbotron {
   height: 100%;
+  /*max-height: 500px;*/
   margin: 0; }
 
 .navbar-fixed {
@@ -83,10 +84,11 @@
           border: 1px solid darkred; }
         .create .global-row .content-wrapper > .sortable section.zone .bloc {
           min-height: 50px;
-          background: #EFF6FC;
+          border: 1px solid #eff6fc;
           padding: 15px; }
           .create .global-row .content-wrapper > .sortable section.zone .bloc:hover {
             cursor: default;
+            background: rgba(239, 246, 252, 0.5);
             border: 1px solid deepskyblue; }
         .create .global-row .content-wrapper > .sortable section.zone .z-action {
           position: absolute;
@@ -106,7 +108,7 @@
         .create .global-row .content-wrapper > .sortable section.zone .col-md-1, .create .global-row .content-wrapper > .sortable section.zone .col-md-2, .create .global-row .content-wrapper > .sortable section.zone .col-md-3, .create .global-row .content-wrapper > .sortable section.zone .col-md-4, .create .global-row .content-wrapper > .sortable section.zone .col-md-5,
         .create .global-row .content-wrapper > .sortable section.zone .col-md-6, .create .global-row .content-wrapper > .sortable section.zone .col-md-7, .create .global-row .content-wrapper > .sortable section.zone .col-md-8, .create .global-row .content-wrapper > .sortable section.zone .col-md-9, .create .global-row .content-wrapper > .sortable section.zone .col-md-10,
         .create .global-row .content-wrapper > .sortable section.zone .col-md-11, .create .global-row .content-wrapper > .sortable section.zone .col-md-12 {
-          border: 1px solid #adadad; }
+          /*border: 1px solid #adadad;*/ }
         .create .global-row .content-wrapper > .sortable section.zone .for-action {
           position: relative; }
           .create .global-row .content-wrapper > .sortable section.zone .for-action .action {

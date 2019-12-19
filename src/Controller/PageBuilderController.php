@@ -36,7 +36,6 @@ class PageBuilderController extends AbstractController
         $orm=$this->getDoctrine()->getManager();
         $liste=$orm->getRepository(Page::class)->findAll();
 
-
         return $this->render('admin/page.html.twig',array("liste"=>$liste));
     }
 
@@ -99,17 +98,35 @@ class PageBuilderController extends AbstractController
 
         } else {
             $page=new Page();
-        }
+		}
 
 
-        $page->setName($pagebuilder->name)
+       	$page->setName($pagebuilder->name)
 			 ->setDescription($pagebuilder->description)
+			->setCache($pagebuilder->cache)
 			->setContent($pagebuilder->content)
             ->setParam(serialize($pagebuilder->param))
             ->setType("page")
             ->setIdSite(1)
             ->setStatus(1);
 
+		foreach($pagebuilder->blocs as $key=>$bloc) {
+			$b=$this->getDoctrine()->getRepository(Bloc::class)->findOneBy(["name"=>$key]);
+			$page->addBloc($b);
+		}
+		foreach($pagebuilder->classes as $key=>$classe) {
+			$c=$this->getDoctrine()->getRepository(Classe::class)->findOneBy(["name"=>$key]);
+			if(empty($c)) {
+				$c=new Classe();
+				$c->setName($key);
+				$c->setParam($classe->param);
+				$c->setContainer($classe->container);
+				$c->setPage($page);
+				$entityManager->persist($c);
+				$entityManager->flush();
+			}
+			$page->addClass($c);
+		}
 
 
         $entityManager->persist($page);
@@ -117,9 +134,9 @@ class PageBuilderController extends AbstractController
         $entityManager->flush();
 
 
-        if($page->getId()) $output="<div class='alert-success alert'>La page numéro ".$page->getId()." a été sauvegardée</div>";
-        else $output="<div class='alert-danger alert'>erreur</div>";
-        return new Response($output);
+        if($page->getId()) $output=["msg"=>"<div class='alert-success alert'>La page numéro ".$page->getId()." a été sauvegardée</div>","page_id"=>$page->getId()];
+        else $output=["msg"=>"<div class='alert-danger alert'>erreur</div>"];
+        return new Response(json_encode($output));
     }
 
 
@@ -192,17 +209,19 @@ class PageBuilderController extends AbstractController
     /**
      * @Route("/admin/content/add", name="admin.popup.content.add")
      */
-    public function popupContentAdd(Request $request) {
+    public function popupAddContent(Request $request) {
 		//dump($request->request->get("editeur"));
 		$content="";
+		$repository=$this->getDoctrine()->getRepository(Bloc::class);
 		if($content=$request->request->get("content")) {
-			$repository=$this->getDoctrine()->getRepository(Bloc::class);
 			$bloc=$repository->findOneBy(["name"=>$content]);
 		} else $bloc=new Bloc();
 
+		$liste_bloc=$repository->findAll();
+
 
 		$form=$this->createFormBuilder($bloc)
-			 ->add('data',TextareaType::class)
+			 ->add('data',TextareaType::class,['row_attr' => ['class' => 'text-editor']])
 		 	->add("valider",SubmitType::class)
 		 	->add("fermer",ButtonType::class)
 			->getForm();
@@ -222,11 +241,14 @@ class PageBuilderController extends AbstractController
 			return new Response(json_encode($t));
             //return $this->render("admin/popup_content_add.html.twig", ["str"=> $str]);
 		} else {
+			$content_id=$request->request->get("content");
+			//if(empty($content_id)) $content_id=uniqid();
 
 			return $this->render("admin/popup_content_add.html.twig", [
-            	"bloc"=> $request->request->get("bloc"),
-            	"content"=>$request->request->get("content"),
+            	"bloc"=> $request->request->get("bloc"), // !!!! bloc id
+            	"content"=>$content_id,
 				'form' => $form->createView(),
+				'liste_bloc' => $liste_bloc,
 			]);
 		}
 	}

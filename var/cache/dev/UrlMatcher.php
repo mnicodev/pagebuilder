@@ -20,7 +20,7 @@ return [
         '/admin/page/create' => [[['_route' => 'admin.popup.page.create', '_controller' => 'App\\Controller\\PageBuilderController::popupCreate'], null, null, null, false, false, null]],
         '/admin/zone/add' => [[['_route' => 'admin.popup.zone.add', '_controller' => 'App\\Controller\\PageBuilderController::popupZoneAdd'], null, null, null, false, false, null]],
         '/admin/zone/styles' => [[['_route' => 'admin.popup.styles', '_controller' => 'App\\Controller\\PageBuilderController::popupStyles'], null, null, null, false, false, null]],
-        '/admin/content/add' => [[['_route' => 'admin.popup.content.add', '_controller' => 'App\\Controller\\PageBuilderController::popupContentAdd'], null, null, null, false, false, null]],
+        '/admin/content/add' => [[['_route' => 'admin.popup.content.add', '_controller' => 'App\\Controller\\PageBuilderController::popupAddContent'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'

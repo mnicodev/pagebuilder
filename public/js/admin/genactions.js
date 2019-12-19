@@ -47,7 +47,10 @@ function action_content(c) {
             })
         })
         $("#delete-content").click(function () {
-            if(window.confirm('Supprimer le contenu ?')) $("#"+c).remove();
+            if(window.confirm('Supprimer le contenu ?')) {
+				$("#"+c).remove();
+				pagebuilder.del_bloc(c);
+			}
 
         })
 }

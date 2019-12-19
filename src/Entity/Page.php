@@ -74,6 +74,11 @@ class Page
      */
     private $classes;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $cache;
+
     public function __construct()
     {
         $this->zones = new ArrayCollection();
@@ -261,6 +266,18 @@ class Page
 
         return $this;
 	}
+
+    public function getCache(): ?string
+    {
+        return $this->cache;
+    }
+
+    public function setCache(?string $cache): self
+    {
+        $this->cache = $cache;
+
+        return $this;
+    }
 
 
 }

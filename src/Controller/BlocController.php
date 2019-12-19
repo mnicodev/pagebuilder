@@ -18,5 +18,7 @@ class BlocController extends AbstractController
         return $this->render('bloc/index.html.twig', [
             'controller_name' => 'BlocController',
         ]);
-    }
+	}
+
+
 }

@@ -269,16 +269,20 @@ jQuery(document).ready(function() {
     }
 
 
+
     $("#save-page").click(function () {
 		del_action();
 		pagebuilder.save()
-		//console.log($("#page .content-wrapper").html());
+		console.log(JSON.stringify(pagebuilder.page));
         $.ajax({
             url:url_page_save,
             method: "POST",
-            data: {page:JSON.stringify(pagebuilder.page),id:id_page,fulltext: $("#page .content-wrapper").html()},
+            data: {page:JSON.stringify(pagebuilder.page),id:id_page,cache: $("#page .content-wrapper").html()},
             success: function(result) {
-                $("#popup").html(result);
+				r=JSON.parse(result);
+                $("#popup").html(r.msg);
+				console.log(r.page_id);
+				id_page=r.page_id;
                 $("#popup").show();
         		set_drag();
         		action_on_zone();

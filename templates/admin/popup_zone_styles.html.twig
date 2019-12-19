@@ -6,16 +6,20 @@
 {{ form_end(form) }}
 </div>
 <script>
-
-$(document).ready(function() {
-	close();
-	save="";
-	$("#form_apercu").click(function() {
+	var save="";
+	var zone="";
+	function applique_style() {
 		zone=$("#zone").val();
 		if(save=="") save={"style":$("#"+zone).attr("style"),"class":$("#"+zone).attr("class")};
 		$("#"+zone).attr("style",$("#form_param").val());
 		$("#"+zone).removeClass("container container-fluid");
 		$("#"+zone).addClass($("#form_container").val());
+
+	}
+$(document).ready(function() {
+	close();
+	$("#form_apercu").click(function() {
+		applique_style();
 console.log(save);
 	})
 	$("#form_fermer").click(function() {
@@ -28,7 +32,16 @@ console.log(save);
 	$("#form_valider").click(function(event) {
 		event.preventDefault();
         var dataString = $("form[name=form]").serialize();
-		$.ajax({
+		applique_style();
+		style=Object.create(classe);
+		style.param=$("#form_param").val();
+		style.container=$("#form_container").val();
+			
+		pagebuilder.set_style(zone,style);
+		close_popup();
+
+		// on n'enregistre pas en base pour le moment
+		/*$.ajax({
 			url:url_popup_styles,
 			method: "POST",
 			data: dataString,
@@ -42,7 +55,7 @@ console.log(save);
 				$("#"+zone).attr("data-style-id",r.id);
 				close_popup();
 			},
-		})
+		})*/
 	})
 	
 });

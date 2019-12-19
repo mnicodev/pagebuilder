@@ -92,7 +92,23 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
             // line 23
             echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new RuntimeError('Variable "form" does not exist.', 23, $this->source); })()), 'form_end');
             echo "
-
+\t<div id=\"liste_bloc\" style=\"overflow-y:scroll;height: 200px\">
+\t";
+            // line 25
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable((isset($context["liste_bloc"]) || array_key_exists("liste_bloc", $context) ? $context["liste_bloc"] : (function () { throw new RuntimeError('Variable "liste_bloc" does not exist.', 25, $this->source); })()));
+            foreach ($context['_seq'] as $context["_key"] => $context["bloc"]) {
+                // line 26
+                echo "\t<p>";
+                echo twig_get_attribute($this->env, $this->source, $context["bloc"], "data", [], "any", false, false, false, 26);
+                echo "</p>
+\t";
+            }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['bloc'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+            // line 28
+            echo "\t</div>
 
 </div>
         <script>
@@ -110,6 +126,21 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 
             dataString += '&ContentFromEditor='+ContentFromEditor; 
 \t\t\tconsole.log(dataString);
+
+\t\t\t/*res={\"content\":\$(\"#content\").val(),\"data\":ContentFromEditor};
+\t\t\tif(\$(\"#bloc\").val()) {
+\t\t\t\tcontent=document.createElement(\"div\");
+\t\t\t\tcontent.setAttribute(\"id\",\$(\"#content\").val());
+\t\t\t\tcontent.classList.add(\"content\");
+\t\t\t\t\$(content).html(res.data);
+\t\t\t\t\$(\"#\"+\$(\"#bloc\").val()).append(content);
+\t\t\t}
+\t\t\taction_on_zone();
+\t\t\tpagebuilder.set_bloc(res);
+\t\t\tclose_popup();*/
+
+\t\t\t// On n'enregistre pas encore les blocs de données
+
         \t\$.ajax({
         \t\ttype: \"POST\",
         \t\turl: url_popup_content,
@@ -136,6 +167,7 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
        \t\t\terror: function(xhr, ajaxOptions, thrownError){ 
             \t\tconsole.log(xhr.responseText);
         \t\t}
+\t\t\t//\t\tuniqid=(new Date().getTime()).toString(16);
      \t\t});
 \t})
 
@@ -143,48 +175,8 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 
     ";
         }
-        // line 74
-        echo "    ";
-        if ((isset($context["str"]) || array_key_exists("str", $context))) {
-            // line 75
-            echo "
-        <script>
-            window.onload=function() {
-                bloc=parent.document.getElementById(\"bloc\").value
-                content=parent.document.getElementById(\"content\").value;
-\t\t\t\tif(content) {
-\t\t\t\t\tparent.document.getElementById(content).innerHTML=\"";
-            // line 81
-            echo (isset($context["str"]) || array_key_exists("str", $context) ? $context["str"] : (function () { throw new RuntimeError('Variable "str" does not exist.', 81, $this->source); })());
-            echo "\";
-\t\t\t\t\tparent.document.getElementById(\"popup\").style.display=\"none\";
-\t\t\t\t\tparent.action_content();
-
-\t\t\t\t} else {
-\t\t\t\t
-\t\t\t\t\tuniqid=(new Date().getTime()).toString(16);
-\t\t\t\t\tcontent=document.createElement(\"div\");
-\t\t\t\t\tcontent.setAttribute(\"id\",uniqid);
-\t\t\t\t\tcontent.classList.add(\"content\");
-\t\t\t\t\tcontent.innerHTML=\"";
-            // line 91
-            echo (isset($context["str"]) || array_key_exists("str", $context) ? $context["str"] : (function () { throw new RuntimeError('Variable "str" does not exist.', 91, $this->source); })());
-            echo "\";
-\t\t\t\t\tparent.document.getElementById(bloc).appendChild(content);
-\t\t\t\t\tparent.document.getElementById(\"popup\").style.display=\"none\";
-\t\t\t\t\tparent.action_content();
-\t\t\t\t}
-
-
-
-            }
-        </script>
-
-    ";
-        }
-        // line 103
+        // line 94
         echo "
-
 ";
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
@@ -206,7 +198,7 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 
     public function getDebugInfo()
     {
-        return array (  186 => 103,  171 => 91,  158 => 81,  150 => 75,  147 => 74,  93 => 23,  85 => 18,  79 => 15,  73 => 12,  69 => 11,  65 => 10,  61 => 9,  54 => 6,  52 => 5,  48 => 3,  46 => 2,  43 => 1,);
+        return array (  179 => 94,  111 => 28,  102 => 26,  98 => 25,  93 => 23,  85 => 18,  79 => 15,  73 => 12,  69 => 11,  65 => 10,  61 => 9,  54 => 6,  52 => 5,  48 => 3,  46 => 2,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -234,7 +226,11 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 
     </div>
 \t{{ form_end(form) }}
-
+\t<div id=\"liste_bloc\" style=\"overflow-y:scroll;height: 200px\">
+\t{% for bloc in liste_bloc %}
+\t<p>{{ bloc.data|raw }}</p>
+\t{% endfor %}
+\t</div>
 
 </div>
         <script>
@@ -252,6 +248,21 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 
             dataString += '&ContentFromEditor='+ContentFromEditor; 
 \t\t\tconsole.log(dataString);
+
+\t\t\t/*res={\"content\":\$(\"#content\").val(),\"data\":ContentFromEditor};
+\t\t\tif(\$(\"#bloc\").val()) {
+\t\t\t\tcontent=document.createElement(\"div\");
+\t\t\t\tcontent.setAttribute(\"id\",\$(\"#content\").val());
+\t\t\t\tcontent.classList.add(\"content\");
+\t\t\t\t\$(content).html(res.data);
+\t\t\t\t\$(\"#\"+\$(\"#bloc\").val()).append(content);
+\t\t\t}
+\t\t\taction_on_zone();
+\t\t\tpagebuilder.set_bloc(res);
+\t\t\tclose_popup();*/
+
+\t\t\t// On n'enregistre pas encore les blocs de données
+
         \t\$.ajax({
         \t\ttype: \"POST\",
         \t\turl: url_popup_content,
@@ -278,42 +289,13 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
        \t\t\terror: function(xhr, ajaxOptions, thrownError){ 
             \t\tconsole.log(xhr.responseText);
         \t\t}
+\t\t\t//\t\tuniqid=(new Date().getTime()).toString(16);
      \t\t});
 \t})
 
         </script>
 
     {% endif %}
-    {% if str is defined %}
-
-        <script>
-            window.onload=function() {
-                bloc=parent.document.getElementById(\"bloc\").value
-                content=parent.document.getElementById(\"content\").value;
-\t\t\t\tif(content) {
-\t\t\t\t\tparent.document.getElementById(content).innerHTML=\"{{ str|raw }}\";
-\t\t\t\t\tparent.document.getElementById(\"popup\").style.display=\"none\";
-\t\t\t\t\tparent.action_content();
-
-\t\t\t\t} else {
-\t\t\t\t
-\t\t\t\t\tuniqid=(new Date().getTime()).toString(16);
-\t\t\t\t\tcontent=document.createElement(\"div\");
-\t\t\t\t\tcontent.setAttribute(\"id\",uniqid);
-\t\t\t\t\tcontent.classList.add(\"content\");
-\t\t\t\t\tcontent.innerHTML=\"{{ str|raw }}\";
-\t\t\t\t\tparent.document.getElementById(bloc).appendChild(content);
-\t\t\t\t\tparent.document.getElementById(\"popup\").style.display=\"none\";
-\t\t\t\t\tparent.action_content();
-\t\t\t\t}
-
-
-
-            }
-        </script>
-
-    {%  endif %}
-
 
 ", "admin/popup_content_add.html.twig", "/home/nico/SYMFONY4/pagebuilder/templates/admin/popup_content_add.html.twig");
     }

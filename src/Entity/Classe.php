@@ -27,7 +27,7 @@ class Classe
     private $param;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Page", inversedBy="classes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Page", inversedBy="classes", cascade={"persist"})
      */
     private $page;
 

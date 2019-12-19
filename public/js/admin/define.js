@@ -27,15 +27,14 @@ var pagebuilder={
 	page: {
 		name:"",
 		description:"",
-		blocs: [],
-		classes: [],
+		blocs: {},
+		classes: {},
 		content: "",
 		param: "",
-		structure: "",
+		cache: "",
 	},
-	contents: [],
-	classes: [],
-	structure: "",
+	/*classes: [],
+	structure: "",*/
 
     create: function() {
         localStorage.setItem('pagebuilder','');
@@ -66,10 +65,18 @@ var pagebuilder={
 		console.log(c);
 	},
 
+	set_style: function(o,c) {
+		this.page.classes[o]=c;
+	},
+
 
 
 	set_bloc: function(res) {
 		this.page.blocs[res.content]=res.data;
+	},
+
+	del_bloc: function(c) {
+		delete this.page.blocs[c];
 	},
 
 
@@ -77,7 +84,14 @@ var pagebuilder={
 
 		this.page.name=$(".h1").val();
 		this.page.description=$(".h2").val();
+		this.page.cache=$("#page .content-wrapper").html();
+		old=$("#page .content-wrapper").html();
+		$(".content").each(function() {
+			$(this).html("");
+		});
 		this.page.content=$("#page .content-wrapper").html();
+		$("#page .content-wrapper").html(old);
+
 
 
 
@@ -127,7 +141,7 @@ var pagebuilder={
 
 
 
-        this.save();
+        //this.save();
         set_drag();
         action_on_zone();
     }

@@ -21,7 +21,11 @@
 
     </div>
 	{{ form_end(form) }}
-
+	<div id="liste_bloc" style="overflow-y:scroll;height: 200px">
+	{% for bloc in liste_bloc %}
+	<p>{{ bloc.data|raw }}</p>
+	{% endfor %}
+	</div>
 
 </div>
         <script>
@@ -39,6 +43,21 @@
 
             dataString += '&ContentFromEditor='+ContentFromEditor; 
 			console.log(dataString);
+
+			/*res={"content":$("#content").val(),"data":ContentFromEditor};
+			if($("#bloc").val()) {
+				content=document.createElement("div");
+				content.setAttribute("id",$("#content").val());
+				content.classList.add("content");
+				$(content).html(res.data);
+				$("#"+$("#bloc").val()).append(content);
+			}
+			action_on_zone();
+			pagebuilder.set_bloc(res);
+			close_popup();*/
+
+			// On n'enregistre pas encore les blocs de données
+
         	$.ajax({
         		type: "POST",
         		url: url_popup_content,
@@ -65,40 +84,11 @@
        			error: function(xhr, ajaxOptions, thrownError){ 
             		console.log(xhr.responseText);
         		}
+			//		uniqid=(new Date().getTime()).toString(16);
      		});
 	})
 
         </script>
 
     {% endif %}
-    {% if str is defined %}
-
-        <script>
-            window.onload=function() {
-                bloc=parent.document.getElementById("bloc").value
-                content=parent.document.getElementById("content").value;
-				if(content) {
-					parent.document.getElementById(content).innerHTML="{{ str|raw }}";
-					parent.document.getElementById("popup").style.display="none";
-					parent.action_content();
-
-				} else {
-				
-					uniqid=(new Date().getTime()).toString(16);
-					content=document.createElement("div");
-					content.setAttribute("id",uniqid);
-					content.classList.add("content");
-					content.innerHTML="{{ str|raw }}";
-					parent.document.getElementById(bloc).appendChild(content);
-					parent.document.getElementById("popup").style.display="none";
-					parent.action_content();
-				}
-
-
-
-            }
-        </script>
-
-    {%  endif %}
-
 
