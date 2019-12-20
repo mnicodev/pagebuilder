@@ -113,8 +113,6 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 </div>
         <script>
             CKEDITOR.replace(\"form_data\", {
-    \t\t\textraPlugins : 'autogrow',
-    \t\t\tremovePlugins : 'resize',
     \t\t\tentities : false
 \t\t\t});
 \t\t\tclose();
@@ -175,7 +173,7 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 
     ";
         }
-        // line 94
+        // line 92
         echo "
 ";
         
@@ -198,7 +196,7 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 
     public function getDebugInfo()
     {
-        return array (  179 => 94,  111 => 28,  102 => 26,  98 => 25,  93 => 23,  85 => 18,  79 => 15,  73 => 12,  69 => 11,  65 => 10,  61 => 9,  54 => 6,  52 => 5,  48 => 3,  46 => 2,  43 => 1,);
+        return array (  177 => 92,  111 => 28,  102 => 26,  98 => 25,  93 => 23,  85 => 18,  79 => 15,  73 => 12,  69 => 11,  65 => 10,  61 => 9,  54 => 6,  52 => 5,  48 => 3,  46 => 2,  43 => 1,);
     }
 
     public function getSourceContext()
@@ -235,8 +233,6 @@ class __TwigTemplate_783b526cc019a5bee98a37ba59e79e73c2a020d59e74aa557cb272caa73
 </div>
         <script>
             CKEDITOR.replace(\"form_data\", {
-    \t\t\textraPlugins : 'autogrow',
-    \t\t\tremovePlugins : 'resize',
     \t\t\tentities : false
 \t\t\t});
 \t\t\tclose();

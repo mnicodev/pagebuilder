@@ -46,7 +46,40 @@ class PageBuilderController extends AbstractController
     public function builder(Request $request): Response {
         return $this->render('admin/builder.html.twig',array("id"=>0));
 
-    }
+	}
+
+
+
+    /**
+     * @Route("/admin/page/test/{slug}",name="admin.page.edit2", requirements={"slug"="[0-9]*"})
+     */
+    public function edit2(Request $request, $slug): Response {
+
+            $orm=$this->getDoctrine()->getManager();
+            $page=$orm->getRepository(Page::class)->find($slug);
+
+
+
+            $pagebuilder=[
+                "name" =>   $page->getName(),
+                "description" => $page->getDescription(),
+                "param" => unserialize($page->getParam()),
+				//"classes" => $page->getClasses(),
+				//"blocs"=>$page->getBlocs(),
+				"content"=>$page->getContent(),
+				"cache"=>$page->getCache(),
+			];
+			$blocs=[];
+			foreach($page->getBlocs() as $bloc) {
+				$blocs[$bloc->getName()]=$bloc->getData();
+			}
+			$pagebuilder["blocs"]=$blocs;
+			print_r(json_encode($pagebuilder));
+			//return new Response($page->getName()."|".$page->getContent());
+
+            return new Response((json_encode($pagebuilder)));
+
+	}
 
     /**
      * @Route("/admin/page/builder/{slug}",name="admin.page.edit", requirements={"slug"="[0-9]*"})
@@ -63,13 +96,21 @@ class PageBuilderController extends AbstractController
                 "name" =>   $page->getName(),
                 "description" => $page->getDescription(),
                 "param" => unserialize($page->getParam()),
-				"classes" => $page->getClasses(),
-				"blocs"=>$page->getBlocs(),
+				//"classes" => $page->getClasses(),
+				//"blocs"=>$page->getBlocs(),
 				"content"=>$page->getContent(),
             ];
-			//print_r(serialize(json_encode($pagebuilder)));
-			$t=[$page->getName(),$page->getDescription(),$page->getContent()];
-            //return new Response($page->getName()."|".$page->getContent());
+			$blocs=[];
+			foreach($page->getBlocs() as $bloc) {
+				$blocs[$bloc->getName()]=$bloc->getData();
+			}
+			$pagebuilder["blocs"]=$blocs;
+			$classes=[];
+			foreach($page->getClasses() as $classe) {
+				$classes[$classe->getName()]=$classe->getParam();
+			}
+			$pagebuilder["classes"]=$classes;
+			//print_r($pagebuilder);
             return new Response((json_encode($pagebuilder)));
 
         }

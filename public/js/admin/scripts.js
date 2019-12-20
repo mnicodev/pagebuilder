@@ -253,14 +253,15 @@ jQuery(document).ready(function() {
             method: "GET",
             data: {load:1},
             success: function (result) {
-				console.log(result);
+				//console.log(result);
 				//p=eval("("+result+")");
 				p=JSON.parse(result);
 				console.log(p);
-				pagebuilder.page.name=p.name;
+				pagebuilder.load(p);
+				/*pagebuilder.page.name=p.name;
 				pagebuilder.page.description=p.description;
-				pagebuilder.page.content=p.content;
-                pagebuilder.show();
+				pagebuilder.page.content=p.content;*/
+                //pagebuilder.show();
         		action_on_zone();
                 //pagebuilder.save();
                 set_drag();

@@ -24,6 +24,13 @@
   z-index: 100;
   width: 100%;
 }
+
+.cke_inner {
+	max-height: 382px;
+}
+.cke_contents {
+	max-height: 350px;
+}
 #page {
 	.jumbotron {
 		margin-bottom: 0;
@@ -93,7 +100,7 @@
 
 
 
-    & > .sortable{
+    & > .content-zone{
 		margin-top: 30px;
       padding: 0;
       section.zone {
@@ -185,6 +192,7 @@
 
             position: relative;
 			overflow: hidden;
+			cursor: grab;
 
 			border: 1px dashed transparent;
 			&:hover {

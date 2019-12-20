@@ -112,7 +112,7 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
 <div class=\"\">
 ";
         // line 15
-        echo twig_get_attribute($this->env, $this->source, (isset($context["page"]) || array_key_exists("page", $context) ? $context["page"] : (function () { throw new RuntimeError('Variable "page" does not exist.', 15, $this->source); })()), "content", [], "any", false, false, false, 15);
+        echo twig_get_attribute($this->env, $this->source, (isset($context["page"]) || array_key_exists("page", $context) ? $context["page"] : (function () { throw new RuntimeError('Variable "page" does not exist.', 15, $this->source); })()), "cache", [], "any", false, false, false, 15);
         echo "
 </div>
 
@@ -183,7 +183,7 @@ class __TwigTemplate_60baed126b19e5ba26390f188e1508908fbcce34d0145bdd28a9e69dccc
 {% block body %}
 
 <div class=\"\">
-{{ page.content|raw }}
+{{ page.cache|raw }}
 </div>
 
 

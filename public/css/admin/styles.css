@@ -21,6 +21,12 @@
   z-index: 100;
   width: 100%; }
 
+.cke_inner {
+  max-height: 382px; }
+
+.cke_contents {
+  max-height: 350px; }
+
 #page {
   padding-top: 70px; }
   #page .jumbotron {
@@ -70,27 +76,27 @@
       cursor: pointer;
       text-align: center;
       color: #fff; }
-    .create .global-row .content-wrapper > .sortable {
+    .create .global-row .content-wrapper > .content-zone {
       margin-top: 30px;
       padding: 0; }
-      .create .global-row .content-wrapper > .sortable section.zone {
+      .create .global-row .content-wrapper > .content-zone section.zone {
         border: 1px solid transparent;
         padding: 20px;
         padding-top: 30px;
         list-style: none;
         position: relative; }
-        .create .global-row .content-wrapper > .sortable section.zone:hover {
+        .create .global-row .content-wrapper > .content-zone section.zone:hover {
           cursor: grab;
           border: 1px solid darkred; }
-        .create .global-row .content-wrapper > .sortable section.zone .bloc {
+        .create .global-row .content-wrapper > .content-zone section.zone .bloc {
           min-height: 50px;
-          border: 1px solid #eff6fc;
+          border: 1px solid #959298;
           padding: 15px; }
-          .create .global-row .content-wrapper > .sortable section.zone .bloc:hover {
+          .create .global-row .content-wrapper > .content-zone section.zone .bloc:hover {
             cursor: default;
             background: rgba(239, 246, 252, 0.5);
             border: 1px solid deepskyblue; }
-        .create .global-row .content-wrapper > .sortable section.zone .z-action {
+        .create .global-row .content-wrapper > .content-zone section.zone .z-action {
           position: absolute;
           top: 0;
           left: 0px;
@@ -100,18 +106,18 @@
           cursor: pointer;
           z-index: 1000;
           transition: all 0.02s; }
-          .create .global-row .content-wrapper > .sortable section.zone .z-action a {
+          .create .global-row .content-wrapper > .content-zone section.zone .z-action a {
             color: #fff; }
-          .create .global-row .content-wrapper > .sortable section.zone .z-action.edit {
+          .create .global-row .content-wrapper > .content-zone section.zone .z-action.edit {
             width: 120px;
             height: 40px; }
-        .create .global-row .content-wrapper > .sortable section.zone .col-md-1, .create .global-row .content-wrapper > .sortable section.zone .col-md-2, .create .global-row .content-wrapper > .sortable section.zone .col-md-3, .create .global-row .content-wrapper > .sortable section.zone .col-md-4, .create .global-row .content-wrapper > .sortable section.zone .col-md-5,
-        .create .global-row .content-wrapper > .sortable section.zone .col-md-6, .create .global-row .content-wrapper > .sortable section.zone .col-md-7, .create .global-row .content-wrapper > .sortable section.zone .col-md-8, .create .global-row .content-wrapper > .sortable section.zone .col-md-9, .create .global-row .content-wrapper > .sortable section.zone .col-md-10,
-        .create .global-row .content-wrapper > .sortable section.zone .col-md-11, .create .global-row .content-wrapper > .sortable section.zone .col-md-12 {
+        .create .global-row .content-wrapper > .content-zone section.zone .col-md-1, .create .global-row .content-wrapper > .content-zone section.zone .col-md-2, .create .global-row .content-wrapper > .content-zone section.zone .col-md-3, .create .global-row .content-wrapper > .content-zone section.zone .col-md-4, .create .global-row .content-wrapper > .content-zone section.zone .col-md-5,
+        .create .global-row .content-wrapper > .content-zone section.zone .col-md-6, .create .global-row .content-wrapper > .content-zone section.zone .col-md-7, .create .global-row .content-wrapper > .content-zone section.zone .col-md-8, .create .global-row .content-wrapper > .content-zone section.zone .col-md-9, .create .global-row .content-wrapper > .content-zone section.zone .col-md-10,
+        .create .global-row .content-wrapper > .content-zone section.zone .col-md-11, .create .global-row .content-wrapper > .content-zone section.zone .col-md-12 {
           /*border: 1px solid #adadad;*/ }
-        .create .global-row .content-wrapper > .sortable section.zone .for-action {
+        .create .global-row .content-wrapper > .content-zone section.zone .for-action {
           position: relative; }
-          .create .global-row .content-wrapper > .sortable section.zone .for-action .action {
+          .create .global-row .content-wrapper > .content-zone section.zone .for-action .action {
             position: absolute;
             top: 0;
             left: 0;
@@ -122,18 +128,19 @@
             cursor: pointer;
             z-index: 10;
             transition: all 0.02s; }
-            .create .global-row .content-wrapper > .sortable section.zone .for-action .action.edit {
+            .create .global-row .content-wrapper > .content-zone section.zone .for-action .action.edit {
               width: 100px;
               height: 40px; }
-          .create .global-row .content-wrapper > .sortable section.zone .for-action:hover .action {
+          .create .global-row .content-wrapper > .content-zone section.zone .for-action:hover .action {
             display: block; }
-          .create .global-row .content-wrapper > .sortable section.zone .for-action .content {
+          .create .global-row .content-wrapper > .content-zone section.zone .for-action .content {
             position: relative;
             overflow: hidden;
+            cursor: grab;
             border: 1px dashed transparent; }
-            .create .global-row .content-wrapper > .sortable section.zone .for-action .content:hover {
+            .create .global-row .content-wrapper > .content-zone section.zone .for-action .content:hover {
               border: 1px dashed red; }
-            .create .global-row .content-wrapper > .sortable section.zone .for-action .content .c-action {
+            .create .global-row .content-wrapper > .content-zone section.zone .for-action .content .c-action {
               top: 0;
               right: 0;
               position: absolute;
@@ -142,10 +149,10 @@
               background: red;
               cursor: pointer;
               z-index: 1000; }
-              .create .global-row .content-wrapper > .sortable section.zone .for-action .content .c-action.edit {
+              .create .global-row .content-wrapper > .content-zone section.zone .for-action .content .c-action.edit {
                 width: 120px;
                 height: 40px; }
-                .create .global-row .content-wrapper > .sortable section.zone .for-action .content .c-action.edit li a {
+                .create .global-row .content-wrapper > .content-zone section.zone .for-action .content .c-action.edit li a {
                   color: #fff; }
 
 .edit ul {

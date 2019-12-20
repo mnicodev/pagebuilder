@@ -18,6 +18,7 @@ return [
     'bloc' => [[], ['_controller' => 'App\\Controller\\BlocController::index'], [], [['text', '/bloc']], [], []],
     'admin.page' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::index'], [], [['text', '/admin/page']], [], []],
     'admin.page.create' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::builder'], [], [['text', '/admin/page/builder']], [], []],
+    'admin.page.edit2' => [['slug'], ['_controller' => 'App\\Controller\\PageBuilderController::edit2'], ['slug' => '[0-9]*'], [['variable', '/', '[0-9]*', 'slug', true], ['text', '/admin/page/test']], [], []],
     'admin.page.edit' => [['slug'], ['_controller' => 'App\\Controller\\PageBuilderController::edit'], ['slug' => '[0-9]*'], [['variable', '/', '[0-9]*', 'slug', true], ['text', '/admin/page/builder']], [], []],
     'admin.page.save' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::save'], [], [['text', '/admin/page/save']], [], []],
     'admin.popup.page.create' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupCreate'], [], [['text', '/admin/page/create']], [], []],

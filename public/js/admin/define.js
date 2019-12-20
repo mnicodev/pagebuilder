@@ -56,9 +56,11 @@ var pagebuilder={
 		this.page.description=str;
 	},
 
-	get_content: function() {
+	get_content: function(c=0) {
+		if(c==1) return this.page.cache;
 		return this.page.content;
 	},
+
 
 	set_content: function(c) {
 		this.page.content=c;
@@ -68,7 +70,9 @@ var pagebuilder={
 	set_style: function(o,c) {
 		this.page.classes[o]=c;
 	},
-
+	get_bloc: function(b) {
+		return this.page.blocs[b];
+	},
 
 
 	set_bloc: function(res) {
@@ -77,6 +81,21 @@ var pagebuilder={
 
 	del_bloc: function(c) {
 		delete this.page.blocs[c];
+	},
+
+	load: function(p) {
+		this.page.name=p.name;
+		this.page.description=p.description;
+		this.page.cache=p.cache;
+		this.page.content=p.content;
+		this.page.blocs=p.blocs;
+
+		this.show();
+		// chargement des blocs de données
+		for(bloc in p.blocs) {
+			$("#"+bloc).html(this.get_bloc(bloc));
+		}
+
 	},
 
 
@@ -125,13 +144,13 @@ var pagebuilder={
         $("#page").addClass("create");
 
         content_wrapper=document.createElement("div");
-       container=document.createElement("div");
+       	container=document.createElement("div");
         // on affecte les classes
         //$(container).addClass(this.page.param.classes);
         $(container).addClass("sortable connected");
 		$(content_wrapper).addClass("content-wrapper");
-
 		$(content_wrapper).html(this.get_content());
+
 		
 
 
