@@ -23,6 +23,9 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class PageBuilderController extends AbstractController
 {
@@ -155,24 +158,44 @@ class PageBuilderController extends AbstractController
 			$b=$this->getDoctrine()->getRepository(Bloc::class)->findOneBy(["name"=>$key]);
 			$page->addBloc($b);
 		}
+		
+
+		$style="";
 		foreach($pagebuilder->classes as $key=>$classe) {
 			$c=$this->getDoctrine()->getRepository(Classe::class)->findOneBy(["name"=>$key]);
-			if(empty($c)) {
-				$c=new Classe();
-				$c->setName($key);
-				$c->setParam($classe->param);
-				$c->setContainer($classe->container);
-				$c->setPage($page);
-				$entityManager->persist($c);
-				$entityManager->flush();
-			}
+			if(empty($c)) $c=new Classe();
+			
+			$c->setName($key);
+			$c->setParam($classe->param);
+			$c->setContainer($classe->container);
+			$c->setPage($page);
+			$entityManager->persist($c);
+			$entityManager->flush();
+
+			$style.="#".$key."{";
+			$style.=$classe->param;
+			$style.="}";
+
+			
 			$page->addClass($c);
 		}
+		
 
 
         $entityManager->persist($page);
 
-        $entityManager->flush();
+		$entityManager->flush();
+
+		$fs=new FileSystem();
+		$current_dir=getcwd();
+		$file_style=$current_dir."/css/styles".$page->getId().".css";
+
+		if(!$fs->exists($file_style)) {
+			$fs->touch($file_style);
+		}
+		$fs->chmod($file_style,0777);
+		$fs->dumpFile($file_style,$style);
+		$fs->chmod($file_style,0644);
 
 
         if($page->getId()) $output=["msg"=>"<div class='alert-success alert'>La page numéro ".$page->getId()." a été sauvegardée</div>","page_id"=>$page->getId()];
@@ -236,7 +259,6 @@ class PageBuilderController extends AbstractController
 
 
 			$entityManager->flush();
-
 			$t=["param"=>$classe->getParam(),"id"=>$classe->getId(),"container"=>$classe->getContainer()];
 
 			return new Response(json_encode($t));
@@ -273,6 +295,8 @@ class PageBuilderController extends AbstractController
 			//if($request->request->get("editeur")!==null) {
 			//$bloc=$form->getData();
 			$bloc->setData($request->request->get("ContentFromEditor"));
+			/*if(!$content) $bloc->setDateCreate(\DateTime::createFromFormat("Y-m-d H:i:s",strtotime('now')));
+			$bloc->setDateUpdate(\DateTime::createFromFormat("Y-m-d H:i:s",strtotime('now')));*/
 			if(empty($content)) $bloc->setName(uniqid());
 			$entityManager->persist($bloc);
 			$entityManager->flush();

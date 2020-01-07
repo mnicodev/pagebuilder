@@ -6,13 +6,13 @@
 
 
 {% block stylesheets %}
-
+<link href="{{ asset('css/styles'~page.id~'.css') }}" type="text/css" rel="stylesheet" media="screen" />
 {% endblock %}
 
 {% block body %}
 
 <div class="">
-{{ page.cache|raw }}
+{{ page.content|raw }}
 </div>
 
 
@@ -23,8 +23,26 @@
 
 {% block javascripts %}
 	<script>
-$('.carousel').carousel({
-  interval: 2000
+$(document).ready(function() {
+
+	$('.carousel').carousel({
+  		interval: 2000
+	})
+
+	$.ajax({
+		method: "POST",
+		url: "/page/load/{{ page.id }}",
+		success: function(result) {
+			data=JSON.parse(result);
+			console.log(data);
+			for(bloc in data.blocs) {
+				$("#"+bloc).html(data.blocs[bloc]);
+				console.log(bloc);
+			}
+		},
+
+	})
 })
+
 	</script>
 {% endblock %}

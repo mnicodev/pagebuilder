@@ -54,7 +54,7 @@
 
 .create .global-row {
   /*margin-left: -15px;
-    margin-right: -15px;*/
+  margin-right: -15px;*/
   background: #ffffee;
   min-height: 20px; }
   .create .global-row .content-wrapper {
@@ -151,7 +151,7 @@
               z-index: 1000; }
               .create .global-row .content-wrapper > .content-zone section.zone .for-action .content .c-action.edit {
                 width: 120px;
-                height: 40px; }
+                height: 55px; }
                 .create .global-row .content-wrapper > .content-zone section.zone .for-action .content .c-action.edit li a {
                   color: #fff; }
 
@@ -175,3 +175,5 @@
     top: 0 !important;
     transform: none !important;
     margin: auto; } }
+
+/*# sourceMappingURL=styles.css.map */

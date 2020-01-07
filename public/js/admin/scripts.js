@@ -134,6 +134,7 @@ function open_popup_style(zone) {
 				method: "POST",
 				data: {zone:zone,style:$("#"+zone).attr("style"),id_page:id_page},
 				success: function(result) {
+
 					$("#popup").html(result);
 					$("#popup").show();
 					
@@ -258,12 +259,7 @@ jQuery(document).ready(function() {
 				p=JSON.parse(result);
 				console.log(p);
 				pagebuilder.load(p);
-				/*pagebuilder.page.name=p.name;
-				pagebuilder.page.description=p.description;
-				pagebuilder.page.content=p.content;*/
-                //pagebuilder.show();
         		action_on_zone();
-                //pagebuilder.save();
                 set_drag();
             }
         })
@@ -274,7 +270,7 @@ jQuery(document).ready(function() {
     $("#save-page").click(function () {
 		del_action();
 		pagebuilder.save()
-		console.log(JSON.stringify(pagebuilder.page));
+		console.log(pagebuilder.page);
         $.ajax({
             url:url_page_save,
             method: "POST",

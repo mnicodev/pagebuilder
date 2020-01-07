@@ -74,6 +74,10 @@ var pagebuilder={
 		return this.page.blocs[b];
 	},
 
+	get_style: function(b) {
+		return this.page.classes[b];
+	},
+
 
 	set_bloc: function(res) {
 		this.page.blocs[res.content]=res.data;
@@ -89,11 +93,15 @@ var pagebuilder={
 		this.page.cache=p.cache;
 		this.page.content=p.content;
 		this.page.blocs=p.blocs;
+		this.page.classes=p.classes;
 
 		this.show();
 		// chargement des blocs de données
 		for(bloc in p.blocs) {
 			$("#"+bloc).html(this.get_bloc(bloc));
+		}
+		for(bloc in this.page.classes) {
+			$("#"+bloc).attr("style",this.get_style(bloc));
 		}
 
 	},
@@ -107,7 +115,15 @@ var pagebuilder={
 		old=$("#page .content-wrapper").html();
 		$(".content").each(function() {
 			$(this).html("");
+			$(this).removeAttr("style");
 		});
+		$("section").each(function() {
+			$(this).removeAttr("style");
+		})
+		$(".bloc").each(function() {
+			$(this).removeAttr("style");
+		})
+
 		this.page.content=$("#page .content-wrapper").html();
 		$("#page .content-wrapper").html(old);
 

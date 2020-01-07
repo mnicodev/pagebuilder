@@ -39,11 +39,17 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/admin/page/(?'
-                    .'|test/([0-9]*)(*:197)'
-                    .'|builder/([0-9]*)(*:221)'
+                .'|/a(?'
+                    .'|dmin/page/(?'
+                        .'|test/([0-9]*)(*:200)'
+                        .'|builder/([0-9]*)(*:224)'
+                    .')'
+                    .'|ssets/styles([^/\\.]++)\\.css(*:260)'
                 .')'
-                .'|/page/([^/]++)(*:244)'
+                .'|/page/(?'
+                    .'|([^/]++)(*:286)'
+                    .'|load/([^/]++)(*:307)'
+                .')'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -54,10 +60,12 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception::showAction'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception::cssAction'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        197 => [[['_route' => 'admin.page.edit2', '_controller' => 'App\\Controller\\PageBuilderController::edit2'], ['slug'], null, null, false, true, null]],
-        221 => [[['_route' => 'admin.page.edit', '_controller' => 'App\\Controller\\PageBuilderController::edit'], ['slug'], null, null, false, true, null]],
-        244 => [
-            [['_route' => 'page.view', '_controller' => 'App\\Controller\\PageController::index'], ['id'], null, null, false, true, null],
+        200 => [[['_route' => 'admin.page.edit2', '_controller' => 'App\\Controller\\PageBuilderController::edit2'], ['slug'], null, null, false, true, null]],
+        224 => [[['_route' => 'admin.page.edit', '_controller' => 'App\\Controller\\PageBuilderController::edit'], ['slug'], null, null, false, true, null]],
+        260 => [[['_route' => 'assets.css', '_controller' => 'App\\Controller\\PageController::css'], ['id'], null, null, false, false, null]],
+        286 => [[['_route' => 'page.view', '_controller' => 'App\\Controller\\PageController::index'], ['id'], null, null, false, true, null]],
+        307 => [
+            [['_route' => 'page.load', '_controller' => 'App\\Controller\\PageController::load'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],
     ],
