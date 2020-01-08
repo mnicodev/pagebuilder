@@ -110,7 +110,7 @@ class PageBuilderController extends AbstractController
 			$pagebuilder["blocs"]=$blocs;
 			$classes=[];
 			foreach($page->getClasses() as $classe) {
-				$classes[$classe->getName()]=$classe->getParam();
+				$classes[$classe->getName()]=array("param"=>$classe->getStyle(),"container"=>$classe->getContainer());
 			}
 			$pagebuilder["classes"]=$classes;
 			//print_r($pagebuilder);
@@ -154,8 +154,10 @@ class PageBuilderController extends AbstractController
             ->setIdSite(1)
             ->setStatus(1);
 
+        $str="";
 		foreach($pagebuilder->blocs as $key=>$bloc) {
 			$b=$this->getDoctrine()->getRepository(Bloc::class)->findOneBy(["name"=>$key]);
+			//$str.=$b->getData()."<br>";
 			$page->addBloc($b);
 		}
 		
@@ -166,7 +168,7 @@ class PageBuilderController extends AbstractController
 			if(empty($c)) $c=new Classe();
 			
 			$c->setName($key);
-			$c->setParam($classe->param);
+			$c->setStyle($classe->param);
 			$c->setContainer($classe->container);
 			$c->setPage($page);
 			$entityManager->persist($c);
@@ -237,7 +239,7 @@ class PageBuilderController extends AbstractController
 		$classe=$repository->findOneBy(["name"=>$request->request->get("zone")]);
 		if(!$classe)	$classe=new Classe();
 		$form=$this->createFormBuilder($classe)
-			->add("param",TextareaType::class, [
+			->add("style",TextareaType::class, [
 				"data"=>$request->request->get("style")
 			])
 			->add("container",ChoiceType::class,["choices"=>["sans"=>"","container"=>"container","container fluid"=>"container-fluid"]])
@@ -246,7 +248,11 @@ class PageBuilderController extends AbstractController
 			->add("apercu",ButtonType::class,["label"=>"Aperçu"])
 			->add("fermer",ButtonType::class)
 			->getForm();
-		$form->handleRequest($request);
+		/* 
+		 * on n'enregistre pas encore les styles
+		 * méthode ancienne, à supprimer ?
+		 */
+		/*$form->handleRequest($request);
 		if ($form->isSubmitted() && $form->isValid()) {
 			$entityManager=$this->getDoctrine()->getManager();
             $page=$entityManager->getRepository(Page::class)->find($request->request->get("id_page"));
@@ -263,7 +269,7 @@ class PageBuilderController extends AbstractController
 
 			return new Response(json_encode($t));
 
-		}
+		}*/
 		return $this->render("admin/popup_zone_styles.html.twig",["form"=>$form->createView(),"zone"=>$request->request->get("zone"),"style"=>$request->request->get("style"),"id_page"=>$request->request->get("id_page")]);
 	}
 
@@ -297,7 +303,7 @@ class PageBuilderController extends AbstractController
 			$bloc->setData($request->request->get("ContentFromEditor"));
 			/*if(!$content) $bloc->setDateCreate(\DateTime::createFromFormat("Y-m-d H:i:s",strtotime('now')));
 			$bloc->setDateUpdate(\DateTime::createFromFormat("Y-m-d H:i:s",strtotime('now')));*/
-			if(empty($content)) $bloc->setName(uniqid());
+			if(empty($content)) $bloc->setName("c_".uniqid());
 			$entityManager->persist($bloc);
 			$entityManager->flush();
 			$bloc->setCle($request->request->get("bloc"));

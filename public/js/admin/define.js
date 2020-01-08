@@ -101,7 +101,8 @@ var pagebuilder={
 			$("#"+bloc).html(this.get_bloc(bloc));
 		}
 		for(bloc in this.page.classes) {
-			$("#"+bloc).attr("style",this.get_style(bloc));
+		console.log(this.get_style(bloc));
+			$("#"+bloc).attr("style",this.get_style(bloc)["param"]);
 		}
 
 	},

@@ -7,6 +7,9 @@ function close() {
     $("#form_fermer").click(function () {
         $("#popup").hide();
     })
+    $(".btn-close").click(function () {
+        $("#popup").hide();
+    })
 }
 
 function close_popup() {
@@ -235,8 +238,13 @@ function creer_page() {
 
 }
 
-function add_content(content) {
-
+function add_content(bloc,data) {
+    content=document.createElement("div");
+	content.setAttribute("id",res.content);
+	content.classList.add("content");
+	$(content).html(res.data);
+	$("#"+bloc).append(content);
+	
 }
 
 

@@ -36,6 +36,11 @@ class Classe
      */
     private $container;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $style;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +90,18 @@ class Classe
     public function setContainer(?string $container): self
     {
         $this->container = $container;
+
+        return $this;
+    }
+
+    public function getStyle(): ?string
+    {
+        return $this->style;
+    }
+
+    public function setStyle(?string $style): self
+    {
+        $this->style = $style;
 
         return $this;
     }

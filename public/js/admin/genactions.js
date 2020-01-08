@@ -31,7 +31,9 @@ function action_bloc(b) {
 }
 
 function action_content(c) {
-
+        $("#style-content").click(function() {
+			open_popup_style(c);
+		})
         $("#edit-content").click(function () {
             $.ajax({
                 url: url_popup_content,
