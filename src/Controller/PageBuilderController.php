@@ -23,6 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Validator\Constraints\DateTime;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
@@ -188,16 +189,14 @@ class PageBuilderController extends AbstractController
 
 		$entityManager->flush();
 
-		$fs=new FileSystem();
+		/*$fs=new FileSystem();
 		$current_dir=getcwd();
 		$file_style=$current_dir."/css/styles".$page->getId().".css";
 
-		if(!$fs->exists($file_style)) {
-			$fs->touch($file_style);
-		}
+		$fs->touch($file_style);
 		$fs->chmod($file_style,0777);
 		$fs->dumpFile($file_style,$style);
-		$fs->chmod($file_style,0644);
+		$fs->chmod($file_style,0644);*/
 
 
         if($page->getId()) $output=["msg"=>"<div class='alert-success alert'>La page numéro ".$page->getId()." a été sauvegardée</div>","page_id"=>$page->getId()];
@@ -242,6 +241,7 @@ class PageBuilderController extends AbstractController
 			->add("style",TextareaType::class, [
 				"data"=>$request->request->get("style")
 			])
+			->add("padding",TextType::class,array("label"=>"Marge intérieure (--px --px ou --px --px --px --px ou --px)"))
 			->add("container",ChoiceType::class,["choices"=>["sans"=>"","container"=>"container","container fluid"=>"container-fluid"]])
 			//->add("page",HiddenType::class,["data"=>$request->request->get("id_page")])
 			->add("valider",SubmitType::class)

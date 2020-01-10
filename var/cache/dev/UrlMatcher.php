@@ -21,6 +21,7 @@ return [
         '/admin/zone/add' => [[['_route' => 'admin.popup.zone.add', '_controller' => 'App\\Controller\\PageBuilderController::popupZoneAdd'], null, null, null, false, false, null]],
         '/admin/zone/styles' => [[['_route' => 'admin.popup.styles', '_controller' => 'App\\Controller\\PageBuilderController::popupStyles'], null, null, null, false, false, null]],
         '/admin/content/add' => [[['_route' => 'admin.popup.content.add', '_controller' => 'App\\Controller\\PageBuilderController::popupAddContent'], null, null, null, false, false, null]],
+        '/' => [[['_route' => 'home', '_controller' => 'App\\Controller\\PageController::index'], null, null, null, false, false, null]],
     ],
     [ // $regexpList
         0 => '{^(?'
@@ -63,7 +64,7 @@ return [
         200 => [[['_route' => 'admin.page.edit2', '_controller' => 'App\\Controller\\PageBuilderController::edit2'], ['slug'], null, null, false, true, null]],
         224 => [[['_route' => 'admin.page.edit', '_controller' => 'App\\Controller\\PageBuilderController::edit'], ['slug'], null, null, false, true, null]],
         260 => [[['_route' => 'assets.css', '_controller' => 'App\\Controller\\PageController::css'], ['id'], null, null, false, false, null]],
-        286 => [[['_route' => 'page.view', '_controller' => 'App\\Controller\\PageController::index'], ['id'], null, null, false, true, null]],
+        286 => [[['_route' => 'page.view', '_controller' => 'App\\Controller\\PageController::page'], ['id'], null, null, false, true, null]],
         307 => [
             [['_route' => 'page.load', '_controller' => 'App\\Controller\\PageController::load'], ['id'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],

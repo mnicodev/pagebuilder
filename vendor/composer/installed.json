@@ -1402,86 +1402,6 @@
         ]
     },
     {
-        "name": "friendsofsymfony/ckeditor-bundle",
-        "version": "2.1.0",
-        "version_normalized": "2.1.0.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle.git",
-            "reference": "7ba78735ea75b9a6d4de403d7aced6c993a0557a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCKEditorBundle/zipball/7ba78735ea75b9a6d4de403d7aced6c993a0557a",
-            "reference": "7ba78735ea75b9a6d4de403d7aced6c993a0557a",
-            "shasum": ""
-        },
-        "require": {
-            "ext-json": "*",
-            "ext-zip": "*",
-            "php": "^7.1",
-            "symfony/asset": "^3.4 || ^4.0",
-            "symfony/config": "^3.4 || ^4.0",
-            "symfony/dependency-injection": "^3.4 || ^4.0",
-            "symfony/expression-language": "^3.4 || ^4.0",
-            "symfony/form": "^3.4 || ^4.0",
-            "symfony/framework-bundle": "^3.4 || ^4.0",
-            "symfony/http-foundation": "^3.4 || ^4.0",
-            "symfony/http-kernel": "^3.4 || ^4.0",
-            "symfony/options-resolver": "^3.4 || ^4.0",
-            "symfony/property-access": "^3.4 || ^4.0",
-            "symfony/routing": "^3.4 || ^4.0",
-            "symfony/twig-bundle": "^3.4 || ^4.0",
-            "twig/twig": "^2.0"
-        },
-        "conflict": {
-            "sebastian/environment": "<1.3.4",
-            "sebastian/exporter": "<2.0.0"
-        },
-        "require-dev": {
-            "friendsofphp/php-cs-fixer": "^2.0",
-            "matthiasnoback/symfony-dependency-injection-test": "^1.0 || ^2.0",
-            "phpunit/phpunit": "^6.0",
-            "symfony/console": "^3.4 || ^4.0",
-            "symfony/phpunit-bridge": "^4.1",
-            "symfony/yaml": "^3.4 || ^4.0"
-        },
-        "suggest": {
-            "egeloen/form-extra-bundle": "Allows to load CKEditor asynchronously"
-        },
-        "time": "2019-04-15T16:29:43+00:00",
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "2.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "FOS\\CKEditorBundle\\": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Eric GELOEN",
-                "email": "geloen.eric@gmail.com"
-            },
-            {
-                "name": "FriendsOfSymfony Community",
-                "homepage": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle/graphs/contributors"
-            }
-        ],
-        "description": "Provides a CKEditor integration for your Symfony project.",
-        "keywords": [
-            "CKEditor"
-        ]
-    },
-    {
         "name": "jdorn/sql-formatter",
         "version": "v1.2.17",
         "version_normalized": "1.2.17.0",
@@ -1665,59 +1585,6 @@
             "parser",
             "php"
         ]
-    },
-    {
-        "name": "ocramius/package-versions",
-        "version": "1.5.1",
-        "version_normalized": "1.5.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/Ocramius/PackageVersions.git",
-            "reference": "1d32342b8c1eb27353c8887c366147b4c2da673c"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/1d32342b8c1eb27353c8887c366147b4c2da673c",
-            "reference": "1d32342b8c1eb27353c8887c366147b4c2da673c",
-            "shasum": ""
-        },
-        "require": {
-            "composer-plugin-api": "^1.0.0",
-            "php": "^7.3.0"
-        },
-        "require-dev": {
-            "composer/composer": "^1.8.6",
-            "doctrine/coding-standard": "^6.0.0",
-            "ext-zip": "*",
-            "infection/infection": "^0.13.4",
-            "phpunit/phpunit": "^8.2.5",
-            "vimeo/psalm": "^3.4.9"
-        },
-        "time": "2019-07-17T15:49:50+00:00",
-        "type": "composer-plugin",
-        "extra": {
-            "class": "PackageVersions\\Installer",
-            "branch-alias": {
-                "dev-master": "1.6.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "PackageVersions\\": "src/PackageVersions"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Marco Pivetta",
-                "email": "ocramius@gmail.com"
-            }
-        ],
-        "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)"
     },
     {
         "name": "ocramius/proxy-manager",
@@ -2147,81 +2014,6 @@
         ]
     },
     {
-        "name": "sensio/framework-extra-bundle",
-        "version": "v5.4.1",
-        "version_normalized": "5.4.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-            "reference": "585f4b3a1c54f24d1a8431c729fc8f5acca20c8a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/585f4b3a1c54f24d1a8431c729fc8f5acca20c8a",
-            "reference": "585f4b3a1c54f24d1a8431c729fc8f5acca20c8a",
-            "shasum": ""
-        },
-        "require": {
-            "doctrine/annotations": "^1.0",
-            "doctrine/persistence": "^1.0",
-            "php": ">=7.1.3",
-            "symfony/config": "^3.4|^4.3",
-            "symfony/dependency-injection": "^3.4|^4.3",
-            "symfony/framework-bundle": "^3.4|^4.3",
-            "symfony/http-kernel": "^3.4|^4.3"
-        },
-        "require-dev": {
-            "doctrine/doctrine-bundle": "^1.6",
-            "doctrine/orm": "^2.5",
-            "nyholm/psr7": "^1.1",
-            "symfony/browser-kit": "^3.4|^4.3",
-            "symfony/dom-crawler": "^3.4|^4.3",
-            "symfony/expression-language": "^3.4|^4.3",
-            "symfony/finder": "^3.4|^4.3",
-            "symfony/monolog-bridge": "^3.0|^4.0",
-            "symfony/monolog-bundle": "^3.2",
-            "symfony/phpunit-bridge": "^3.4.19|^4.1.8",
-            "symfony/psr-http-message-bridge": "^1.1",
-            "symfony/security-bundle": "^3.4|^4.3",
-            "symfony/twig-bundle": "^3.4|^4.3",
-            "symfony/yaml": "^3.4|^4.3",
-            "twig/twig": "~1.12|~2.0"
-        },
-        "suggest": {
-            "symfony/expression-language": "",
-            "symfony/psr-http-message-bridge": "To use the PSR-7 converters",
-            "symfony/security-bundle": ""
-        },
-        "time": "2019-07-08T08:31:25+00:00",
-        "type": "symfony-bundle",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "5.4.x-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Sensio\\Bundle\\FrameworkExtraBundle\\": ""
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Fabien Potencier",
-                "email": "fabien@symfony.com"
-            }
-        ],
-        "description": "This bundle provides a way to configure your controllers with annotations",
-        "keywords": [
-            "annotations",
-            "controllers"
-        ]
-    },
-    {
         "name": "swiftmailer/swiftmailer",
         "version": "v6.2.1",
         "version_normalized": "6.2.1.0",
@@ -2403,86 +2195,6 @@
         ],
         "description": "Symfony BrowserKit Component",
         "homepage": "https://symfony.com"
-    },
-    {
-        "name": "symfony/cache",
-        "version": "v4.3.5",
-        "version_normalized": "4.3.5.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/symfony/cache.git",
-            "reference": "40c62600ebad1ed2defbf7d35523d918a73ab330"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/symfony/cache/zipball/40c62600ebad1ed2defbf7d35523d918a73ab330",
-            "reference": "40c62600ebad1ed2defbf7d35523d918a73ab330",
-            "shasum": ""
-        },
-        "require": {
-            "php": "^7.1.3",
-            "psr/cache": "~1.0",
-            "psr/log": "~1.0",
-            "symfony/cache-contracts": "^1.1",
-            "symfony/service-contracts": "^1.1",
-            "symfony/var-exporter": "^4.2"
-        },
-        "conflict": {
-            "doctrine/dbal": "<2.5",
-            "symfony/dependency-injection": "<3.4",
-            "symfony/var-dumper": "<3.4"
-        },
-        "provide": {
-            "psr/cache-implementation": "1.0",
-            "psr/simple-cache-implementation": "1.0",
-            "symfony/cache-implementation": "1.0"
-        },
-        "require-dev": {
-            "cache/integration-tests": "dev-master",
-            "doctrine/cache": "~1.6",
-            "doctrine/dbal": "~2.5",
-            "predis/predis": "~1.1",
-            "psr/simple-cache": "^1.0",
-            "symfony/config": "~4.2",
-            "symfony/dependency-injection": "~3.4|~4.1",
-            "symfony/var-dumper": "^4.1.1"
-        },
-        "time": "2019-10-04T10:57:53+00:00",
-        "type": "library",
-        "extra": {
-            "branch-alias": {
-                "dev-master": "4.3-dev"
-            }
-        },
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "Symfony\\Component\\Cache\\": ""
-            },
-            "exclude-from-classmap": [
-                "/Tests/"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Nicolas Grekas",
-                "email": "p@tchwork.com"
-            },
-            {
-                "name": "Symfony Community",
-                "homepage": "https://symfony.com/contributors"
-            }
-        ],
-        "description": "Symfony Cache component with PSR-6, PSR-16, and tags",
-        "homepage": "https://symfony.com",
-        "keywords": [
-            "caching",
-            "psr6"
-        ]
     },
     {
         "name": "symfony/cache-contracts",
@@ -6835,7 +6547,8 @@
             "ZendFramework",
             "code",
             "zf"
-        ]
+        ],
+        "abandoned": "laminas/laminas-code"
     },
     {
         "name": "zendframework/zend-eventmanager",
@@ -6891,6 +6604,299 @@
             "eventmanager",
             "events",
             "zf2"
+        ],
+        "abandoned": "laminas/laminas-eventmanager"
+    },
+    {
+        "name": "ocramius/package-versions",
+        "version": "1.4.2",
+        "version_normalized": "1.4.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Ocramius/PackageVersions.git",
+            "reference": "44af6f3a2e2e04f2af46bcb302ad9600cba41c7d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Ocramius/PackageVersions/zipball/44af6f3a2e2e04f2af46bcb302ad9600cba41c7d",
+            "reference": "44af6f3a2e2e04f2af46bcb302ad9600cba41c7d",
+            "shasum": ""
+        },
+        "require": {
+            "composer-plugin-api": "^1.0.0",
+            "php": "^7.1.0"
+        },
+        "require-dev": {
+            "composer/composer": "^1.6.3",
+            "doctrine/coding-standard": "^5.0.1",
+            "ext-zip": "*",
+            "infection/infection": "^0.7.1",
+            "phpunit/phpunit": "^7.5.17"
+        },
+        "time": "2019-11-15T16:17:10+00:00",
+        "type": "composer-plugin",
+        "extra": {
+            "class": "PackageVersions\\Installer",
+            "branch-alias": {
+                "dev-master": "2.0.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "PackageVersions\\": "src/PackageVersions"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Marco Pivetta",
+                "email": "ocramius@gmail.com"
+            }
+        ],
+        "description": "Composer plugin that provides efficient querying for installed package versions (no runtime IO)"
+    },
+    {
+        "name": "friendsofsymfony/ckeditor-bundle",
+        "version": "2.1.0",
+        "version_normalized": "2.1.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle.git",
+            "reference": "7ba78735ea75b9a6d4de403d7aced6c993a0557a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/FriendsOfSymfony/FOSCKEditorBundle/zipball/7ba78735ea75b9a6d4de403d7aced6c993a0557a",
+            "reference": "7ba78735ea75b9a6d4de403d7aced6c993a0557a",
+            "shasum": ""
+        },
+        "require": {
+            "ext-json": "*",
+            "ext-zip": "*",
+            "php": "^7.1",
+            "symfony/asset": "^3.4 || ^4.0",
+            "symfony/config": "^3.4 || ^4.0",
+            "symfony/dependency-injection": "^3.4 || ^4.0",
+            "symfony/expression-language": "^3.4 || ^4.0",
+            "symfony/form": "^3.4 || ^4.0",
+            "symfony/framework-bundle": "^3.4 || ^4.0",
+            "symfony/http-foundation": "^3.4 || ^4.0",
+            "symfony/http-kernel": "^3.4 || ^4.0",
+            "symfony/options-resolver": "^3.4 || ^4.0",
+            "symfony/property-access": "^3.4 || ^4.0",
+            "symfony/routing": "^3.4 || ^4.0",
+            "symfony/twig-bundle": "^3.4 || ^4.0",
+            "twig/twig": "^2.0"
+        },
+        "conflict": {
+            "sebastian/environment": "<1.3.4",
+            "sebastian/exporter": "<2.0.0"
+        },
+        "require-dev": {
+            "friendsofphp/php-cs-fixer": "^2.0",
+            "matthiasnoback/symfony-dependency-injection-test": "^1.0 || ^2.0",
+            "phpunit/phpunit": "^6.0",
+            "symfony/console": "^3.4 || ^4.0",
+            "symfony/phpunit-bridge": "^4.1",
+            "symfony/yaml": "^3.4 || ^4.0"
+        },
+        "suggest": {
+            "egeloen/form-extra-bundle": "Allows to load CKEditor asynchronously"
+        },
+        "time": "2019-04-15T16:29:43+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "FOS\\CKEditorBundle\\": "src/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Eric GELOEN",
+                "email": "geloen.eric@gmail.com"
+            },
+            {
+                "name": "FriendsOfSymfony Community",
+                "homepage": "https://github.com/FriendsOfSymfony/FOSCKEditorBundle/graphs/contributors"
+            }
+        ],
+        "description": "Provides a CKEditor integration for your Symfony project.",
+        "keywords": [
+            "CKEditor"
+        ]
+    },
+    {
+        "name": "sensio/framework-extra-bundle",
+        "version": "v5.5.3",
+        "version_normalized": "5.5.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
+            "reference": "98f0807137b13d0acfdf3c255a731516e97015de"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/98f0807137b13d0acfdf3c255a731516e97015de",
+            "reference": "98f0807137b13d0acfdf3c255a731516e97015de",
+            "shasum": ""
+        },
+        "require": {
+            "doctrine/annotations": "^1.0",
+            "php": ">=7.1.3",
+            "symfony/config": "^4.3|^5.0",
+            "symfony/dependency-injection": "^4.3|^5.0",
+            "symfony/framework-bundle": "^4.3|^5.0",
+            "symfony/http-kernel": "^4.3|^5.0"
+        },
+        "conflict": {
+            "doctrine/doctrine-cache-bundle": "<1.3.1"
+        },
+        "require-dev": {
+            "doctrine/doctrine-bundle": "^1.11|^2.0",
+            "doctrine/orm": "^2.5",
+            "nyholm/psr7": "^1.1",
+            "symfony/browser-kit": "^4.3|^5.0",
+            "symfony/dom-crawler": "^4.3|^5.0",
+            "symfony/expression-language": "^4.3|^5.0",
+            "symfony/finder": "^4.3|^5.0",
+            "symfony/monolog-bridge": "^4.0|^5.0",
+            "symfony/monolog-bundle": "^3.2",
+            "symfony/phpunit-bridge": "^4.3.5|^5.0",
+            "symfony/psr-http-message-bridge": "^1.1",
+            "symfony/security-bundle": "^4.3|^5.0",
+            "symfony/twig-bundle": "^4.3|^5.0",
+            "symfony/yaml": "^4.3|^5.0",
+            "twig/twig": "^1.34|^2.4|^3.0"
+        },
+        "suggest": {
+            "symfony/expression-language": "",
+            "symfony/psr-http-message-bridge": "To use the PSR-7 converters",
+            "symfony/security-bundle": ""
+        },
+        "time": "2019-12-27T08:57:19+00:00",
+        "type": "symfony-bundle",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "5.5.x-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Sensio\\Bundle\\FrameworkExtraBundle\\": "src/"
+            },
+            "exclude-from-classmap": [
+                "/tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            }
+        ],
+        "description": "This bundle provides a way to configure your controllers with annotations",
+        "keywords": [
+            "annotations",
+            "controllers"
+        ]
+    },
+    {
+        "name": "symfony/cache",
+        "version": "v4.3.9",
+        "version_normalized": "4.3.9.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/symfony/cache.git",
+            "reference": "2a7bcc592adcaab9efc165bbced5a91fe905fad4"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/symfony/cache/zipball/2a7bcc592adcaab9efc165bbced5a91fe905fad4",
+            "reference": "2a7bcc592adcaab9efc165bbced5a91fe905fad4",
+            "shasum": ""
+        },
+        "require": {
+            "php": "^7.1.3",
+            "psr/cache": "~1.0",
+            "psr/log": "~1.0",
+            "symfony/cache-contracts": "^1.1",
+            "symfony/service-contracts": "^1.1",
+            "symfony/var-exporter": "^4.2"
+        },
+        "conflict": {
+            "doctrine/dbal": "<2.5",
+            "symfony/dependency-injection": "<3.4",
+            "symfony/var-dumper": "<3.4"
+        },
+        "provide": {
+            "psr/cache-implementation": "1.0",
+            "psr/simple-cache-implementation": "1.0",
+            "symfony/cache-implementation": "1.0"
+        },
+        "require-dev": {
+            "cache/integration-tests": "dev-master",
+            "doctrine/cache": "~1.6",
+            "doctrine/dbal": "~2.5",
+            "predis/predis": "~1.1",
+            "psr/simple-cache": "^1.0",
+            "symfony/config": "~4.2",
+            "symfony/dependency-injection": "~3.4|~4.1",
+            "symfony/var-dumper": "^4.1.1"
+        },
+        "time": "2019-12-01T10:50:31+00:00",
+        "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "4.3-dev"
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Symfony\\Component\\Cache\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Nicolas Grekas",
+                "email": "p@tchwork.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
+            }
+        ],
+        "description": "Symfony Cache component with PSR-6, PSR-16, and tags",
+        "homepage": "https://symfony.com",
+        "keywords": [
+            "caching",
+            "psr6"
         ]
     }
 ]

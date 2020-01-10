@@ -3,6 +3,17 @@
 {{ form_start(form) }}
 <input type="hidden" id="zone" name="zone" value="{{ zone }}" />
 <input type="hidden" id="id_page" name="id_page" value="{{ id_page }}" />
+
+        {{ form_row(form.style) }}
+        {{ form_row(form.container) }}
+        {{ form_row(form.padding) }}
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_widget(form.valider) }}
+                {{ form_widget(form.apercu) }}
+			    {{ form_widget(form.fermer) }}
+            </div>
+        </div>
 {{ form_end(form) }}
 </div>
 <script>

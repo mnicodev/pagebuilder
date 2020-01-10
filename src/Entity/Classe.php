@@ -41,6 +41,12 @@ class Classe
      */
     private $style;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $padding;
+
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,4 +111,17 @@ class Classe
 
         return $this;
     }
+
+    public function getPadding(): ?string
+    {
+        return $this->padding;
+    }
+
+    public function setPadding(?string $padding): self
+    {
+        $this->padding = $padding;
+
+        return $this;
+    }
+
 }

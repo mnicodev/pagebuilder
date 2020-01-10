@@ -13,13 +13,6 @@ namespace PackageVersions;
 final class Versions
 {
     public const ROOT_PACKAGE_NAME = '__root__';
-    /**
-     * Array of all available composer packages.
-     * Dont read this array from your calling code, but use the \PackageVersions\Versions::getVersion() method instead.
-     *
-     * @var array<string, string>
-     * @internal
-     */
     public const VERSIONS          = array (
   'doctrine/annotations' => 'v1.8.0@904dca4eb10715b92569fbcd79e201d5c349b6bc',
   'doctrine/cache' => 'v1.8.0@d768d58baee9a4862ca783840eca1b9add7a7f57',
@@ -42,7 +35,7 @@ final class Versions
   'friendsofsymfony/ckeditor-bundle' => '2.1.0@7ba78735ea75b9a6d4de403d7aced6c993a0557a',
   'jdorn/sql-formatter' => 'v1.2.17@64990d96e0959dff8e059dfcdc1af130728d92bc',
   'monolog/monolog' => '1.25.1@70e65a5470a42cfec1a7da00d30edb6e617e8dcf',
-  'ocramius/package-versions' => '1.5.1@1d32342b8c1eb27353c8887c366147b4c2da673c',
+  'ocramius/package-versions' => '1.4.2@44af6f3a2e2e04f2af46bcb302ad9600cba41c7d',
   'ocramius/proxy-manager' => '2.2.3@4d154742e31c35137d5374c998e8f86b54db2e2f',
   'phpdocumentor/reflection-common' => '2.0.0@63a995caa1ca9e5590304cd845c15ad6d482a62a',
   'phpdocumentor/reflection-docblock' => '4.3.2@b83ff7cfcfee7827e1e78b637a5904fe6a96698e',
@@ -51,10 +44,10 @@ final class Versions
   'psr/container' => '1.0.0@b7ce3b176482dbbc1245ebf52b181af44c2cf55f',
   'psr/link' => '1.0.0@eea8e8662d5cd3ae4517c9b864493f59fca95562',
   'psr/log' => '1.1.0@6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd',
-  'sensio/framework-extra-bundle' => 'v5.4.1@585f4b3a1c54f24d1a8431c729fc8f5acca20c8a',
+  'sensio/framework-extra-bundle' => 'v5.5.3@98f0807137b13d0acfdf3c255a731516e97015de',
   'swiftmailer/swiftmailer' => 'v6.2.1@5397cd05b0a0f7937c47b0adcb4c60e5ab936b6a',
   'symfony/asset' => 'v4.3.5@3f97e57596884f7b9158d564a533112a0d19dbdd',
-  'symfony/cache' => 'v4.3.5@40c62600ebad1ed2defbf7d35523d918a73ab330',
+  'symfony/cache' => 'v4.3.9@2a7bcc592adcaab9efc165bbced5a91fe905fad4',
   'symfony/cache-contracts' => 'v1.1.7@af50d14ada9e4e82cfabfabdc502d144f89be0a1',
   'symfony/config' => 'v4.3.5@0acb26407a9e1a64a275142f0ae5e36436342720',
   'symfony/console' => 'v4.3.5@929ddf360d401b958f611d44e726094ab46a7369',
@@ -126,13 +119,13 @@ final class Versions
   'symfony/var-dumper' => 'v4.3.9@8efdf3022bea18efad9793c9e920677c4eadf388',
   'symfony/web-profiler-bundle' => 'v4.3.5@b52bb32e6182d924303dbeb9c584396819fef118',
   'symfony/web-server-bundle' => 'v4.3.5@dc26b980900ddf3e9feade14e5b21c029e8ca92f',
-  'paragonie/random_compat' => '2.*@c46456e4215e6b9fdf8b99533acfe28c4b34a7b3',
-  'symfony/polyfill-ctype' => '*@c46456e4215e6b9fdf8b99533acfe28c4b34a7b3',
-  'symfony/polyfill-iconv' => '*@c46456e4215e6b9fdf8b99533acfe28c4b34a7b3',
-  'symfony/polyfill-php71' => '*@c46456e4215e6b9fdf8b99533acfe28c4b34a7b3',
-  'symfony/polyfill-php70' => '*@c46456e4215e6b9fdf8b99533acfe28c4b34a7b3',
-  'symfony/polyfill-php56' => '*@c46456e4215e6b9fdf8b99533acfe28c4b34a7b3',
-  '__root__' => 'dev-dev@c46456e4215e6b9fdf8b99533acfe28c4b34a7b3',
+  'paragonie/random_compat' => '2.*@48b01376684899e628bf589bf55de8ee03f16a4f',
+  'symfony/polyfill-ctype' => '*@48b01376684899e628bf589bf55de8ee03f16a4f',
+  'symfony/polyfill-iconv' => '*@48b01376684899e628bf589bf55de8ee03f16a4f',
+  'symfony/polyfill-php71' => '*@48b01376684899e628bf589bf55de8ee03f16a4f',
+  'symfony/polyfill-php70' => '*@48b01376684899e628bf589bf55de8ee03f16a4f',
+  'symfony/polyfill-php56' => '*@48b01376684899e628bf589bf55de8ee03f16a4f',
+  '__root__' => 'dev-dev@48b01376684899e628bf589bf55de8ee03f16a4f',
 );
 
     private function __construct()
@@ -141,8 +134,6 @@ final class Versions
 
     /**
      * @throws \OutOfBoundsException If a version cannot be located.
-     *
-     * @psalm-param key-of<self::VERSIONS> $packageName
      */
     public static function getVersion(string $packageName) : string
     {

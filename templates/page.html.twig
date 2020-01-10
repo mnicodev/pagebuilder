@@ -6,7 +6,8 @@
 
 
 {% block stylesheets %}
-<link href="{{ asset('css/styles'~page.id~'.css') }}" type="text/css" rel="stylesheet" media="screen" />
+{# <link href="{{ asset('css/styles'~page.id~'.css') }}" type="text/css" rel="stylesheet" media="screen" /> #}
+<link href="{{ path('assets.css', {'id': page.id}) }}" type="text/css" rel="stylesheet" media="screen" /> 
 {% endblock %}
 
 {% block body %}
@@ -33,7 +34,11 @@ $(document).ready(function() {
 		method: "POST",
 		url: "/page/load/{{ page.id }}",
 		success: function(result) {
-			data=JSON.parse(result);
+			//s=eval("("+result+")");
+			console.log(result);
+			
+			//data=JSON.parse(result);
+			data=result;
 			console.log(data);
 			for(bloc in data.blocs) {
 				$("#"+bloc).html(data.blocs[bloc]);

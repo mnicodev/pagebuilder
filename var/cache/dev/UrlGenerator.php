@@ -25,7 +25,8 @@ return [
     'admin.popup.zone.add' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupZoneAdd'], [], [['text', '/admin/zone/add']], [], []],
     'admin.popup.styles' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupStyles'], [], [['text', '/admin/zone/styles']], [], []],
     'admin.popup.content.add' => [[], ['_controller' => 'App\\Controller\\PageBuilderController::popupAddContent'], [], [['text', '/admin/content/add']], [], []],
-    'page.view' => [['id'], ['_controller' => 'App\\Controller\\PageController::index'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/page']], [], []],
+    'home' => [[], ['_controller' => 'App\\Controller\\PageController::index'], [], [['text', '/']], [], []],
+    'page.view' => [['id'], ['_controller' => 'App\\Controller\\PageController::page'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/page']], [], []],
     'page.load' => [['id'], ['_controller' => 'App\\Controller\\PageController::load'], [], [['variable', '/', '[^/]++', 'id', true], ['text', '/page/load']], [], []],
     'assets.css' => [['id'], ['_controller' => 'App\\Controller\\PageController::css'], [], [['text', '.css'], ['variable', '', '[^/\\.]++', 'id', true], ['text', '/assets/styles']], [], []],
 ];
