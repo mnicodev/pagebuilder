@@ -6,18 +6,27 @@ namespace App\Controller;
 
 
 
-use App\Entity\Bloc;
-use App\Entity\Content;
 use App\Entity\Page;
-use App\Entity\Zone;
+use App\Entity\Classe;
+use App\Entity\Bloc;
 use App\Form\CreateZoneType;
+use App\Form\BlocType;
 use phpDocumentor\Reflection\Types\Integer;
 use Psr\Container\ContainerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
+use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Validator\Constraints\DateTime;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class PageBuilderController extends AbstractController
 {
@@ -31,7 +40,6 @@ class PageBuilderController extends AbstractController
         $orm=$this->getDoctrine()->getManager();
         $liste=$orm->getRepository(Page::class)->findAll();
 
-
         return $this->render('admin/page.html.twig',array("liste"=>$liste));
     }
 
@@ -42,7 +50,40 @@ class PageBuilderController extends AbstractController
     public function builder(Request $request): Response {
         return $this->render('admin/builder.html.twig',array("id"=>0));
 
-    }
+	}
+
+
+
+    /**
+     * @Route("/admin/page/test/{slug}",name="admin.page.edit2", requirements={"slug"="[0-9]*"})
+     */
+    public function edit2(Request $request, $slug): Response {
+
+            $orm=$this->getDoctrine()->getManager();
+            $page=$orm->getRepository(Page::class)->find($slug);
+
+
+
+            $pagebuilder=[
+                "name" =>   $page->getName(),
+                "description" => $page->getDescription(),
+                "param" => unserialize($page->getParam()),
+				//"classes" => $page->getClasses(),
+				//"blocs"=>$page->getBlocs(),
+				"content"=>$page->getContent(),
+				"cache"=>$page->getCache(),
+			];
+			$blocs=[];
+			foreach($page->getBlocs() as $bloc) {
+				$blocs[$bloc->getName()]=$bloc->getData();
+			}
+			$pagebuilder["blocs"]=$blocs;
+			print_r(json_encode($pagebuilder));
+			//return new Response($page->getName()."|".$page->getContent());
+
+            return new Response((json_encode($pagebuilder)));
+
+	}
 
     /**
      * @Route("/admin/page/builder/{slug}",name="admin.page.edit", requirements={"slug"="[0-9]*"})
@@ -59,29 +100,21 @@ class PageBuilderController extends AbstractController
                 "name" =>   $page->getName(),
                 "description" => $page->getDescription(),
                 "param" => unserialize($page->getParam()),
-                "zones" => []
+				//"classes" => $page->getClasses(),
+				//"blocs"=>$page->getBlocs(),
+				"content"=>$page->getContent(),
             ];
-
-            foreach($page->getZones() as $i=>$zone) {
-                $pagebuilder["zones"][]=[
-                    "param"=>unserialize($zone->getParam()),
-                    "format" => $zone->getIdFormatZone(),
-                    "blocs" => [],
-                ];
-                foreach($zone->getBlocs() as $j=>$bloc) {
-                    $pagebuilder["zones"][$i]["blocs"][]=[
-                        "param" => unserialize($bloc->getParam()),
-                        "contents"=>[],
-                    ];
-                    foreach ($bloc->getContents() as $k=>$content) {
-                        $pagebuilder["zones"][$i]["blocs"][$j]["contents"][]=[
-                            "param" => unserialize($content->getParam()),
-                            "data" => $content->getData(),
-                        ];
-                    }
-                }
-            }
-            //print_r(serialize(json_encode($pagebuilder)));
+			$blocs=[];
+			foreach($page->getBlocs() as $bloc) {
+				$blocs[$bloc->getName()]=$bloc->getData();
+			}
+			$pagebuilder["blocs"]=$blocs;
+			$classes=[];
+			foreach($page->getClasses() as $classe) {
+				$classes[$classe->getName()]=array("param"=>$classe->getStyle(),"container"=>$classe->getContainer());
+			}
+			$pagebuilder["classes"]=$classes;
+			//print_r($pagebuilder);
             return new Response((json_encode($pagebuilder)));
 
         }
@@ -104,89 +137,71 @@ class PageBuilderController extends AbstractController
     public function save(Request $request): Response {
         $pagebuilder=json_decode($request->request->get("page"));
         $entityManager=$this->getDoctrine()->getManager();
-        $id=0;
-        if($id=$request->request->get("id")) {
+		$id=0;
+		if($id=$request->request->get("id")) {
             $page=$entityManager->getRepository(Page::class)->find($id);
-            foreach($page->getZones() as $zone) {
-                //$page->removeZone($zone);
-                foreach($zone->getBlocs() as $bloc) {
-                    foreach($bloc->getContents() as $content) {
-                        $entityManager->remove($content);
-                    }
-                    $entityManager->remove($bloc);
-
-                }
-                $entityManager->remove($zone);
-            }
-
-            $entityManager->flush();
-
 
         } else {
-
-
             $page=new Page();
-        }
+		}
 
 
-
-        $page->setName($pagebuilder->name)
-            ->setDescription($pagebuilder->description)
+       	$page->setName($pagebuilder->name)
+			 ->setDescription($pagebuilder->description)
+			->setCache($pagebuilder->cache)
+			->setContent($pagebuilder->content)
             ->setParam(serialize($pagebuilder->param))
             ->setType("page")
             ->setIdSite(1)
             ->setStatus(1);
 
+        $str="";
+		foreach($pagebuilder->blocs as $key=>$bloc) {
+			$b=$this->getDoctrine()->getRepository(Bloc::class)->findOneBy(["name"=>$key]);
+			//$str.=$b->getData()."<br>";
+			$page->addBloc($b);
+		}
+		
 
-        foreach($pagebuilder->zones as $pz=>$z) {
-            $zone=new Zone();
+		$style="";
+		foreach($pagebuilder->classes as $key=>$classe) {
+			$c=$this->getDoctrine()->getRepository(Classe::class)->findOneBy(["name"=>$key]);
+			if(empty($c)) $c=new Classe();
+			
+			$c->setName($key);
+			$c->setStyle($classe->param);
+			$c->setContainer($classe->container);
+			$c->setPage($page);
+			$entityManager->persist($c);
+			$entityManager->flush();
 
-            $zone->setParam(serialize($z->param))
-                ->setIdFormatZone($z->format)
-                ->setPosition($pz)
-                ->setPage($page);
+			$style.="#".$key."{";
+			$style.=$classe->param;
+			$style.="}";
 
-
-
-            foreach ($z->blocs as $pos=>$b) {
-                $bloc=new Bloc();
-                $bloc->setParam(serialize($b->param))
-                    ->setPosition($pos)
-                    ->setZone($zone);
-
-
-                foreach($b->contents as $pc=>$c) {
-                    $content=new Content();
-                    $content->setPosition($pc)
-                        ->setParam(serialize($c->param))
-                        ->setData($c->data)
-                        ->setPosition($pc)
-                        ->setBloc($bloc);
-                    $bloc->addContent($content);
-                }
-
-                $zone->addBloc($bloc);
-
-            }
-
-            $page->addZone($zone);
-
-        }
-
-        if($id) {
-            $entityManager->persist($page);
-            $entityManager->persist($zone);
-            $entityManager->persist($bloc);
-            if(isset($content)) $entityManager->persist($content);
-        }
+			
+			$page->addClass($c);
+		}
+		
 
 
-        $entityManager->flush();
+        $entityManager->persist($page);
+
+		$entityManager->flush();
+
+		/*$fs=new FileSystem();
+		$current_dir=getcwd();
+		$file_style=$current_dir."/css/styles".$page->getId().".css";
+
+		$fs->touch($file_style);
+		$fs->chmod($file_style,0777);
+		$fs->dumpFile($file_style,$style);
+		$fs->chmod($file_style,0644);*/
 
 
-        if($page->getId()) $output="<div class='alert-success alert'>La page numéro ".$page->getId()." a été sauvegardée</div>";
-        else $output="<div class='alert-danger alert'>erreur</div>";
-        return new Response($output);
+        if($page->getId()) $output=["msg"=>"<div class='alert-success alert'>La page numéro ".$page->getId()." a été sauvegardée</div>","page_id"=>$page->getId()];
+        else $output=["msg"=>"<div class='alert-danger alert'>erreur</div>"];
+        return new Response(json_encode($output));
     }
 
 
@@ -214,52 +229,102 @@ class PageBuilderController extends AbstractController
         return $this->render("admin/popup_add_zone.html.twig", ["form"=>$form->createView(),"large"=>$large]);
     }
 
-    /**
-     * @Route("/admin/zone/action", name="admin.popup.zone.action")
-     */
-    public function popupZoneAction(Request $request): Response {
-        return $this->render("admin/popup_zone_action.html.twig", ["zone"=>$request->request->get("zone")]);
-    }
 
-    /**
-     * @Route("/admin/bloc/action", name="admin.popup.bloc.action")
-     */
-    public function popupBlocAction(Request $request): Response {
+	/**
+	 * @Route("/admin/zone/styles", name="admin.popup.styles")
+	 */
+	public function popupStyles(Request $request): Response {
+		$repository=$this->getDoctrine()->getRepository(Classe::class);
+		$classe=$repository->findOneBy(["name"=>$request->request->get("zone")]);
+		if(!$classe)	$classe=new Classe();
+		$form=$this->createFormBuilder($classe)
+			->add("style",TextareaType::class, [
+				"data"=>$request->request->get("style")
+			])
+			->add("padding",TextType::class,array("label"=>"Marge intérieure (--px --px ou --px --px --px --px ou --px)"))
+			->add("container",ChoiceType::class,["choices"=>["sans"=>"","container"=>"container","container fluid"=>"container-fluid"]])
+			//->add("page",HiddenType::class,["data"=>$request->request->get("id_page")])
+			->add("valider",SubmitType::class)
+			->add("apercu",ButtonType::class,["label"=>"Aperçu"])
+			->add("fermer",ButtonType::class)
+			->getForm();
+		/* 
+		 * on n'enregistre pas encore les styles
+		 * méthode ancienne, à supprimer ?
+		 */
+		/*$form->handleRequest($request);
+		if ($form->isSubmitted() && $form->isValid()) {
+			$entityManager=$this->getDoctrine()->getManager();
+            $page=$entityManager->getRepository(Page::class)->find($request->request->get("id_page"));
 
-        return $this->render("admin/popup_bloc_action.html.twig", ["bloc" => $request->request->get("bloc"), "zone"=>$request->request->get("zone")]);
+			$classe->setName($request->request->get("zone"));
+			$classe->setPage($page);
+			$page->addClass($classe);
+			$entityManager->persist($classe);
+			$entityManager->persist($page);
 
-    }
 
-    /**
-     * @Route("/admin/content/action", name="admin.popup.content.action")
-     */
-    public function popupContentAction(Request $request): Response {
+			$entityManager->flush();
+			$t=["param"=>$classe->getParam(),"id"=>$classe->getId(),"container"=>$classe->getContainer()];
 
-        return $this->render("admin/popup_content_action.html.twig", [
-            "bloc" => $request->request->get("bloc"),
-            "content"=>$request->request->get("content"),
-            "id"=> $request->request->get("id")
-        ]);
+			return new Response(json_encode($t));
 
-    }
+		}*/
+		return $this->render("admin/popup_zone_styles.html.twig",["form"=>$form->createView(),"zone"=>$request->request->get("zone"),"style"=>$request->request->get("style"),"id_page"=>$request->request->get("id_page")]);
+	}
+
+
 
     /**
      * @Route("/admin/content/add", name="admin.popup.content.add")
      */
-    public function popupContentAdd(Request $request) {
-        //dump($request->request->get("editeur"));
-        if($request->request->get("editeur")!==null) {
+    public function popupAddContent(Request $request) {
+		//dump($request->request->get("editeur"));
+		$content="";
+		$repository=$this->getDoctrine()->getRepository(Bloc::class);
+		if($content=$request->request->get("content")) {
+			$bloc=$repository->findOneBy(["name"=>$content]);
+		} else $bloc=new Bloc();
 
-            $str=str_replace(chr(10),"",$request->request->get("editeur"));
-            $str=str_replace(chr(13),"",$str);
-            $str=addslashes($str);
+		$liste_bloc=$repository->findAll();
 
-            return $this->render("admin/popup_content_add.html.twig", ["str"=> $str]);
-        } else return $this->render("admin/popup_content_add.html.twig", [
-            "bloc"=> $request->request->get("bloc"),
-            "content"=>$request->request->get("content"),
-            "id" => $request->request->get("id")
-        ]);
-    }
+
+		$form=$this->createFormBuilder($bloc)
+			 ->add('data',TextareaType::class,['row_attr' => ['class' => 'text-editor']])
+		 	->add("valider",SubmitType::class)
+		 	->add("fermer",ButtonType::class)
+			->getForm();
+
+		$form->handleRequest($request);
+    	if ($form->isSubmitted() && $form->isValid()) {
+        	$entityManager=$this->getDoctrine()->getManager();
+			//if($request->request->get("editeur")!==null) {
+			//$bloc=$form->getData();
+			$bloc->setData($request->request->get("ContentFromEditor"));
+			/*if(!$content) $bloc->setDateCreate(\DateTime::createFromFormat("Y-m-d H:i:s",strtotime('now')));
+			$bloc->setDateUpdate(\DateTime::createFromFormat("Y-m-d H:i:s",strtotime('now')));*/
+			if(empty($content)) $bloc->setName("c_".uniqid());
+			$entityManager->persist($bloc);
+			$entityManager->flush();
+			$bloc->setCle($request->request->get("bloc"));
+
+			$t=["data"=>$bloc->getData(),"bloc"=>$request->request->get("bloc"),"content"=>$bloc->getName()];
+			return new Response(json_encode($t));
+            //return $this->render("admin/popup_content_add.html.twig", ["str"=> $str]);
+		} else {
+			$content_id=$request->request->get("content");
+			//if(empty($content_id)) $content_id=uniqid();
+
+			return $this->render("admin/popup_content_add.html.twig", [
+            	"bloc"=> $request->request->get("bloc"), // !!!! bloc id
+            	"content"=>$content_id,
+				'form' => $form->createView(),
+				'liste_bloc' => $liste_bloc,
+			]);
+		}
+	}
+
+
 
 }
+

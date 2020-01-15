@@ -43,10 +43,6 @@ class Page
      */
     private $status;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Zone", mappedBy="page", cascade={"persist"})
-     */
-    private $zones;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -63,16 +59,39 @@ class Page
      */
     private $description;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $content;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Bloc", mappedBy="page")
+     */
+    private $blocs;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Classe", mappedBy="page")
+     */
+    private $classes;
+
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $cache;
+
     public function __construct()
     {
         $this->zones = new ArrayCollection();
         $this->date_create= new \DateTime();
         $this->date_update= new \DateTime();
+        $this->blocs = new ArrayCollection();
+        $this->classes = new ArrayCollection();
     }
 
     public function __toString()
     {
-        // TODO: Implement __toString() method.
+		// TODO: Implement __toString() method.
+		return $this->name;
     }
 
     public function getId(): ?int
@@ -140,36 +159,6 @@ class Page
         return $this;
     }
 
-    /**
-     * @return Collection|Zone[]
-     */
-    public function getZones(): Collection
-    {
-        return $this->zones;
-    }
-
-    public function addZone(Zone $zone): self
-    {
-        if (!$this->zones->contains($zone)) {
-            $this->zones[] = $zone;
-            $zone->setPage($this);
-        }
-
-        return $this;
-    }
-
-    public function removeZone(Zone $zone): self
-    {
-        if ($this->zones->contains($zone)) {
-            $this->zones->removeElement($zone);
-            // set the owning side to null (unless already changed)
-            if ($zone->getPage() === $this) {
-                $zone->setPage(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function getName(): ?string
     {
@@ -206,4 +195,89 @@ class Page
 
         return $this;
     }
+
+    public function getContent(): ?string
+    {
+        return $this->content;
+    }
+
+    public function setContent(?string $content): self
+    {
+        $this->content = $content;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Bloc[]
+     */
+    public function getBlocs(): Collection
+    {
+        return $this->blocs;
+    }
+
+    public function addBloc(Bloc $bloc): self
+    {
+        if (!$this->blocs->contains($bloc)) {
+            $this->blocs[] = $bloc;
+            $bloc->addPage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBloc(Bloc $bloc): self
+    {
+        if ($this->blocs->contains($bloc)) {
+            $this->blocs->removeElement($bloc);
+            $bloc->removePage($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Classe[]
+     */
+    public function getClasses(): Collection
+    {
+        return $this->classes;
+    }
+
+    public function addClass(Classe $class): self
+    {
+        if (!$this->classes->contains($class)) {
+            $this->classes[] = $class;
+            $class->setPage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeClass(Classe $class): self
+    {
+        if ($this->classes->contains($class)) {
+            $this->classes->removeElement($class);
+            // set the owning side to null (unless already changed)
+            if ($class->getPage() === $this) {
+                $class->setPage(null);
+            }
+        }
+
+        return $this;
+	}
+
+    public function getCache(): ?string
+    {
+        return $this->cache;
+    }
+
+    public function setCache(?string $cache): self
+    {
+        $this->cache = $cache;
+
+        return $this;
+    }
+
+
 }

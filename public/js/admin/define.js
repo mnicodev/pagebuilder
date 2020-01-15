@@ -2,28 +2,39 @@ function o_param() {
     this.classes= "";
     this.style= "";
 }
-function o_content() {
-    this.param= new o_param();
-    this.data= "";
-}
-function o_bloc() {
-    this.param= new o_param();
-    this.contents= [];
-}
-function o_zone() {
-    this.param= new o_param();
-    this.format= "";
-    this.blocs= [];
-}
 function o_page() {
     this.name="";
     this.description="";
+	this.content="",
     this.param=new o_param();
     this.zones=[];
 
 }
+classe={
+	param:"",
+	container:"",
+}
+// ZONE
+section={
+	name:"",
+}
+content={
+	name:"",
+	data:"",
+}
 var pagebuilder={
-    page: new o_page(),
+    //page: new o_page(),
+	page: {
+		name:"",
+		description:"",
+		blocs: {},
+		classes: {},
+		content: "",
+		param: "",
+		cache: "",
+	},
+	/*classes: [],
+	structure: "",*/
 
     create: function() {
         localStorage.setItem('pagebuilder','');
@@ -37,103 +48,94 @@ var pagebuilder={
 
     },
 
+	set_name: function(name) {
+		this.page.name=name;
+	},
 
-    add_zone: function(z) {
-        this.page.zones.push(z);
-    },
+	set_description: function(str) {
+		this.page.description=str;
+	},
 
-    del_zone: function(id) {
-        this.page.zones.splice(id,1);
-        this.show();
-
-    },
-
-    update_content: function(id, str) {
-        t=id.split(":");
-        this.page.zones[t[0]].blocs[t[1]].contents[t[2]].data=str;
-
-        this.show();
-        $("#popup").hide();
-        action_content();
-
-        set_drag();
+	get_content: function(c=0) {
+		if(c==1) return this.page.cache;
+		return this.page.content;
+	},
 
 
-        this.save();
+	set_content: function(c) {
+		this.page.content=c;
+		console.log(c);
+	},
 
-    },
+	set_style: function(o,c) {
+		this.page.classes[o]=c;
+	},
+	get_bloc: function(b) {
+		return this.page.blocs[b];
+	},
 
-    add_content: function(bloc, str) {
-        console.log(bloc)
-        id=bloc.split(":");
-        c=new o_content();
-        c.data=str;
-
-
-        this.page.zones[id[0]].blocs[id[1]].contents.push(c);
-        this.show();
-        $("#popup").hide();
-        action_content();
-
-        set_drag();
+	get_style: function(b) {
+		return this.page.classes[b];
+	},
 
 
-        this.save();
-    },
+	set_bloc: function(res) {
+		this.page.blocs[res.content]=res.data;
+	},
 
-    del_content: function(id) {
-        t=id.split(":");
+	del_bloc: function(c) {
+		delete this.page.blocs[c];
+	},
 
-        this.page.zones[t[0]].blocs[t[1]].contents.splice(t[2],1);
+	load: function(p) {
+		this.page.name=p.name;
+		this.page.description=p.description;
+		this.page.cache=p.cache;
+		this.page.content=p.content;
+		this.page.blocs=p.blocs;
+		this.page.classes=p.classes;
 
-        this.show();
+		this.show();
+		// chargement des blocs de données
+		for(bloc in p.blocs) {
+			$("#"+bloc).html(this.get_bloc(bloc));
+		}
+		for(bloc in this.page.classes) {
+		console.log(this.get_style(bloc));
+			$("#"+bloc).attr("style",this.get_style(bloc)["param"]);
+		}
 
-    },
+	},
+
 
     save: function() {
-        if(window.localStorage) {
+
+		this.page.name=$(".h1").val();
+		this.page.description=$(".h2").val();
+		this.page.cache=$("#page .content-wrapper").html();
+		old=$("#page .content-wrapper").html();
+		$(".content").each(function() {
+			$(this).html("");
+			$(this).removeAttr("style");
+		});
+		$("section").each(function() {
+			$(this).removeAttr("style");
+		})
+		$(".bloc").each(function() {
+			$(this).removeAttr("style");
+		})
+
+		this.page.content=$("#page .content-wrapper").html();
+		$("#page .content-wrapper").html(old);
+
+
+
+
+
+        if(window.localStorage) {console.log("save");
             localStorage.setItem('pagebuilder',JSON.stringify(this.page));
         }
     },
-
-    refresh: function() {
-        console.log("ok");
-        p=new o_page();
-
-        p.name=this.page.name;
-        p.param=this.page.param;
-        $(".create").find(".zone").each(function() {
-            console.log($(this).attr("id"))
-                z = new o_zone();
-                z.param.classes = $(this).attr("data-param-classes");
-                z.param.style = $(this).attr("data-param-style");
-                z.format=$(this).attr("data-format");
-
-                $(this).find(".bloc").each(function () {
-                    b=new o_bloc();
-                    b.param.classes = $(this).attr("data-param-classes");
-                    b.param.style = $(this).attr("data-param-style");
-
-                    $(this).find(".contents").each(function () {
-                        c=new o_content();
-                        c.param.classes= $(this).attr("data-param-classes");
-                        c.param.style= $(this).attr("data-param-style");
-                        c.data=$(this).html();
-                        b.contents.push(c);
-                    })
-                    z.blocs.push(b);
-
-                })
-                p.zones.push(z);
-
-            }
-
-        )
-
-        this.page=p;
-    },
-
-
 
 
     show: function () {
@@ -142,92 +144,42 @@ var pagebuilder={
         global_row=document.createElement("div");
         $(global_row).addClass("global-row");
         chapo=document.createElement("div");
-        h1=document.createElement("h1");
-        h2=document.createElement("h2");
+        h1=document.createElement("input");
+        h2=document.createElement("textarea");
         $(chapo).addClass("jumbotron chapo");
-        $(h1).append(this.page.name);
-        $(h2).append(this.page.description);
+		$(h1).attr("type","text");
+		$(h1).addClass("h1");
+		$(h2).addClass("h2");
+        $(h1).val(this.page.name);
+        $(h2).val(this.page.description);
         chapo.appendChild(h1);
         chapo.appendChild(h2);
 
 
         //$("#page").append(chapo);
         $(global_row).append(chapo);
-        $("#page").addClass(this.page.param.classes+" create");
+        $("#page").addClass("create");
 
-        container=document.createElement("ul");
+        content_wrapper=document.createElement("div");
+       	container=document.createElement("div");
         // on affecte les classes
         //$(container).addClass(this.page.param.classes);
         $(container).addClass("sortable connected");
+		$(content_wrapper).addClass("content-wrapper");
+		$(content_wrapper).html(this.get_content());
+
+		
 
 
 
-        for(var i in this.page.zones) {
-            element="";
-            f=this.page.zones[i].format.split(":");
-
-            element=document.createElement("li");
-            $(element).addClass("zone");
-            $(element).addClass(this.page.zones[i].param.classes);
-            $(element).attr("data-line",i);
-            $(element).attr("data-format",this.page.zones[i].format);
-            $(element).attr("data-param-classes",this.page.zones[i].param.classes);
-            $(element).attr("data-param-style",this.page.zones[i].param.style);
-            $(element).attr("id","zone_"+i);
-
-            /*container_bloc=document.createElement("ul");
-            $(container_bloc).addClass("sortable row");*/
-
-            for(var j in this.page.zones[i].blocs) {
-
-                bloc=document.createElement("ul");
-                /*action=document.createElement("div");
-                $(action).addClass("action");*/
-                $(bloc).addClass("connected sortable for-action bloc col-md-"+f[j]);
-                $(bloc).attr("id","bloc_"+i+"_"+j);
-                $(bloc).attr("data-param-classes",this.page.zones[i].blocs[j].param.classes);
-                $(bloc).attr("data-param-style",this.page.zones[i].blocs[j].param.style);
-                $(bloc).attr("data-bloc",i+":"+j);
-               // bloc.appendChild(action);
-
-                if(this.page.zones[i].blocs[j].contents.length) {
-                    for(var c in this.page.zones[i].blocs[j].contents) {
-                        content=document.createElement("li");
-                        $(content).addClass("content");
-                        $(content).attr("data-pos",i+":"+j+":"+c);
-                        $(content).attr("data-param-classes", this.page.zones[i].blocs[j].contents[c].param.classes);
-                        $(content).attr("data-param-style", this.page.zones[i].blocs[j].contents[c].param.style);
-                        //prefix="<div class='content' id='content-"+c+"'>";
-                        //suffix="</div>";
-                        prefix="";
-                        suffix="";
-                        $(content).append(prefix+this.page.zones[i].blocs[j].contents[c].data+suffix);
-                        bloc.appendChild(content);
-                    }
-
-                } else {
-                    content=document.createElement("li");
-                    $(content).addClass("vide");
-                    bloc.appendChild(content);
-                }
-                //container_bloc.appendChild(bloc)
-
-                element.appendChild(bloc);
-
-            }
-            container.appendChild(element);
-
-        }
-
-        $(global_row).append(container);
+        $(global_row).append(content_wrapper);
         $("#page").append(global_row);
 
 
 
-        this.save();
+        //this.save();
         set_drag();
-        action_content();
-
+        action_on_zone();
     }
 
 }

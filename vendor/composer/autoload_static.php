@@ -415,7 +415,7 @@ class ComposerStaticInitc1edb3eac75bbf51f2886b70d0cfd02e
         ),
         'Sensio\\Bundle\\FrameworkExtraBundle\\' => 
         array (
-            0 => __DIR__ . '/..' . '/sensio/framework-extra-bundle',
+            0 => __DIR__ . '/..' . '/sensio/framework-extra-bundle/src',
         ),
         'Psr\\Log\\' => 
         array (

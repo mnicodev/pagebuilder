@@ -1,16 +1,22 @@
 .popup {
-  position: fixed;
-  width: 600px;
+ 	position: fixed;
+  width: 70%;
+  min-width: 800px;
+  background: #efefef;
 
   display: none;
-  top: 200px;
+  top: 100px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 10000;
+  form {
+	  height: 100%;
+  }
 }
 
 .popup .jumbotron {
   height: 100%;
+  /*max-height: 500px;*/
   margin: 0;
 }
 .navbar-fixed {
@@ -18,7 +24,17 @@
   z-index: 100;
   width: 100%;
 }
+
+.cke_inner {
+	max-height: 382px;
+}
+.cke_contents {
+	max-height: 350px;
+}
 #page {
+	.jumbotron {
+		margin-bottom: 0;
+	}
   table {
     tr {
       cursor: pointer;
@@ -27,17 +43,25 @@
   padding-top: 70px;
 
   .chapo {
-    h2 {
+    .h2 {
+	  color: #000;
       min-height: 50px;
+	  background: transparent;
       border: 1px dashed transparent;
+	  width: 100%;
       &:hover {
         border: 1px dashed #000;
+		background: #fff;
       }
     }
-    h1 {
+    .h1 {
+	  color: #000;
       min-height: 50px;
       border: 1px dashed transparent;
+	  background: transparent;
+	  width: 100%;
       &:hover {
+		  background: #fff;
         border: 1px dashed #000;
       }
     }
@@ -46,45 +70,66 @@
 .create  {
 
   .global-row {
-    margin-left: -15px;
-    margin-right: -15px;
+    /*margin-left: -15px;
+    margin-right: -15px;*/
     background: #ffffee;
     min-height: 20px;
+
+	.content-wrapper {
+		cursor: default;
+		border: 1px solid transparent;
+		/*padding-top: 30px;*/
+		min-height: 100px;
+		position: relative;
+		&:hover {
+			border: 1px solid green;
+		}
+		.p-action {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 20px;
+			height: 20px;
+			background: green;
+			cursor: pointer;
+			text-align: center;
+			color: #fff;
+
+		}
     /*width: 100%;*/
 
 
 
-    & > ul {
+    & > .content-zone{
+		margin-top: 30px;
       padding: 0;
-      .zone {
-        border: 3px solid transparent;
-        padding: 20px;
-        &:hover {
+      section.zone {
+		
 
-          border: 3px solid darkred;
+        border: 1px solid transparent;
+        padding: 20px;
+		padding-top:30px;
+        &:hover {
+			cursor: grab;
+          border: 1px solid darkred;
         }
 
         list-style: none;
         position: relative;
 
         .bloc {
+			min-height: 50px;
+			border: 1px solid rgba(149,146,152,1);
           &:hover {
+			cursor: default;
+			background: rgba(239,246,252,0.5);
 
             border: 1px solid deepskyblue;
           }
 
-          li.vide {
-            list-style: none;
-          }
+		  padding: 15px;
 
-          li.content {
-            list-style: none;
 
-            &:hover {
-              border: 1px dashed darkmagenta;
-            }
-
-          }
         }
 
         .z-action {
@@ -94,26 +139,29 @@
           width: 20px;
           height: 20px;
 
-          background: aquamarine;
+          background: darkmagenta;
           cursor: pointer;
           z-index: 1000;
           transition: all 0.02s;
+		  a { color: #fff;}
 
           &.edit {
             width: 120px;
             height: 40px;
+			
           }
         }
 
 
 
-        .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
-          border: 1px solid lightgrey;
+        .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, 
+		.col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, 
+		.col-md-11, .col-md-12 {
+          /*border: 1px solid #adadad;*/
         }
 
         .for-action {
           position: relative;
-          min-height: 20px;
           .action {
             position: absolute;
             top: 0;
@@ -121,14 +169,14 @@
             width: 20px;
             height: 20px;
             display: none;
-            background: #dadada;
+            background: deepskyblue;
             cursor: pointer;
             z-index: 10;
             transition: all 0.02s;
 
             &.edit {
               width: 100px;
-              height: 30px;
+              height: 40px;
             }
 
 
@@ -143,19 +191,25 @@
           .content {
 
             position: relative;
-            border: 1px dashed #efefef;
+			overflow: hidden;
+			cursor: grab;
+
+			border: 1px dashed transparent;
+			&:hover {
+				border: 1px dashed red;
+			}
             .c-action {
               top: 0;
               right: 0;
               position: absolute;
               width: 20px;
               height: 20px;
-              background: #1d75b3;
+              background: red;
               cursor: pointer;
-              z-index: 10;
+              z-index: 1000;
               &.edit {
                 width: 120px;
-                height: 40px;
+                height: 55px;
                 li {
                   a {
                     color: #fff;
@@ -171,6 +225,7 @@
 
       }
     }
+	}
   }
 
 
@@ -193,4 +248,19 @@
     }
   }
 
+}
+
+.sortable_background {
+	background: #ffffaa;
+}
+
+@media(max-width: 968px) {
+	.bloc {
+		min-width: 90%;
+		position: relative!important;
+		left: 0!important;
+		top: 0!important;
+		transform: none!important;
+		margin: auto;
+	}
 }
