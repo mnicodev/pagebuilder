@@ -2,7 +2,7 @@
 
 {% extends 'base.html.twig' %}
 
-
+{% block title %}Editeur de page web : Pagebuilder{% endblock %}
 {% block stylesheets %}
     <link rel="stylesheet" media="screen" href="{{ asset('css/admin/styles.css') }}" />
 {% endblock %}
@@ -25,8 +25,11 @@
 {% block javascripts %}
 
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script src="{{ asset('js/admin/sortable/Sortable.min.js') }}"></script>
     {% include('admin/variables.js.twig') %}
 
+    <script src="{{ asset('js/admin/component.js') }}"></script>
+    <script src="{{ asset('js/admin/genactions.js') }}"></script>
     <script src="{{ asset('js/admin/define.js') }}"></script>
     <script src="{{ asset('js/admin/scripts.js') }}"></script>
 

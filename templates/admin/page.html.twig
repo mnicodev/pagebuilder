@@ -21,6 +21,7 @@
         <th scope="col">Titre</th>
         <th scope="col">Date de création</th>
         <th scope="col">Date de mise à jour</th>
+        <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
@@ -30,6 +31,7 @@
         <td>{{ item.name }}</td>
         <td>{{ item.datecreate|date }}</td>
         <td>{{ item.dateupdate|date }}</td>
+		<td><a target="blank" href="{{ path('page.view', {id: item.id}) }}">Voir</a></td>
     </tr>
 {% endfor %}
     </tbody>

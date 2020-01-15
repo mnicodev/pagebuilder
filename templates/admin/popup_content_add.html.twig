@@ -1,50 +1,117 @@
 
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 
 
-
-    {% if bloc is defined %}
+    {% if bloc is defined or content is defined %}
 <script src={{ asset('js/admin/ckeditor/ckeditor.js') }}></script>
-
-    <form target="data" method="post" action="{{ url('admin.popup.content.add') }}">
-<input type="hidden" id="bloc" value="{{ bloc }}">
-        <input type="hidden" id="id" value="{{ id }}">
-<div class="jumbotron">
-    <div class="display-8">Ajout d'un contenu</div>
-    <textarea id="editeur" name="editeur" rows="10" cols="60">{%  if content is defined %}{{ content|raw }}{% endif %}</textarea>
-    <div class="row">
-        <div class="col-sm-6">
-            <button id="content-validate" class="form-control btn-primary">Valider</button>
+<div class="" id="content_add" style="padding:20px;">
+    <nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-content-tab" data-toggle="tab" href="#nav-content" role="tab" aria-controls="nav-content" aria-selected="true">Ajout d'un contenu</a>
+    <a class="nav-item nav-link" id="nav-archive-tab" data-toggle="tab" href="#nav-archive" role="tab" aria-controls="nav-archive" aria-selected="false">Archive</a>
+    <a class="nav-item nav-link" id="nav-diaporama-tab" data-toggle="tab" href="#nav-diaporama" role="tab" aria-controls="nav-diaporama" aria-selected="false">Diaporama</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">
+        
+	    {{ form_start(form) }}
+		    <input type="hidden" id="bloc" name="bloc" value="{{ bloc }}">
+            <input type="hidden" id="content" name="content" value="{{ content }}">
+	    {{ form_widget(form.data) }}
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_widget(form.valider) }}
+			    {{ form_widget(form.fermer) }}
+            </div>
         </div>
-        <div class="col-sm-6">
+	    {{ form_end(form) }}
+	</div>
+	<div class="tab-pane fade show" id="nav-archive" role="tabpanel" aria-labelledby="nav-archive-tab">
+	    <div id="liste_bloc" style="overflow-y:scroll;max-height: 600px">
+	        <ul class="list-group">
+	        {% for bloc in liste_bloc %}
+	        <li class="list-group-item archive">
+	        <input type="checkbox"  class="check" id="archive_{{ bloc.id }}" />
+	        <input type="hidden" class="content" value="{{ bloc.name }}" />
+	        <label for="archive_{{ bloc.id }}">{{ bloc.data|raw }}</label></li>
+	        {% endfor %}
+	        </ul>
+	    </div>
+	    <div class="row">
+            <div class="col-md-12">
+                <button id="btn_add_archive" class="btn-primary btn" type="button">Ajouter</button>
+                <button id="btn_fermer" class="btn-secondary btn btn-close" type="button">Fermer</button>
+            </div>
 
-            <input type="button" id="close" value="Fermer" class="form-control btn-cancel" />
+
         </div>
-
-    </div>
+	</div>
+</div>
+	
 
 </div>
-
-    </form>
-    <iframe id="data" name="data" style="width:300px;display:none"></iframe>
         <script>
-            CKEDITOR.replace("editeur");
+            CKEDITOR.replace("form_data", {
+    			entities : false
+			});
+			close();
+			
+			$("#btn_add_archive").click(function() {
+			    $(".archive").each(function() {
+			        if($(this).find("input.check").is(":checked")) {
+			            res={content:$(this).find("input.content").val(),data:$(this).find("label").html()};
+			            add_content($("#bloc").val(),res);
+			            action_on_zone();
+					    pagebuilder.set_bloc(res);
+					    close_popup();
+			        }
+			    });
+			});
+		$("#form_valider").click(function(event) {
+			event.preventDefault();
+        	var ContentFromEditor = CKEDITOR.instances.form_data.getData();
+
+        	var dataString = $("form[name=form]").serialize();
+
+            dataString += '&ContentFromEditor='+ContentFromEditor; 
+			console.log(dataString);
+
+			// On n'enregistre pas encore les blocs de données
+
+        	$.ajax({
+        		type: "POST",
+        		url: url_popup_content,
+        		data: dataString,
+		        cache: false,
+        		success: function(r){
+					res=JSON.parse(r);
+					console.log(res);
+					if(res.bloc) {
+						/*content=document.createElement("div");
+						content.setAttribute("id",res.content);
+						content.classList.add("content");
+						$(content).html(res.data);*/
+						//$("#"+res.bloc).append(content);
+						add_content(res.bloc,res);
+						
+					} else if(res.content) {
+						$("#"+res.content).html(res.data);
+					}
+					action_on_zone();
+					pagebuilder.set_bloc(res);
+					close_popup();
+
+					//p=eval("("+r+")");
+       			},
+       			error: function(xhr, ajaxOptions, thrownError){ 
+            		console.log(xhr.responseText);
+        		}
+			//		uniqid=(new Date().getTime()).toString(16);
+     		});
+	})
 
         </script>
 
     {% endif %}
-    {% if str is defined %}
-
-        <script>
-            window.onload=function() {
-                bloc=parent.document.getElementById("bloc").value
-                id=parent.document.getElementById("id").value;
-
-                if(id) parent.pagebuilder.update_content(id,"{{ str|raw }}");
-                else parent.pagebuilder.add_content(bloc,"{{ str|raw }}");
-
-            }
-        </script>
-
-    {%  endif %}
-
 

@@ -1,0 +1,75 @@
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+<div id="zone_styles" class="jumbotron">
+{{ form_start(form) }}
+<input type="hidden" id="zone" name="zone" value="{{ zone }}" />
+<input type="hidden" id="id_page" name="id_page" value="{{ id_page }}" />
+
+        {{ form_row(form.style) }}
+        {{ form_row(form.container) }}
+        {{ form_row(form.padding) }}
+        <div class="row">
+            <div class="col-md-12">
+                {{ form_widget(form.valider) }}
+                {{ form_widget(form.apercu) }}
+			    {{ form_widget(form.fermer) }}
+            </div>
+        </div>
+{{ form_end(form) }}
+</div>
+<script>
+	var save="";
+	var zone="";
+	function applique_style() {
+		zone=$("#zone").val();
+		if(save=="") save={"style":$("#"+zone).attr("style"),"class":$("#"+zone).attr("class")};
+		$("#"+zone).attr("style",$("#form_style").val());
+		$("#"+zone).removeClass("container container-fluid");
+		$("#"+zone).addClass($("#form_container").val());
+
+	}
+$(document).ready(function() {
+	close();
+	$("#form_apercu").click(function() {
+		applique_style();
+console.log(save);
+	})
+	$("#form_fermer").click(function() {
+console.log(save);
+		$("#"+zone).attr("style",save.style);
+		$("#"+zone).removeClass("container container-fluid");
+		$("#"+zone).addClass(save.class);
+
+	})
+	$("#form_valider").click(function(event) {
+		event.preventDefault();
+        var dataString = $("form[name=form]").serialize();
+		applique_style();
+		style=Object.create(classe);
+		style.param=$("#form_style").val();
+		style.container=$("#form_container").val();
+			
+		pagebuilder.set_style(zone,style);
+		close_popup();
+
+		// on n'enregistre pas en base pour le moment
+		/*$.ajax({
+			url:url_popup_styles,
+			method: "POST",
+			data: dataString,
+			cache: false,
+			success: function(result) {
+				r=eval("("+result+")");
+				console.log(r);
+				zone=$("#zone").val();
+				$("#"+zone).attr("style",r.param);
+				$("#"+zone).addClass(r.container);
+				$("#"+zone).attr("data-style-id",r.id);
+				close_popup();
+			},
+		})*/
+	})
+	
+});
+
+</script>
+
